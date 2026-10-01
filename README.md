@@ -217,6 +217,72 @@ and 2F1(1, 1; 2; 1/2) = sum_{m>=0} (1/2)^m / (m+1) = -ln(1/2) / (1/2) = 2 ln 2, 
 
 This section does not identify L with D - A, does not select W, and does not state a continuum limit, a force, a stress, or a momentum. The scalar hypergeometric identity is classical; what is recorded here is its application to the finite-gasket remainder. No claim is made that the scalar identity was previously unknown.
 
+
+## Lambda = 6 eigenspace split
+
+### Assumptions
+
+- omega = 1 and K = I - W L, with W a prescribed scalar.
+- The spectrum {lambda_k} is real and lies in [0, 6] with lambda_max = 6 attained, so K is positive definite if and only if W < 1/6.
+- The gasket is finite: finitely many eigenvalues, counted with algebraic multiplicity.
+- Write m_6 = mult(6) >= 1 for the multiplicity of the eigenvalue 6, and write {mu_j} for the complementary eigenvalues (those not equal to 6). Then each mu_j lies in [0, 6).
+- Gamma_loop(W) = (1/2) sum_k ln(1 - W lambda_k) and
+  V''(W) = - (1/2) sum_k lambda_k^2 / (1 - W lambda_k)^2
+  for W < 1/6, as recorded above.
+
+S_W is not an input. No value of W is selected.
+
+### Derivation
+
+Split the locked sums into the m_6 copies of lambda = 6 and the complementary terms. For each copy of 6,
+
+    ln(1 - W * 6) = ln(1 - 6W),
+    (1/2) * 6^2 / (1 - 6W)^2 = 18 / (1 - 6W)^2.
+
+Hence
+
+    Gamma_loop(W) = (m_6 / 2) ln(1 - 6W) + (1/2) sum_j ln(1 - W mu_j),
+
+    V''(W) = - 18 m_6 / (1 - 6W)^2 - (1/2) sum_j mu_j^2 / (1 - W mu_j)^2.
+
+On W in [0, 1/6), each factor 1 - 6W is in (0, 1] and each 1 - W mu_j is in (0, 1]. Every complementary summand mu_j^2 / (1 - W mu_j)^2 is nonnegative, and vanishes if and only if mu_j = 0. Therefore
+
+    V''(W) <= - 18 m_6 / (1 - 6W)^2 < 0,
+
+with equality in the first comparison if and only if every mu_j = 0.
+
+The free finite gasket L = D - A of sierpinski-geometry-045 has E(n) = 3^{n+1} from gasket_graph.py, so Tr L = 2E = 6 * 3^n for every n. SPECTRUM.md records, for n = 2..5, that lambda_max = 6, that mult(6) equals (3^n - 3)/2, and that eigenvalues 3 and 5 occur. Inserting that multiplicity formula gives
+
+    Tr L - 6 m_6 = 6 * 3^n - 3(3^n - 3) = 3^{n+1} + 9 > 0,
+
+so the complementary eigenvalues cannot all vanish on those free graphs. The presence of eigenvalues in (0, 6) already forces the complementary sum in V'' to be strictly positive, hence a strict inequality V''(W) < - 18 m_6 / (1 - 6W)^2 on those levels.
+
+Dirichlet multiplicity of the initial eigenvalue 6 on the discrete Laplacian -Delta_m of Gamma_m with corners grounded (V_m without V_0), equal to (3^m - 3)/2 for m >= 2, is classical: Qiu, arXiv:1206.1381, Section 2, attributing Fukushima–Shima / Shima. That is a different operator from the free whole-graph L = D - A. Free mult(6) matching the same formula is a numerical observation in SPECTRUM.md for n = 2..5; this section does not claim Qiu proved the free multiplicity.
+
+### Theorem
+
+Identities. Under the assumptions above, for every real W < 1/6,
+
+    Gamma_loop(W) = (m_6 / 2) ln(1 - 6W) + (1/2) sum_j ln(1 - W mu_j),
+
+    V''(W) = - 18 m_6 / (1 - 6W)^2 - (1/2) sum_j mu_j^2 / (1 - W mu_j)^2.
+
+Bound. For every W in [0, 1/6),
+
+    V''(W) <= - 18 m_6 / (1 - 6W)^2 < 0,
+
+with equality in <= if and only if every complementary eigenvalue mu_j equals 0.
+
+On the free gasket graphs of SPECTRUM.md with n >= 2, eigenvalues lie in (0, 6), so the inequality is strict. Neither the split nor the bound selects W.
+
+### Negative result (abstract, not a gasket theorem)
+
+The upper bound -18 m_6 / (1 - 6W)^2 is saturated precisely when the spectrum is supported on {0, 6}. That two-point support, together with the numerical constraints Tr L and mult(6) and the box [0, 6], defines an abstract extremal problem on finite spectra. It is not the spectrum of free L = D - A on build_gasket(n): those graphs carry eigenvalues in (0, 6). Do not commit two-point {0, 6} extremals as gasket theorems. The bound above remains valid as an inequality for every spectrum in the assumed box; saturation is off the gasket.
+
+### Not a consequence
+
+This section does not prove free mult(6) = (3^n - 3)/2 for all n >= 2, does not identify the free spectrum with the Dirichlet spectrum of Qiu, does not select W, and does not state a continuum limit, a force, a stress, or a momentum. The split of Gamma_loop and V'' is elementary from the locked definitions once lambda = 6 is factored out.
+
 ---
 
 <div align="center">
