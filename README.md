@@ -1,3 +1,36 @@
+<div align="center">
+
+```
+╔══════════════════════════════════════════════════════════════╗
+║   ATOMIC DREAM LABS  ·  BEYOND-REPAIR                        ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
+# Finite Gasket Spectral Derivatives
+
+### W-derivatives of (1/2) Tr ln K on the finite gasket. No continuum. No thrust.
+
+[![Lifecycle](https://img.shields.io/badge/●_RESEARCH-a855f7?style=for-the-badge&labelColor=0f0f23)](https://github.com/beyond-repair/ADL-Governance)
+[![Claim](https://img.shields.io/badge/Claim_≤1-22c55e?style=for-the-badge&labelColor=0f0f23)](https://github.com/beyond-repair/ADL-Governance/blob/main/docs/CLAIM_VALIDATION.md)
+[![Governance](https://img.shields.io/badge/ADL--Governance-7c3aed?style=for-the-badge&labelColor=0f0f23)](https://github.com/beyond-repair/ADL-Governance)
+
+```
+LIFECYCLE   RESEARCH
+CLAIM       ≤ 1   finite discrete kernel
+NOT CLAIMED continuum · selected W · force
+```
+
+</div>
+
+---
+## ▌ STATUS
+
+Classification follows [ADL-Governance](https://github.com/beyond-repair/ADL-Governance). A README facelift does not raise claim level. Physics and pharmacology stay at the evidenced cap. CI green is not experimental validation.
+
+---
+
+## ▌ PRESERVED BODY
+
 # Finite gasket spectral derivatives
 
 Locked scope. This repository does not select W, does not take a continuum limit, and does not predict a force.
@@ -183,3 +216,14 @@ and 2F1(1, 1; 2; 1/2) = sum_{m>=0} (1/2)^m / (m+1) = -ln(1/2) / (1/2) = 2 ln 2, 
 ### Not a consequence
 
 This section does not identify L with D - A, does not select W, and does not state a continuum limit, a force, a stress, or a momentum. The scalar hypergeometric identity is classical; what is recorded here is its application to the finite-gasket remainder. No claim is made that the scalar identity was previously unknown.
+
+---
+
+<div align="center">
+
+**REWRITE · BUILD · TRANSCEND**
+
+**William (Brian) Ware** · [Atomic Dream Labs](https://github.com/beyond-repair)  
+Governing source: [ADL-Governance](https://github.com/beyond-repair/ADL-Governance) · [Claim levels 0–5](https://github.com/beyond-repair/ADL-Governance/blob/main/docs/CLAIM_VALIDATION.md)
+
+</div>
