@@ -16,6 +16,14 @@ Eigenvalues of K are kappa_k = 1 - W lambda_k.
 
 V'' is negative wherever K is positive definite and some lambda_k is nonzero. That is concavity of the one-loop piece. It is not a vacuum and not a thrust.
 
+## Power series
+
+For |W| lambda_max < 1, which on this gasket is W < 1/6,
+
+    Gamma_loop = - (1/2) sum_{n=1}^{infty} (W^n / n) Tr(L^n).
+
+The series diverges when W reaches 1/lambda_max. It does not select a value of W.
+
 S_W is not in this repository. Stationarity is not defined here.
 
-scripts/spectral_derivatives.py evaluates those sums from a list of eigenvalues. It does not build W(x) and it does not emit a force.
+scripts/spectral_derivatives.py evaluates the eigenvalue sums from a list of eigenvalues. It does not build W(x) and it does not emit a force.
