@@ -1,6 +1,27 @@
 # Completion log — finite-gasket-spectral-derivatives
 
-## Proved this run (2026-10-02, free mult(3))
+## Proved this run (2026-10-02, exceptional spectral mass)
+
+Dated 2026-10-02 (America/New_York).
+
+- Theorem: for every integer n ≥ 3, free L = D − A on build_gasket(n) has
+  M_exc(n) := mult(3)+mult(5)+mult(6) = (5·3^{n−1} − 7)/2,
+  and with N(n) = |V_n| = (3^{n+1}+3)/2 (assumption from gasket_graph.py / SPECTRUM.md N column; verified n = 2..5),
+  μ_exc(n) := M_exc(n)/N(n) = (5·3^{n−1}−7)/(3^{n+1}+3),
+  which increases to 5/9 as n → ∞; consequently 1 − μ_exc(n) decreases to 4/9.
+- Proof structure (recorded in README, section “Exceptional spectral mass”):
+  1. Assumptions: free gasket as in Free mult(6); |V_n| formula from the constructor; free mult(3), mult(5), mult(6) theorems already proved.
+  2. Algebra: sum the three multiplicity formulas to get M_exc; divide by N(n).
+  3. Limit: divide by 3^{n−1} → 5/9; complement → 4/9.
+  4. Monotonicity: μ_exc(n+1) − μ_exc(n) has the same sign as 156 · 3^{n−1} > 0.
+- Case n = 2 recorded separately: mult(3)=0, mult(5)=2, mult(6)=3 ⇒ M_exc=5, N=15, mass 1/3 (formula for n ≥ 3 only, because of the mult(5) exception).
+- Clarification (not a theorem upgrade):
+  - This counts total multiplicity of the exceptional values {3,5,6}. It does **not** prove that every remaining eigenvalue is an R-preimage of an eigenvalue of L_{n−1}, nor that any hit-rate algorithm equals 1 − μ_exc.
+  - SPECTRUM.md “hit rates … roughly 0.4–0.7” stays a **numerical observation**; consistent with complement → 4/9 ≈ 0.444, not upgraded here.
+  - Dirichlet λ_min(n)/λ_min(n−1) → 1/5 remains open / numerical in SPECTRUM.md (not proved this run; Qiu / classical sources not reopened for that claim).
+- Supporting numerics (not a substitute for the algebra): eigvalsh on gasket_graph.py for n = 3,4,5 matches M_exc = 19, 64, 199.
+
+## Proved previously (2026-10-02, free mult(3))
 
 Dated 2026-10-02 (America/New_York).
 
@@ -69,8 +90,10 @@ Dated 2026-10-02 (America/New_York).
 - Free mult(6) for n = 2..5 matches (3^n − 3)/2 (theorem). Explicit u_x construction checked with residual 0 and full span for n = 2..5 against gasket_graph.py (supporting, not a substitute for injectivity).
 - Free mult(5) for n = 3..5 matches (3^{n−1} − 1)/2 (theorem); n = 2 has mult(5) = 2. Corner evaluation rank 0 on free 5-space for n = 3..5; DN residual 0; ⟨(L_D−5I)^+ 1, 1⟩ = −3^{n−1} checked for n = 1..5.
 - Free mult(3) for n = 2..5 matches (3^{n−1} − 3)/2 (theorem): 0, 3, 12, 39. Extension residual of the midpoint formula on a 6-eigenbasis is below 10^{−14} for n = 3..5; restriction rank equals mult(6) of the previous level. Supporting only.
+- Exceptional mass for n = 3,4,5 matches M_exc = 19, 64, 199 and μ_exc = 19/42, 64/123, 199/366 (theorem algebra; eigvalsh supporting). n = 2 has mass 5/15 = 1/3.
 
 ## Still open
 
-- No further exceptional multiplicity is written in sierpinski-geometry-045 SPECTRUM.md. The columns mult(3), mult(5), and mult(6) are now theorems for free L = D − A on build_gasket(n): mult(6) and mult(3) for every n ≥ 2, mult(5) for every n ≥ 3 (n = 2 has free mult(5) = 2, outside that formula).
-- Not a multiplicity claim, and not proved here: SPECTRUM.md records that one decimation map does not hit the whole free spectrum (hit rates roughly 0.4–0.7), and that the Dirichlet bottom scales by 1/5 in the limit. Neither is a finite-n multiplicity.
+- No further exceptional multiplicity columns remain in sierpinski-geometry-045 SPECTRUM.md. Free mult(3), mult(5), mult(6) are theorems, and their total exceptional mass μ_exc → 5/9 is now a theorem for n ≥ 3.
+- Decimation hit rates: SPECTRUM.md’s “hit rates … roughly 0.4–0.7” remains a **numerical observation**. The exceptional-mass theorem does not define or prove a hit predicate; 1 − μ_exc → 4/9 is only a complementary mass fraction, not a proved hit rate.
+- Dirichlet bottom: λ_min(n)/λ_min(n−1) → 1/5 stays open / numerical in SPECTRUM.md. Not proved this run (would need a real proof from Qiu arXiv:1206.1381 or equivalent, which was not written here).

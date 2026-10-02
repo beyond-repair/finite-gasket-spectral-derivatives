@@ -489,6 +489,76 @@ For n = 3, 4, 5 the formula matches SPECTRUM.md (mult(3) = 3, 12, 39), and n = 2
 
 This subsection does not identify free L with the reflected Neumann Laplacian, nor with the Dirichlet Laplacian, even though the Dirichlet multiplicity of 3 recorded by Okoudjou–Strichartz–Tuley is the same integer. It does not select W, and it does not state a continuum limit, a force, a stress, or a momentum.
 
+### Exceptional spectral mass on build_gasket(n)
+
+#### Assumptions
+
+- G_n and L = D − A are as in the Free mult(6) subsection: finest upward edges only, corners degree 2, every other vertex degree 4, free Laplacian on all of V_n.
+- Vertex count |V_n| = N(n) = (3^{n+1} + 3)/2, taken from gasket_graph.py / SPECTRUM.md (N column). Verified against build_gasket(n) for n = 2..5 (N = 15, 42, 123, 366). Not re-proved here as an independent counting theorem; used as an assumption from the constructor.
+- Free multiplicity theorems already recorded in this README:
+  - mult(6) = (3^n − 3)/2 for every integer n ≥ 2,
+  - mult(5) = (3^{n−1} − 1)/2 for every integer n ≥ 3,
+  - mult(3) = (3^{n−1} − 3)/2 for every integer n ≥ 2.
+- Write M_exc(n) := mult(3) + mult(5) + mult(6) for the total multiplicity of the exceptional values {3, 5, 6} identified in SPECTRUM.md / classical SG literature, and μ_exc(n) := M_exc(n) / N(n).
+
+S_W is not an input. No value of W is selected.
+
+#### Derivation
+
+For every integer n ≥ 3, add the three free multiplicity formulas:
+
+    M_exc(n) = (3^{n−1} − 3)/2 + (3^{n−1} − 1)/2 + (3^n − 3)/2
+             = (2 · 3^{n−1} + 3^n − 7)/2
+             = (5 · 3^{n−1} − 7)/2.
+
+Divide by N(n) = (3^{n+1} + 3)/2:
+
+    μ_exc(n) = (5 · 3^{n−1} − 7) / (3^{n+1} + 3).
+
+Limit. Divide numerator and denominator by 3^{n−1}:
+
+    μ_exc(n) = (5 − 7 · 3^{1−n}) / (9 + 3^{2−n}) → 5/9 as n → ∞.
+
+Hence 1 − μ_exc(n) → 4/9.
+
+Monotone increase. Write a = 3^{n−1} ≥ 3. Then
+
+    μ_exc(n+1) − μ_exc(n) has the same sign as
+    (15a − 7)(9a + 3) − (5a − 7)(27a + 3) = 156 a > 0,
+
+so μ_exc(n+1) > μ_exc(n) for every n ≥ 3. The sequence increases to 5/9.
+
+#### Theorem (exceptional spectral mass)
+
+For every integer n ≥ 3, the free combinatorial Laplacian L = D − A on build_gasket(n) satisfies
+
+    M_exc(n) := mult(3) + mult(5) + mult(6) = (5 · 3^{n−1} − 7)/2,
+
+and with N(n) = |V_n| = (3^{n+1} + 3)/2 (assumption from gasket_graph.py),
+
+    μ_exc(n) := M_exc(n)/N(n) = (5 · 3^{n−1} − 7)/(3^{n+1} + 3),
+
+which increases to 5/9 as n → ∞. Consequently the complementary fraction 1 − μ_exc(n) decreases to 4/9.
+
+#### Case n = 2 (separate)
+
+At n = 2 the free multiplicities are mult(3) = 0, mult(5) = 2 (outside the n ≥ 3 formula), mult(6) = 3, so M_exc(2) = 5, N(2) = 15, and μ_exc(2) = 5/15 = 1/3. This is smaller than μ_exc(3) = 19/42, consistent with the increase for n ≥ 3, but the closed formula (5 · 3^{n−1} − 7)/2 is stated only for n ≥ 3 because mult(5) is.
+
+#### What this theorem does and does not say
+
+- It counts the total multiplicity of the already-identified exceptional values {3, 5, 6}. The proof is only addition of the three free multiplicity theorems plus the |V_n| formula.
+- It does **not** by itself prove that every remaining eigenvalue is a preimage under R(z) = z(5 − z) of an eigenvalue of L_{n−1}, nor that any particular hit-rate algorithm equals 1 − μ_exc(n).
+- The SPECTRUM.md phrase “hit rates … roughly 0.4–0.7” remains a **numerical observation** about whatever closed-form check that file used. It is consistent with an exceptional mass approaching 5/9 (complement → 4/9 ≈ 0.444) but is not upgraded to a theorem here.
+- Dirichlet λ_min(n)/λ_min(n−1) → 1/5 is **not** proved in this subsection; it stays open / numerical in SPECTRUM.md.
+
+#### Numerical observation
+
+For n = 3, 4, 5, eigvalsh of L from gasket_graph.py matches M_exc = 19, 64, 199 and μ_exc = 19/42, 64/123, 199/366 against the closed formulas. For n = 2, M_exc = 5 and μ_exc = 1/3 as above. No hit-rate predicate is recorded as a theorem; a naive check “R(λ) lies in the spectrum of L_{n−1}” on non-exceptional eigenvalues is unstable relative to the SPECTRUM.md 0.4–0.7 band and is not claimed.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not identify 1 − μ_exc with a proved decimation hit rate.
+
 
 
 ---
