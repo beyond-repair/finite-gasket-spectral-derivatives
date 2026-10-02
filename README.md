@@ -425,6 +425,72 @@ For n = 3,4,5 the formula matches SPECTRUM.md (mult(5) = 4,13,40). Explicit chec
 
 This subsection does not identify free L with the full Neumann Laplacian (for λ = 6 the free and Neumann multiplicities differ by 3), does not select W, and does not state a continuum limit, a force, a stress, or a momentum.
 
+### Free mult(3) on build_gasket(n)
+
+#### Assumptions
+
+- G_n is the graph returned by build_gasket(n) in sierpinski-geometry-045/gasket_graph.py, as in the Free mult(6) subsection: finest upward edges only, corners degree 2, every other vertex degree 4, L = D − A free on all of V_n.
+- The edge set of G_n is the disjoint union of the 3^n finest upward triangles, and equally the edge-disjoint union of the three level-1 cells. Each level-1 cell, with its induced edges, is combinatorially isomorphic to G_{n−1}.
+- V_{n−1} ⊂ V_n is the vertex set of build_gasket(n−1). Each edge of G_{n−1} contributes exactly one midpoint in V_n \ V_{n−1}.
+- Already proved, for every integer m ≥ 2: dim ker(L_m − 6 I) = (3^m − 3)/2.
+- The count below is stated for every integer n ≥ 2. The range n ≥ 3 is the one in which the right-hand side is positive. At n = 2 both sides are zero.
+
+S_W is not an input. No value of W is selected.
+
+#### Classical ingredients (opened sources)
+
+- Spectral decimation for the Dirichlet and Neumann graph Laplacians: λ_m = λ_{m+1}(5 − λ_{m+1}), extension formula (2.5), forbidden values {2, 5, 6}. Qiu, arXiv:1206.1381, Proposition 2.1 and (2.3)–(2.5) (PDF opened), after Fukushima–Shima. The only preimage of 6 that is not itself forbidden is φ_+(6) = 3; φ_−(6) = 2 is forbidden. Fukushima–Shima, Potential Analysis 1992, was not opened (Springer paywall); the formulas quoted as background are Qiu's.
+- Okoudjou–Strichartz–Tuley, arXiv:1110.1554 (ar5iv HTML opened): in the Dirichlet graph-Laplacian accounting (Δ_m on V_m \ V_0) used for the Green trace, multiplicity of 6 is (3^m − 3)/2, of 5 is (3^{m−1} + 3)/2, and of 3 is (3^{m−1} − 3)/2. The 3-line is the decimation child of Dirichlet mult(6). Same integer as the free theorem; different boundary condition. It is not an input below.
+- Ambrose–Bannon–Dunham–Iyer–Roark, UConn REU “Neumann Eigenfunctions on SG” (PDF opened): the Neumann law is (4 − λ) u(q) = 2 u(n_1) + 2 u(n_2), not the free law (2 − λ) u(q) = u(n_1) + u(n_2). They record the Neumann spectrum of Δ_1 as {0, 3, 6} with multiplicities (1, 2, 3), and mult(3) = 3 on Δ_2. Each Neumann 6-eigenfunction continues along one branch, to eigenvalue 3, so Neumann mult_m(3) = (3^{m−1} + 3)/2, larger than the free count by 3.
+
+#### Derivation
+
+Corner response at eigenvalue 6. For every integer m ≥ 1 and every c ∈ ℝ^{V_0} there exists w : V_m → ℝ with w|_{V_0} = c,
+(L w − 6 w)(x) = 0 for x ∉ V_0, and (L w − 6 w)(q) = −3 c_q for q ∈ V_0.
+
+Base m = 1. Corners q_0, q_1, q_2; opposite midpoints x = m_{q_1 q_2}, y = m_{q_0 q_2}, z = m_{q_0 q_1}. For c = (1, 0, 0) set w(q_0) = 1, w(q_1) = w(q_2) = 0, w(y) = w(z) = −1/2, w(x) = 1/2. Each midpoint has degree 4. The three midpoint defects L w − 6 w vanish because (a, b, c) = (−1/2, −1/2, 1/2) solves
+2a + b + c = −1, a + 2b + c = −1, a + b + 2c = 0.
+At q_0 the neighbors are y and z, so (L w)(q_0) = 2 − (−1) = 3 and (L − 6) w(q_0) = −3. At q_1 and q_2 the neighbor sums are zero, so the defects vanish. The other corners follow by symmetry of the level-1 graph.
+
+Inductive step. G_m is the edge-disjoint union of three copies H_0, H_1, H_2 of G_{m−1}, with q_i the outer corner of H_i and with H_i meeting H_j at one glue vertex g_{ij} ∈ V_1 \ V_0. At a glue vertex the incident edges split between the two copies and the degrees add, so L_{G_m} = L_{H_i} + L_{H_j} there. Elsewhere the copy Laplacian agrees with L_{G_m}. Apply the inductive hypothesis inside H_0 to the corner values (c_0, 0, 0) on (q_0, g_{01}, g_{02}), and extend that function by 0 off H_0. Defects vanish on copy interiors and at both glue corners of H_0; the two copies therefore contribute defect 0 at each glue vertex; the defect at q_0 is −3 c_0; H_1 and H_2 are identically zero, so the defects at q_1 and q_2 vanish. Superposition gives a general c.
+
+Consequences of the response ψ_q associated with c = e_q. L is symmetric.
+
+1. Every free 6-eigenfunction vanishes on V_0. If L φ = 6 φ, then ⟨ψ_q, (L − 6) φ⟩ = ⟨(L − 6) ψ_q, φ⟩ = −3 φ(q), so φ(q) = 0. In particular ker(L_1 − 6 I) = {0}: corners vanish, and on the three midpoints the Dirichlet matrix is L_D = 5 I − J, so (−I − J) v = 0. Then v = −J v, hence J v = −3 J v, so J v = 0 and v = 0.
+2. A Dirichlet 6-mode has zero corner flux. If (L_D − 6 I) v = 0 on I_m = V_m \ V_0 and u is v extended by 0, then (L − 6) u is supported on V_0 with value −(u(n_1)+u(n_2)) at q. Pairing with ψ_q gives u(n_1)+u(n_2) = 0, so (L u)(q) = 0 and u is a free 6-eigenfunction.
+3. The response itself has neighbor sum −c_q. Indeed (L w)(q) = 6 c_q − 3 c_q = 3 c_q and also (L w)(q) = 2 c_q − (n_1+n_2).
+4. Corner obstruction. Suppose (L v)(x) = 6 v(x) for every x ∉ V_0, and write c = v|_{V_0}. Let w be the response with the same corner values. Then v − w vanishes on V_0 and satisfies the interior equation, so its neighbor sums vanish by (2). Neighbor sums of v equal those of w, hence equal −c. If in addition n_1(q)+n_2(q) = 0 at every corner, then c = 0 and v is a free 6-eigenfunction.
+
+Extension, lower bound, n ≥ 3. Let φ ∈ ker(L_{n−1} − 6 I). By (1), φ vanishes on V_0, so its two coarse neighbors at each corner sum to 0. Define u on V_n by u|_{V_{n−1}} = φ and, on each upward (n−1)-cell with corners x_0, x_1, x_2,
+u(y_i) = −(2 φ(x_i) + φ(x_{i+1}) + φ(x_{i−1}))/2,
+where y_i is the midpoint of the opposite side. This is Qiu's extension (2.5) at λ = 3, where the denominator (2−3)(5−3) equals −2. Each new vertex has its four neighbors inside its cell, and substitution shows that those four neighbors sum to u(y_i), so (L_n u)(y_i) = 3 u(y_i).
+
+At an old non-corner x, two (n−1)-cells contain x. In a cell (x, a, b) the two new neighbors of x sum to −φ(x) − (3/2)(φ(a)+φ(b)). The four coarse neighbors sum to S = −2 φ(x), because L_{n−1} φ = 6 φ and the degree is 4. The four new neighbors therefore sum to −2 φ(x) − (3/2) S = φ(x), which is the degree-4 equation for eigenvalue 3. At a corner the same one-cell sum collapses to 0 because φ(q) = 0 and the coarse neighbor sum is 0, matching −u(q). Thus L_n u = 3 u. The map φ ↦ u is injective, so
+mult_n(3) ≥ mult_{n−1}(6) = (3^{n−1} − 3)/2.
+
+Restriction, upper bound. Let L_n u = 3 u. The midpoint equations on each (n−1)-cell are the same invertible 3×3 system (determinant 4), so u is the extension of φ = u|_{V_{n−1}} and the restriction map is injective. Reversing the cell arithmetic: at each non-corner of V_{n−1} the degree-4 equation for λ = 3 is equivalent to (L_{n−1} φ)(x) = 6 φ(x); at each corner the degree-2 equation is equivalent to the coarse neighbor sum being 0 (the corner value cancels). Consequence (4) at level n−1 ≥ 2 gives L_{n−1} φ = 6 φ. Therefore
+mult_n(3) ≤ mult_{n−1}(6).
+
+Level n = 2. The same restriction lands in ker(L_1 − 6 I) = {0}, so mult_2(3) = 0 = (3^1 − 3)/2.
+
+#### Theorem
+
+For every integer n ≥ 2, the free combinatorial Laplacian L = D − A on build_gasket(n) satisfies
+
+    mult(3) = (3^{n−1} − 3)/2.
+
+In particular the identity holds for every integer n ≥ 3. Equivalently, dim ker(L_n − 3 I) = dim ker(L_{n−1} − 6 I), by the φ_+ branch on this free operator: extension of free 6-eigenfunctions, and injective restriction onto that eigenspace. The n = 2 case is the zero identity, not an exception of the mult(5) type. The identity does not select W.
+
+#### Numerical observation
+
+For n = 3, 4, 5 the formula matches SPECTRUM.md (mult(3) = 3, 12, 39), and n = 2 has mult(3) = 0. Extension of an eigenbasis of ker(L_{n−1} − 6 I) by the midpoint formula has max residual below 10^{−14} for n = 3, 4, 5; restriction of ker(L_n − 3 I) lands in that 6-space with full rank. These checks support the identification. They are not a proof.
+
+#### Not a consequence
+
+This subsection does not identify free L with the reflected Neumann Laplacian, nor with the Dirichlet Laplacian, even though the Dirichlet multiplicity of 3 recorded by Okoudjou–Strichartz–Tuley is the same integer. It does not select W, and it does not state a continuum limit, a force, a stress, or a momentum.
+
+
+
 ---
 
 <div align="center">
