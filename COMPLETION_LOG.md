@@ -1,8 +1,22 @@
 # Completion log — finite-gasket-spectral-derivatives
 
-Dated 2026-10-01 (America/New_York).
+## Proved this run (2026-10-02, free mult(5))
 
-## Proved this run (2026-10-01, free mult(6))
+Dated 2026-10-02 (America/New_York).
+
+- Theorem: for every integer n ≥ 3, the free combinatorial Laplacian L = D − A on build_gasket(n) has
+  mult(5) = (3^{n−1} − 1)/2.
+- Proof structure (recorded in README, section “Free mult(5)”):
+  1. Assumptions: same free gasket graph as Free mult(6); n ≥ 3; L_D = Dirichlet principal submatrix on I_n = V_n \ V_0.
+  2. Classical: Dir mult(5) = (3^{n−1}+3)/2 (Qiu arXiv:1206.1381 §2; Fukushima–Shima). Neumann map ρ on Dir_5 has rank 2 (loop / battery split; Ambrose–Bannon–Iyer–Roark Neumann REU 2025 and Morris–Patel–Regan–Wick Dirichlet REU 2025, both opened). Hence DN_5 := ker(ρ) has dim (3^{n−1}−1)/2.
+  3. DN ⊆ free: extend DN modes by 0 on V_0; free corner identity matches ρ = 0.
+  4. Free ∩ {u|_{V_0}=0} = DN_5.
+  5. Corner obstruction: nonzero free corner values must be equal (solvability ⇒ c ∈ span{(1,1,1)}); the equal-corner inhomogeneous problem (L_D−5I)u = L_D 1 forces Σ = 6−(5/2)(3^{n−1}+3), which equals the free target Σ = −9 iff n = 2. For n ≥ 3 one gets c = 0.
+  6. Resolvent input: ⟨(L_D−5I)^+ 1, 1⟩ = −3^{n−1} (elementary for n = 1 via L_D = 5I−J; recurrence G_n = 3 G_{n−1} from self-similarity, giving ⟨u,1⟩ = −mult_D(5)).
+- Exception: n = 2 has free mult(5) = 2 = DN_dim + 1 (SPECTRUM.md); formula stated only for n ≥ 3.
+- Hence mult(5) = (3^{n−1}−1)/2 for all n ≥ 3. Upgrades the n = 3..5 numerical line in sierpinski-geometry-045 SPECTRUM.md to a theorem for the free operator of gasket_graph.py.
+
+## Proved previously (2026-10-01, free mult(6))
 
 - Theorem: for every integer n ≥ 2, the free combinatorial Laplacian L = D − A on build_gasket(n) (gasket_graph.py) has
   mult(6) = (3^n − 3)/2 = |V_{n−1} \ V_0|.
@@ -23,9 +37,10 @@ Dated 2026-10-01 (America/New_York).
 
 ## Classical
 
-- Dirichlet multiplicity of the initial eigenvalue 6 on -Delta_m (Gamma_m, corners grounded): (3^m-3)/2 for m ≥ 2; Qiu arXiv:1206.1381 §2, after Fukushima–Shima / Shima. Same numerical formula as the free theorem above, but a different operator (principal submatrix on V_m \ V_0).
-- The same localized basis (modes indexed by V_{m−1} \ V_0) appears in Qiu §2 for Dirichlet and in Okoudjou–Strichartz–Tuley arXiv:1110.1554 for the Dirichlet graph Laplacian multiplicities. Those sources were opened this run; they do not by themselves prove the free D−A statement, which is proved combinatorially above from build_gasket.
-- Literature Neumann (even reflection at corners, treating boundary vertices as degree 4) is a third operator. UConn REU talk “Neumann Eigenfunctions on SG” (Ambrose et al., 2025; opened this run) counts Neumann mult(6) = |V_{m−1}| = (3^m + 3)/2, which is strictly larger than free mult(6) by 3. Free L = D − A is not that Neumann operator.
+- Dirichlet multiplicity of the initial eigenvalue 6 on -Delta_m (Gamma_m, corners grounded): (3^m-3)/2 for m ≥ 2; Qiu arXiv:1206.1381 §2, after Fukushima–Shima / Shima. Same numerical formula as the free mult(6) theorem, but a different operator (principal submatrix on V_m \ V_0).
+- The same localized basis (modes indexed by V_{m−1} \ V_0) appears in Qiu §2 for Dirichlet and in Okoudjou–Strichartz–Tuley arXiv:1110.1554 for the Dirichlet graph Laplacian multiplicities. Those sources were opened for the mult(6) run; they do not by themselves prove the free D−A statement.
+- Literature Neumann (even reflection at corners, treating boundary vertices as degree 4) is a third operator. UConn REU “Neumann Boundary Conditions on SG” / “Neumann Eigenfunctions on SG” (Ambrose–Bannon–Iyer–Roark, 2025; opened) counts Neumann mult(6) = |V_{m−1}| = (3^m + 3)/2, larger than free mult(6) by 3, and Neumann mult(5) = (3^{m−1} − 1)/2 (loop modes around holes of Γ_{m−1}). Free L = D − A is not the reflected Neumann Laplacian in general; for λ = 5 and n ≥ 3 the free 5-space coincides with the DN / Neumann loop space (proved this run via corner obstruction).
+- Dirichlet mult(5) = (3^{m−1}+3)/2 (Qiu §2; Morris–Patel–Regan–Wick Dirichlet REU 2025, opened this run: loops plus two battery chains). Localized DN mult(5) = (3^{m−1}−1)/2 (Qiu §2).
 
 ## Abstract-only (not committed as gasket theorems)
 
@@ -34,8 +49,9 @@ Dated 2026-10-01 (America/New_York).
 ## Numerical
 
 - Free L = D − A: lambda_max = 6 for n ≥ 2; Tr L = 6*3^n; eigenvalues 3 and 5 present for n = 2..5 (SPECTRUM.md). E(n) = 3^{n+1} (gasket_graph.py).
-- Free mult(6) for n = 2..5 matches (3^n − 3)/2 (now subsumed by the theorem). Explicit u_x construction checked with residual 0 and full span for n = 2..5 in a one-off script against gasket_graph.py (not committed as a claim of proof by numerics).
+- Free mult(6) for n = 2..5 matches (3^n − 3)/2 (theorem). Explicit u_x construction checked with residual 0 and full span for n = 2..5 against gasket_graph.py (supporting, not a substitute for injectivity).
+- Free mult(5) for n = 3..5 matches (3^{n−1} − 1)/2 (theorem); n = 2 has mult(5) = 2. Corner evaluation rank 0 on free 5-space for n = 3..5; DN residual 0; ⟨(L_D−5I)^+ 1, 1⟩ = −3^{n−1} checked for n = 1..5.
 
 ## Still open
 
-- Next open item: rigorous proof that free L = D − A on build_gasket(n) has mult(5) = (3^{n−1} − 1)/2 for all n ≥ 3 (SPECTRUM.md numerical: n = 3,4,5 give 4,13,40; n = 2 has mult(5) = 2, outside that formula). Dirichlet/Neumann 5-series multiplicities are classical but again for different boundary conventions; free mult(5) is not settled by the free mult(6) argument above.
+- Next open item: rigorous proof that free L = D − A on build_gasket(n) has mult(3) = (3^{n−1} − 3)/2 for all n ≥ 3 (SPECTRUM.md numerical: n = 3,4,5 give 3,12,39; n = 2 has mult(3) = 0). Eigenvalue 3 is the spectral-decimation child of 6 (φ-branch), not an initial forbidden value; the free mult(5)/mult(6) arguments do not apply unchanged.
