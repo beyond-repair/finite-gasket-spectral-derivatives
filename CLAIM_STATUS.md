@@ -3,7 +3,7 @@
 **Classification:** RESEARCH
 **Claim cap:** ≤ 1 (finite discrete kernel identities)
 **Sweep:** 167 / PASS-2026-10-01-167
-**Head audited:** (pending this run commit; was 6b51229 before Dirichlet bottom ratio)
+**Head audited:** 9aa404950322594069bf91547ea2cb34c253eaae
 
 | Capability | State | Evidence |
 |---|---|---|
