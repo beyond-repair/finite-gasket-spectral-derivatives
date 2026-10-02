@@ -549,7 +549,7 @@ At n = 2 the free multiplicities are mult(3) = 0, mult(5) = 2 (outside the n ≥
 - It counts the total multiplicity of the already-identified exceptional values {3, 5, 6}. The proof is only addition of the three free multiplicity theorems plus the |V_n| formula.
 - It does **not** by itself prove that every remaining eigenvalue is a preimage under R(z) = z(5 − z) of an eigenvalue of L_{n−1}, nor that any particular hit-rate algorithm equals 1 − μ_exc(n).
 - The SPECTRUM.md phrase “hit rates … roughly 0.4–0.7” remains a **numerical observation** about whatever closed-form check that file used. It is consistent with an exceptional mass approaching 5/9 (complement → 4/9 ≈ 0.444) but is not upgraded to a theorem here.
-- Dirichlet λ_min(n)/λ_min(n−1) → 1/5 is **not** proved in this subsection; it stays open / numerical in SPECTRUM.md.
+- Dirichlet λ_min(n)/λ_min(n−1) → 1/5 is proved in the next subsection (Dirichlet bottom ratio), not here.
 
 #### Numerical observation
 
@@ -559,6 +559,72 @@ For n = 3, 4, 5, eigvalsh of L from gasket_graph.py matches M_exc = 19, 64, 199 
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not identify 1 − μ_exc with a proved decimation hit rate.
 
+
+### Dirichlet bottom ratio on L_D of build_gasket(n)
+
+#### Assumptions
+
+- Same free gasket graph build_gasket(n) as Free mult(6). Write I_n = V_n \ V_0 and L_D^{(n)} for the Dirichlet principal submatrix of free L = D − A on I_n (corners grounded). This is the same discrete Dirichlet operator as Qiu's −Δ_n on Γ_n \ V_0.
+- Classical spectral decimation for that Dirichlet graph Laplacian (Qiu, arXiv:1206.1381, §2 / Proposition 2.1 and (2.3)–(2.6); ar5iv HTML opened this run), after Fukushima–Shima:
+  - f(x) = x(5 − x), inverse branches φ_±(x) = (5 ± √(25 − 4x))/2;
+  - forbidden values {2, 5, 6};
+  - D_1 = {2 (mult 1), 5 (mult 2)};
+  - for m ≥ 2 the only initial Dirichlet eigenvalues are 5 and 6; every other Dirichlet eigenvalue at level m is a continued φ_±-preimage of a Dirichlet eigenvalue at level m − 1 (with the usual rule that 6 continues only to 3, since φ_−(6) = 2 is forbidden).
+- Fukushima–Shima, Potential Analysis 1992, was not opened (Springer paywall); formulas used below are those stated in Qiu.
+
+S_W is not an input. No value of W is selected. This subsection is about L_D, not about free L (whose bottom eigenvalue is 0).
+
+#### Derivation
+
+Branch geometry on [0, 6]. The map φ_+ is decreasing and φ_+([0, 6]) = [3, 5]. The map φ_− is increasing and φ_−([0, 6]) = [0, 2], with φ_−(x) < 2 for every x ∈ [0, 6).
+
+Claim. For every integer n ≥ 1,
+    λ_min(n) := λ_min(L_D^{(n)}) = φ_−^{(n−1)}(2).
+In particular λ_min(n) = φ_−(λ_min(n−1)) for n ≥ 2.
+
+Proof by induction. At n = 1, L_D^{(1)} = 5I − J on the three midpoints (same matrix as in Free mult(5)), so Spec = {2, 5, 5} and λ_min(1) = 2 = φ_−^{(0)}(2).
+
+Assume λ_min(n−1) = φ_−^{(n−2)}(2). Every Dirichlet eigenvalue at level n is either initial (5 or 6, for n ≥ 2) or of the form φ_+(μ) or φ_−(μ) for some Dirichlet eigenvalue μ at level n − 1 (with 6 contributing only φ_+(6) = 3). Then:
+
+- every initial value is ≥ 5;
+- every φ_+-image lies in [3, 5];
+- every φ_−-image satisfies φ_−(μ) ≥ φ_−(λ_min(n−1)), because φ_− is increasing and μ ≥ λ_min(n−1).
+
+Hence the global minimum at level n is exactly φ_−(λ_min(n−1)) = φ_−^{(n−1)}(2).
+
+Ratio identity. For x ∈ (0, 6],
+    φ_−(x)/x = (5 − √(25 − 4x))/(2x) = 2 / (5 + √(25 − 4x)),
+by rationalizing the numerator. Therefore
+    λ_min(n)/λ_min(n−1) = 2 / (5 + √(25 − 4 λ_min(n−1)))
+for every n ≥ 2.
+
+Limit. The recurrence λ_min(n) = φ_−(λ_min(n−1)) with λ_min(1) = 2 forces λ_min(n) → 0 (since φ_−(x) ≤ x/2 on a neighborhood of 0, or simply φ_−(x)/x → 1/5 < 1). Sending λ_min(n−1) → 0 in the ratio identity gives
+    λ_min(n)/λ_min(n−1) → 2/(5+5) = 1/5.
+
+#### Theorem (Dirichlet bottom ratio)
+
+For every integer n ≥ 1, the Dirichlet combinatorial Laplacian L_D^{(n)} on I_n = V_n \ V_0 of build_gasket(n) satisfies
+    λ_min(n) = φ_−^{(n−1)}(2),
+where φ_−(x) = (5 − √(25 − 4x))/2. For every n ≥ 2,
+    λ_min(n)/λ_min(n−1) = 2 / (5 + √(25 − 4 λ_min(n−1))),
+and therefore
+    λ_min(n)/λ_min(n−1) → 1/5 as n → ∞.
+
+This upgrades the Dirichlet ratio table and the “→ 1/5” line in sierpinski-geometry-045 SPECTRUM.md from a numerical observation to a theorem for L_D of gasket_graph.py, using classical spectral decimation structure from Qiu (opened) plus the elementary branch comparison and rationalization above.
+
+#### What this theorem does and does not say
+
+- It is a statement about Dirichlet L_D, not about free L (free λ_min = 0 for all n).
+- It does not prove a continuum Weyl law, spectral dimension, or any force / selected W.
+- It does not upgrade SPECTRUM.md’s free-spectrum hit-rate string “roughly 0.4–0.7” (that remains a numerical observation).
+
+#### Numerical observation
+
+For n = 1..5, eigvalsh of L_D from gasket_graph.py matches φ_−^{(n−1)}(2) to machine precision, and the successive ratios match 2/(5+√(25−4 λ_min(n−1))) exactly on those floats (SPECTRUM.md table: 2, 0.438447, 0.089284, 0.017921, 0.003587 with ratios ≈ 0.219, 0.204, 0.201, 0.200). Supporting only.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not identify free decimation hit rates with 1 − μ_exc.
 
 
 ---

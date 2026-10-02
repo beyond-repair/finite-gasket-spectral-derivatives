@@ -1,6 +1,20 @@
 # Completion log — finite-gasket-spectral-derivatives
 
-## Proved this run (2026-10-02, exceptional spectral mass)
+## Proved this run (2026-10-02, Dirichlet bottom ratio)
+
+Dated 2026-10-02 (America/New_York).
+
+- Theorem: for every integer n ≥ 1, Dirichlet L_D^{(n)} on I_n = V_n \ V_0 of build_gasket(n) has
+  λ_min(n) = φ_−^{(n−1)}(2) with φ_−(x) = (5 − √(25 − 4x))/2;
+  for n ≥ 2, λ_min(n)/λ_min(n−1) = 2/(5 + √(25 − 4 λ_min(n−1))) → 1/5 as n → ∞.
+- Proof structure (recorded in README, section “Dirichlet bottom ratio”):
+  1. Assumptions: free gasket as before; L_D = Dirichlet principal submatrix; classical Dirichlet spectral decimation from Qiu arXiv:1206.1381 §2 / Prop. 2.1 and (2.3)–(2.6) (ar5iv HTML opened this run): f(x)=x(5−x), φ_±, forbidden {2,5,6}, D_1={2,5,5}, initial 5 and 6 for m≥2, continued via φ_±. Fukushima–Shima 1992 not opened.
+  2. Branch comparison: φ_+([0,6])=[3,5]; φ_− increasing with image [0,2]; hence λ_min(n)=φ_−(λ_min(n−1)) by induction from λ_min(1)=2.
+  3. Rationalization: φ_−(x)/x = 2/(5+√(25−4x)) → 1/5 as x→0; λ_min(n)→0.
+- Upgrades SPECTRUM.md Dirichlet ratio table / “→ 1/5” line from numerical observation to a theorem for L_D of gasket_graph.py.
+- Clarification: free λ_min is 0; this is Dirichlet only. Free hit-rate string “0.4–0.7” stays numerical.
+
+## Proved previously (2026-10-02, exceptional spectral mass)
 
 Dated 2026-10-02 (America/New_York).
 
@@ -79,6 +93,7 @@ Dated 2026-10-02 (America/New_York).
 - Dirichlet mult(5) = (3^{m−1}+3)/2 (Qiu §2; Morris–Patel–Regan–Wick Dirichlet REU 2025, opened this run: loops plus two battery chains). Localized DN mult(5) = (3^{m−1}−1)/2 (Qiu §2).
 - Dirichlet graph mult(3) = (3^{m−1}−3)/2 is stated by Okoudjou–Strichartz–Tuley, arXiv:1110.1554 (ar5iv HTML opened this run), as the decimation child of Dirichlet mult(6). Same integer as the free theorem; not an input to it. Qiu arXiv:1206.1381 PDF opened this run for the decimation formula (Prop. 2.1, (2.3)–(2.5)): φ_+(6) = 3, φ_−(6) = 2 forbidden. Fukushima–Shima 1992 was not opened.
 - Neumann (even reflection) mult(3) is larger than free mult(3) by 3. Ambrose–Bannon–Dunham–Iyer–Roark, Neumann Eigenfunctions on SG (PDF opened): Neumann mult_1(3) = 2, mult_2(3) = 3, and each 6-eigenfunction continues along one branch to eigenvalue 3, so Neumann mult_m(3) = (3^{m−1}+3)/2. The Neumann corner law is not the free corner law.
+- Dirichlet bottom / 2-series: Qiu arXiv:1206.1381 §2 (ar5iv opened this run) records D_1 = {2,5}, initial 5 and 6 for m≥2, and φ_−(x)=x/5+O(x²) as x→0. The identification λ_min(n)=φ_−^{(n−1)}(2) and the ratio limit 1/5 proved this run use that classical structure plus elementary branch comparison; they are not a new discovery of spectral decimation.
 
 ## Abstract-only (not committed as gasket theorems)
 
@@ -91,9 +106,10 @@ Dated 2026-10-02 (America/New_York).
 - Free mult(5) for n = 3..5 matches (3^{n−1} − 1)/2 (theorem); n = 2 has mult(5) = 2. Corner evaluation rank 0 on free 5-space for n = 3..5; DN residual 0; ⟨(L_D−5I)^+ 1, 1⟩ = −3^{n−1} checked for n = 1..5.
 - Free mult(3) for n = 2..5 matches (3^{n−1} − 3)/2 (theorem): 0, 3, 12, 39. Extension residual of the midpoint formula on a 6-eigenbasis is below 10^{−14} for n = 3..5; restriction rank equals mult(6) of the previous level. Supporting only.
 - Exceptional mass for n = 3,4,5 matches M_exc = 19, 64, 199 and μ_exc = 19/42, 64/123, 199/366 (theorem algebra; eigvalsh supporting). n = 2 has mass 5/15 = 1/3.
+- Dirichlet λ_min(n) for n = 1..5 matches φ_−^{(n−1)}(2) and the ratio identity 2/(5+√(25−4 λ_min(n−1))) on gasket_graph.py eigvalsh (supporting).
 
 ## Still open
 
-- No further exceptional multiplicity columns remain in sierpinski-geometry-045 SPECTRUM.md. Free mult(3), mult(5), mult(6) are theorems, and their total exceptional mass μ_exc → 5/9 is now a theorem for n ≥ 3.
-- Decimation hit rates: SPECTRUM.md’s “hit rates … roughly 0.4–0.7” remains a **numerical observation**. The exceptional-mass theorem does not define or prove a hit predicate; 1 − μ_exc → 4/9 is only a complementary mass fraction, not a proved hit rate.
-- Dirichlet bottom: λ_min(n)/λ_min(n−1) → 1/5 stays open / numerical in SPECTRUM.md. Not proved this run (would need a real proof from Qiu arXiv:1206.1381 or equivalent, which was not written here).
+- No further exceptional multiplicity columns remain in sierpinski-geometry-045 SPECTRUM.md. Free mult(3), mult(5), mult(6) are theorems, and their total exceptional mass μ_exc → 5/9 is a theorem for n ≥ 3.
+- Dirichlet bottom ratio λ_min(n)/λ_min(n−1) → 1/5 is now a theorem for L_D (this run).
+- Decimation hit rates: SPECTRUM.md’s “hit rates … roughly 0.4–0.7” remains a **numerical observation**. The exceptional-mass theorem does not define or prove a hit predicate; 1 − μ_exc → 4/9 is only a complementary mass fraction, not a proved hit rate. Defining a precise hit predicate on free Spec(L_n) \ {3,5,6} and proving that the hit mass equals 1 − μ_exc (or another closed fraction) is still open.
