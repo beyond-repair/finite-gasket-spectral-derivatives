@@ -54,6 +54,19 @@ class SpectralDerivativeTests(unittest.TestCase):
         self.assertAlmostEqual(direct, split, places=12)
         self.assertLess(self.mod.v_second(self.ev, w), 0.0)
 
+    def test_omega2_scales_the_positive_wall(self):
+        omega2 = 4.0
+        self.mod.require_positive(self.ev, 0.5, omega2)
+        with self.assertRaises(ValueError):
+            self.mod.require_positive(self.ev, omega2 / 6.0, omega2)
+        analytic = self.mod.dgamma_dw(self.ev, 0.2, omega2)
+        h = 1e-6
+        finite = (
+            self.mod.gamma_loop(self.ev, 0.2 + h, omega2)
+            - self.mod.gamma_loop(self.ev, 0.2 - h, omega2)
+        ) / (2 * h)
+        self.assertAlmostEqual(analytic, finite, places=6)
+
 
 if __name__ == "__main__":
     unittest.main()
