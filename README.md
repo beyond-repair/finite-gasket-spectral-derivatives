@@ -1033,6 +1033,45 @@ Numerical observation (not used). The Euclidean remainder sequence of (A_k, Π_k
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the logarithmic-derivative identity or the resultant formulation is new. No literature was opened this run.
 
+### Residue condition: exact check to k = 46 and no monomial trace certificate
+
+Dated 2026-10-08 (America/New_York), eighth run of the day. This subsection adds one more length to the exact finite check and records a negative search. It proves no new infinite family.
+
+#### Assumptions
+
+- Everything in "Residue condition: Frobenius orbit reduction and exact check to k = 45": chains z_0 = 1, z_i² + z_i = z_{i−1}, S_k = Σ_{i=1}^k 1/z_i, the orbit lemma (one chain per Frobenius orbit is obtained by keeping one child at every power-of-two depth), and the fact that every chain of length k ≤ 63 lies in GF(2^64).
+- The two-adic reduction theorem: a coincidental hit at level n ≥ 3 needs some k with 1 ≤ k ≤ n − 2, n − k even, and a chain with S_k = 0.
+- No literature was opened this run, and no novelty is claimed.
+
+S_W is not an input. No value of W is selected.
+
+#### Exact finite verification (1 ≤ k ≤ 46)
+
+The unchanged program scripts/residue_orbits_gf2_64.c (built with gcc -O3 -march=native -fopenmp) was run with KMAX = 46. It walks the reduced tree in GF(2^64) = F_2[x]/(x^64 + x^4 + x^3 + x + 1), carries S_k as num/den with den = z_1 ⋯ z_k ≠ 0, and reports zero vanishing numerators at every depth 1 ≤ k ≤ 46, with exactly 2^{k−⌈log₂(k+1)⌉} reduced chains at each depth. At k = 46 that is 2^{40} representatives, covering all 2^{46} chains. The run took 35.5 minutes of wall time (230 CPU-minutes) on the 8-core box and printed `ok` with zeros = 0 for every k. The reduction checks recorded in the previous subsection (Galois-invariant trace counts, full = 2^B · reduced for k ≤ 22, carry-less multiply against schoolbook) apply unchanged, since the program and field model are the same.
+
+#### Corollary (theorem plus finite exact computation)
+
+S_k ≠ 0 for every chain when 1 ≤ k ≤ 46, and when k = 2^j or k = 2^j + 1 for any j. The smallest open length is k = 47. A coincidental hit at level n needs an open k ≤ n − 2 with n − k even. For n = 48 that would be an even k ≤ 46, and none is open, so a hit needs n ≥ 49. Hence for 3 ≤ n ≤ 48 there are no coincidental hits, and
+    h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3)   exactly.
+This extends the previous range 3 ≤ n ≤ 47 by one level. Each further level costs about twice the previous run, so this route stays exponential.
+
+#### Negative result: no monomial trace certificate (scripts/check_residue_trace_monomials.py)
+
+A uniform identity Tr_d(f · S_k) = 1 on all chains of length k, with d = 2^{⌈log₂(k+1)⌉} and Tr_d the trace from GF(2^d) to F_2, would prove S_k ≠ 0. The script enumerates all 2^k chains in GF(2^64) for k ≤ 8 and tests every f = z_k^a z_{k−1}^b and every f = (z_k + 1)^a z_{k−1}^b with −6 ≤ a ≤ 6 and −4 ≤ b ≤ 4. Results:
+- k = 1, …, 5 have 18, 120, 63, 49, 12 such certificates, k = 6 and k = 7 have none, and k = 8 has 4 (f = z_7² and f = z_7³, with either choice of sibling).
+- No f in this family works for every 2 ≤ k ≤ 8.
+So a trace certificate of this simple monomial shape does not exist uniformly in k. This rules out only this family. It does not rule out certificates with other f, and it says nothing against the conjecture.
+
+#### Still open
+
+- Residue conjecture for k ≥ 47 with k ∉ {2^j, 2^j + 1}: Σ_{i=1}^k 1/z_i ≠ 0 for every chain, equivalently gcd(N^k + 1, Π_k′) = 1 in F_2[t]. Not proved, and no counterexample is known.
+- Exact h_n for n ≥ 49 (it would follow from the conjecture; failure of the residue test would only remove this obstruction, not produce a hit).
+- No structural proof was found for k = 2^j + 2 (j ≥ 2). Writing GF(2^{2p}) = GF(2^p)(z_p) with p = 2^j, the condition S_{p+2} = 0 splits into two equations over GF(2^p) (the z_p-coefficient 1/z_{p−1} + 1/(α z_1) + z_2/(α + γ(z_2 + 1)) = 0, where z_{p+1} = α + z_1 z_p and z_{p+2} = γ + z_2 z_p, together with the constant term), and this run did not show they are incompatible.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation or the trace test is new.
+
 ---
 
 <div align="center">

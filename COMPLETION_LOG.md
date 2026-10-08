@@ -1,6 +1,17 @@
 # Completion log — finite-gasket-spectral-derivatives
 
-## Proved this run (2026-10-08, seventh run: logarithmic-derivative form, F_2[t] gcd certificate)
+## Proved this run (2026-10-08, eighth run: residue check to k = 46, no monomial trace certificate)
+
+Dated 2026-10-08 (America/New_York).
+
+- Finite exact computation (README "Residue condition: exact check to k = 46 and no monomial trace certificate"): the unchanged Frobenius-reduced walk scripts/residue_orbits_gf2_64.c, run with KMAX = 46 in GF(2^64), finds S_k ≠ 0 at every reduced chain for 1 ≤ k ≤ 46 (2^40 representatives at k = 46, covering all 2^46 chains; 35.5 min wall, 230 CPU-min).
+- Corollary (two-adic reduction theorem + orbit lemma + this computation): the smallest open length is 47, so a coincidental hit needs n ≥ 49, and h_n = 1 − μ_exc(n) − 5·2^n/(3^{n+1}+3) exactly for 3 ≤ n ≤ 48 (previously n ≤ 47).
+- Negative result (scripts/check_residue_trace_monomials.py, exhaustive for k ≤ 8): no certificate Tr_d(f·S_k) = 1 with f = z_k^a z_{k−1}^b or (z_k+1)^a z_{k−1}^b, |a| ≤ 6, |b| ≤ 4, holds for all 2 ≤ k ≤ 8; k = 6 and 7 admit none at all. Only this family is ruled out.
+- Recorded without a conclusion: for k = 2^j + 2 (j ≥ 2) the condition S_k = 0 splits into two equations over GF(2^{2^j}); their incompatibility was not shown.
+- Still open: the residue conjecture for k ≥ 47 with k ∉ {2^j, 2^j + 1} (equivalently gcd(N^k + 1, Π_k′) = 1), hence exact h_n for n ≥ 49.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
+## Proved previously (2026-10-08, seventh run: logarithmic-derivative form, F_2[t] gcd certificate)
 
 Dated 2026-10-08 (America/New_York).
 
@@ -200,5 +211,5 @@ Dated 2026-10-02 (America/New_York).
 - No further exceptional multiplicity columns remain in sierpinski-geometry-045 SPECTRUM.md. Free mult(3), mult(5), mult(6) are theorems, and their total exceptional mass μ_exc → 5/9 is a theorem for n ≥ 3.
 - Dirichlet bottom ratio λ_min(n)/λ_min(n−1) → 1/5 is a theorem for L_D (2026-10-02).
 - Decimation hit rates: with the hit predicate defined in README ("Free decimation hit predicate"), h_n → 4/9 is now a theorem (2026-10-08), with 1 − μ_exc − 5·2^n/(3^{n+1}+3) ≤ h_n ≤ 1 − μ_exc for n ≥ 3. SPECTRUM.md's informal "0.4–0.7" string remains a numerical observation of an unspecified quantity.
-- Coincidental hits among corner-visible eigenvalues (updated seventh run: exact reformulation as gcd(N^k + 1, Π_k′) = 1 in F_2[t], independent gcd certificate for k ≤ 21, range unchanged; sixth run: Frobenius orbit reduction, S_k ≠ 0 for all k ≤ 45, exact h_n for 3 ≤ n ≤ 47, open for k ≥ 46 not of the form 2^j or 2^j + 1; fifth run: lengths 2^j + 1 proved, exact h_n for 3 ≤ n ≤ 35): excluded for 3 ≤ n ≤ 11 by an exact finite certificate (2026-10-08, corner channels), and for 3 ≤ n ≤ 18 by the two-adic reduction plus a residue check for k ≤ 16 (2026-10-08, third run); for general n this is reduced to the residue conjecture Σ 1/z_i ≠ 0 in characteristic 2, which is open. Fourth run: the residue condition holds for all k ≤ 32 and every power of two k, so exact h_n now holds for 3 ≤ n ≤ 34; open for k ≥ 33 not a power of two.
+- Coincidental hits among corner-visible eigenvalues (updated eighth run: S_k ≠ 0 for all k ≤ 46 by the reduced walk, exact h_n for 3 ≤ n ≤ 48, open for k ≥ 47 not of the form 2^j or 2^j + 1; no monomial trace certificate for k ≤ 8; seventh run: exact reformulation as gcd(N^k + 1, Π_k′) = 1 in F_2[t], independent gcd certificate for k ≤ 21, range unchanged; sixth run: Frobenius orbit reduction, S_k ≠ 0 for all k ≤ 45, exact h_n for 3 ≤ n ≤ 47, open for k ≥ 46 not of the form 2^j or 2^j + 1; fifth run: lengths 2^j + 1 proved, exact h_n for 3 ≤ n ≤ 35): excluded for 3 ≤ n ≤ 11 by an exact finite certificate (2026-10-08, corner channels), and for 3 ≤ n ≤ 18 by the two-adic reduction plus a residue check for k ≤ 16 (2026-10-08, third run); for general n this is reduced to the residue conjecture Σ 1/z_i ≠ 0 in characteristic 2, which is open. Fourth run: the residue condition holds for all k ≤ 32 and every power of two k, so exact h_n now holds for 3 ≤ n ≤ 34; open for k ≥ 33 not a power of two.
 - Elementary proof of DN_n(2) = 0 (n ≥ 3) without Qiu §2: done (2026-10-08, from c_n = 5·2^{n−1}+1 via corner channels).
