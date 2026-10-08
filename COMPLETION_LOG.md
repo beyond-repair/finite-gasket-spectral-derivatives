@@ -1,6 +1,19 @@
 # Completion log — finite-gasket-spectral-derivatives
 
-## Proved this run (2026-10-08, eighth run: residue check to k = 46, no monomial trace certificate)
+## Proved this run (2026-10-08, ninth run: residue lengths 2^j + 2)
+
+Dated 2026-10-08 (America/New_York).
+
+- Lemma (README "Residue condition: lengths 2^j + 2 (relative-trace argument)"): for every j ≥ 3 and every chain, S_{2^j+2} ∉ GF(2^{2^j}); in particular S_{2^j+2} ≠ 0. With k = 4 (power of two) and k = 6 (finite check), S_k ≠ 0 for every k = 2^j + 2, j ≥ 1.
+- Proof structure: with p = 2^j, c = z_{p−1} (degree exactly p), α_i = z_{p+i} + z_i z_p ∈ GF(2^p) (fixed by σ = F^p), the relations α_i² + α_i = α_{i−1} + c z_i² and the relative norms Nm(z_{p+1}) = z_1² α_1, Nm(z_{p+2}) = α_1 + (1 + z_2) α_2 make the z_p-coordinate of S_{p+2} equal to C_1 = z_1²/(α_1 + 1) + z_2/(α_1 + (1 + z_2) α_2). C_1 = 0 is linear in α_2; substituting into the α_2 relation gives a quadratic in α_1 over GF(16) whose linear coefficient is 0 and whose constant μ² + μ is nonzero, so α_1 ∈ GF(16), hence c ∈ GF(16), contradicting deg c = p ≥ 8.
+- This resolves the case left without a conclusion in the eighth run (the two equations over GF(2^p) for k = 2^j + 2): the z_p-coefficient equation alone is already incompatible for j ≥ 3.
+- Supporting exact checks (scripts/check_residue_p_plus_two.py, GF(2^64)): all identities on every chain for k = 6, 10 and on one chain per Frobenius orbit for k = 18; counts of S_{p+2} ∈ GF(2^p) are 8, 0, 0 (k = 6 reproduces the fifth run); α_1 ∈ GF(16) wherever C_1 = 0. Not a substitute for the proof.
+- Range unchanged: the smallest open length is still 47, so exact h_n holds for 3 ≤ n ≤ 48. New proved lengths beyond computation: k = 66, 130, 258, ….
+- Recorded as a strategy only (not proved): for k = 2^j + m the same coordinates give m equations in α_1, …, α_m; if that system is zero-dimensional for a fixed m, the argument would cover all large j. Not checked for any m ≥ 3, and it could not cover all k.
+- Still open: the residue conjecture for k ≥ 47 with k ∉ {2^j, 2^j + 1, 2^j + 2}, hence exact h_n for n ≥ 49.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
+## Proved previously (2026-10-08, eighth run: residue check to k = 46, no monomial trace certificate)
 
 Dated 2026-10-08 (America/New_York).
 
@@ -211,5 +224,5 @@ Dated 2026-10-02 (America/New_York).
 - No further exceptional multiplicity columns remain in sierpinski-geometry-045 SPECTRUM.md. Free mult(3), mult(5), mult(6) are theorems, and their total exceptional mass μ_exc → 5/9 is a theorem for n ≥ 3.
 - Dirichlet bottom ratio λ_min(n)/λ_min(n−1) → 1/5 is a theorem for L_D (2026-10-02).
 - Decimation hit rates: with the hit predicate defined in README ("Free decimation hit predicate"), h_n → 4/9 is now a theorem (2026-10-08), with 1 − μ_exc − 5·2^n/(3^{n+1}+3) ≤ h_n ≤ 1 − μ_exc for n ≥ 3. SPECTRUM.md's informal "0.4–0.7" string remains a numerical observation of an unspecified quantity.
-- Coincidental hits among corner-visible eigenvalues (updated eighth run: S_k ≠ 0 for all k ≤ 46 by the reduced walk, exact h_n for 3 ≤ n ≤ 48, open for k ≥ 47 not of the form 2^j or 2^j + 1; no monomial trace certificate for k ≤ 8; seventh run: exact reformulation as gcd(N^k + 1, Π_k′) = 1 in F_2[t], independent gcd certificate for k ≤ 21, range unchanged; sixth run: Frobenius orbit reduction, S_k ≠ 0 for all k ≤ 45, exact h_n for 3 ≤ n ≤ 47, open for k ≥ 46 not of the form 2^j or 2^j + 1; fifth run: lengths 2^j + 1 proved, exact h_n for 3 ≤ n ≤ 35): excluded for 3 ≤ n ≤ 11 by an exact finite certificate (2026-10-08, corner channels), and for 3 ≤ n ≤ 18 by the two-adic reduction plus a residue check for k ≤ 16 (2026-10-08, third run); for general n this is reduced to the residue conjecture Σ 1/z_i ≠ 0 in characteristic 2, which is open. Fourth run: the residue condition holds for all k ≤ 32 and every power of two k, so exact h_n now holds for 3 ≤ n ≤ 34; open for k ≥ 33 not a power of two.
+- Coincidental hits among corner-visible eigenvalues (updated ninth run: S_k ≠ 0 proved for every k = 2^j + 2, range unchanged, open for k ≥ 47 not of the form 2^j, 2^j + 1, 2^j + 2; eighth run: S_k ≠ 0 for all k ≤ 46 by the reduced walk, exact h_n for 3 ≤ n ≤ 48, open for k ≥ 47 not of the form 2^j or 2^j + 1; no monomial trace certificate for k ≤ 8; seventh run: exact reformulation as gcd(N^k + 1, Π_k′) = 1 in F_2[t], independent gcd certificate for k ≤ 21, range unchanged; sixth run: Frobenius orbit reduction, S_k ≠ 0 for all k ≤ 45, exact h_n for 3 ≤ n ≤ 47, open for k ≥ 46 not of the form 2^j or 2^j + 1; fifth run: lengths 2^j + 1 proved, exact h_n for 3 ≤ n ≤ 35): excluded for 3 ≤ n ≤ 11 by an exact finite certificate (2026-10-08, corner channels), and for 3 ≤ n ≤ 18 by the two-adic reduction plus a residue check for k ≤ 16 (2026-10-08, third run); for general n this is reduced to the residue conjecture Σ 1/z_i ≠ 0 in characteristic 2, which is open. Fourth run: the residue condition holds for all k ≤ 32 and every power of two k, so exact h_n now holds for 3 ≤ n ≤ 34; open for k ≥ 33 not a power of two.
 - Elementary proof of DN_n(2) = 0 (n ≥ 3) without Qiu §2: done (2026-10-08, from c_n = 5·2^{n−1}+1 via corner channels).

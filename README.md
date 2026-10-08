@@ -1072,6 +1072,64 @@ So a trace certificate of this simple monomial shape does not exist uniformly in
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation or the trace test is new.
 
+### Residue condition: lengths 2^j + 2 (relative-trace argument)
+
+Dated 2026-10-08 (America/New_York), ninth run of the day. This subsection proves one more infinite family of lengths, k = 2^j + 2, which was left open by the eighth run. It does not change the smallest open length (47) or the exact range of h_n.
+
+#### Assumptions
+
+- Everything in the earlier residue subsections: chains z_0 = 1, z_i² + z_i = z_{i−1} over the algebraic closure of F_2, S_k = Σ_{i=1}^k 1/z_i, N(x) = x² + x = F + 1, E_a = ker N^{2^a} = GF(2^{2^a}), and z_i ∈ E_a if and only if i + 1 ≤ 2^a. Hence z_i has degree exactly 2^a over F_2 when 2^{a−1} ≤ i < 2^a (degrees of elements of the E_a tower are powers of two).
+- The Galois action of the sixth run: for p = 2^j and i ≥ p, σ := F^p = N^p + 1 acts by σ(z_i) = z_i + z_{i−p}, and σ generates Gal(GF(2^{2p})/GF(2^p)).
+- Elementary algebra in characteristic 2. No literature was opened this run, and no novelty is claimed.
+
+S_W is not an input. No value of W is selected.
+
+#### Derivation
+
+Fix p = 2^j with j ≥ 2, so p + 2 ≤ 2p − 1 and every z_i with i ≤ p + 2 lies in GF(2^{2p}) = GF(2^p)(z_p). Write c = z_{p−1}, ω = z_1 (so ω² + ω = 1, ω³ = 1, 1 + ω = ω²) and ζ = z_2 (so ζ² + ζ = ω, ζ ∈ GF(16) \ GF(4)). Then c ∈ GF(2^p) has degree exactly p, and z_p² + z_p = c.
+
+Step 1 (coordinates over GF(2^p)). For 0 ≤ i ≤ 2 put α_i := z_{p+i} + z_i z_p. Since σ(z_{p+i}) = z_{p+i} + z_i and σ(z_p) = z_p + 1, σ(α_i) = α_i, so α_i ∈ GF(2^p), and α_0 = 0. Expanding z_{p+i}² + z_{p+i} = z_{p+i−1} with z_p² = z_p + c and comparing coefficients of 1 and z_p gives
+    α_i² + α_i = α_{i−1} + c z_i²,   so   α_1² + α_1 = ω² c,   α_2² + α_2 = α_1 + ζ² c.
+In particular c = ω(α_1² + α_1), and α_1 ∉ {0, 1}.
+
+Step 2 (relative norms and the z_p-coordinate of S). For x = a + b z_p with a, b ∈ GF(2^p), σ(x) = (a + b) + b z_p, Nm(x) := x σ(x) = a² + ab + b² c, and 1/x = σ(x)/Nm(x), so the z_p-coordinate of 1/x is b/Nm(x). This gives Nm(z_p) = c, Nm(z_{p+1}) = α_1² + ω α_1 + ω² c = ω² α_1 and Nm(z_{p+2}) = α_2² + ζ α_2 + ζ² c = α_1 + (1 + ζ) α_2. Since S_{p−1} ∈ GF(2^p), S_{p+2} = S_0' + C_1 z_p with S_0', C_1 ∈ GF(2^p) and
+    C_1 = 1/c + ω/(ω² α_1) + ζ/(α_1 + (1 + ζ) α_2) = ω²/(α_1 + 1) + ζ/(α_1 + (1 + ζ) α_2),
+using 1/c + ω²/α_1 = ω²/(α_1(α_1 + 1)) + ω²/α_1 = ω²/(α_1 + 1). Because {1, z_p} is a GF(2^p)-basis, S_{p+2} ∈ GF(2^p) if and only if C_1 = 0. This is the z_p-coefficient equation recorded without a conclusion in the eighth run.
+
+Step 3 (C_1 = 0 forces α_1 into GF(16)). C_1 = 0 is linear in α_2: α_2 = λ α_1 + μ with λ = ω(ζ + ω²)/(1 + ζ) and μ = ωζ/(1 + ζ), both in GF(16). Substituting into α_2² + α_2 = α_1 + ζ²ω(α_1² + α_1) gives
+    Q(α_1) := (λ² + ζ²ω) α_1² + (λ + 1 + ζ²ω) α_1 + (μ² + μ) = 0.
+The linear coefficient vanishes: (1 + ζ²ω)(1 + ζ) = 1 + ζω = λ(1 + ζ), using ζ² = ζ + ω and ζ³ = ζ + ω + ωζ. The constant μ² + μ is nonzero, because μ = 0 would need ζ = 0 and μ = 1 would need ζ(1 + ω) = 1, that is ζ = ω ∈ GF(4). So either the leading coefficient A = λ² + ζ²ω is 0, and Q = μ² + μ has no root, or α_1² = (μ² + μ)/A ∈ GF(16), and then α_1 ∈ GF(16) because squaring is bijective on GF(16). In both cases a solution forces α_1 ∈ GF(16), hence c = ω(α_1² + α_1) ∈ GF(16).
+
+Lemma (lengths 2^j + 2). For every j ≥ 3 and every chain, S_{2^j+2} ∉ GF(2^{2^j}); in particular S_{2^j+2} ≠ 0.
+
+Proof. If S_{p+2} were in GF(2^p) (in particular, if it were 0), Steps 2 and 3 give c ∈ GF(16), so the degree of c divides 4. But c = z_{p−1} has degree p ≥ 8. Contradiction.
+
+Together with k = 4 (a power of two) and k = 6 (finite check), S_k ≠ 0 for every k = 2^j + 2, j ≥ 1. The argument fails at p = 4 exactly where the data says it must: there c ∈ GF(16) is allowed, and the fifth run's count of 8 chains with S_6 ∈ GF(16) is reproduced below.
+
+#### Exact finite verification (scripts/check_residue_p_plus_two.py)
+
+In GF(2^64), for p = 4 and p = 8 on all chains of length p + 2, and for p = 16 on one chain per Frobenius orbit of length 18 (orbit lemma of the sixth run; membership in GF(2^p) is Frobenius-invariant), the script checks that α_1, α_2 ∈ GF(2^p), both Artin–Schreier relations of Step 1, the three norm formulas, both forms of C_1, that S_{p+2} = S_0' + C_1 z_p with S_0', C_1 ∈ GF(2^p), and that C_1 = 0 exactly when S_{p+2} ∈ GF(2^p). For each of the four choices of (z_1, z_2) it checks the substitution identity behind Q at random points, that the linear coefficient is 0 and μ² + μ ≠ 0 (both also proved above), and that A ≠ 0 (not needed for the lemma). Counts of chains with S_{p+2} ∈ GF(2^p): 8 for k = 6 (matching the fifth run), 0 for k = 10, 0 for k = 18, with α_1 ∈ GF(16) on every chain where C_1 = 0. These checks support the algebra; the lemma does not depend on them.
+
+#### Corollary (status after this run)
+
+- S_k ≠ 0 for every chain when 1 ≤ k ≤ 46 (computation), and when k ∈ {2^j, 2^j + 1, 2^j + 2} for any j (lemmas). The first lengths newly covered by a proof rather than computation are k = 66, 130, 258, ….
+- The smallest open length stays 47, so the exact range is unchanged: h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3) for 3 ≤ n ≤ 48.
+
+#### Remark (not proved): the same scheme for k = 2^j + m
+
+For k = p + m with fixed m and p = 2^j > m, the same coordinates give α_1, …, α_m ∈ GF(2^p) with α_i² + α_i = α_{i−1} + c z_i², z_1, …, z_m in a fixed small field, and S_k ∈ GF(2^p) iff a single rational equation C_1(α_1, …, α_m) = 0 holds. If, for a given m, these m equations in m unknowns have only finitely many solutions over the algebraic closure, all solutions lie in a field of bounded degree, and the argument above would prove S_{p+m} ≠ 0 for all large j. Whether the system is zero-dimensional was not checked for any m ≥ 3, and the fifth run's data (S_k ∈ GF(2^p) for some chains at k = 11, 13, 14, 15) shows that small p can admit solutions. This is a proof strategy only; even for every fixed m it would not cover all k, since m ranges up to p − 1.
+
+#### Still open
+
+- Residue conjecture for k ≥ 47 with k ∉ {2^j, 2^j + 1, 2^j + 2}: Σ_{i=1}^k 1/z_i ≠ 0 for every chain, equivalently gcd(N^k + 1, Π_k′) = 1 in F_2[t]. Not proved, and no counterexample is known.
+- Exact h_n for n ≥ 49 (it would follow from the conjecture; failure of the residue test would only remove this obstruction, not produce a hit).
+- Zero-dimensionality of the C_1-system for k = 2^j + m, m ≥ 3 (see the remark).
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the relative-trace argument is new.
+
+
 ---
 
 <div align="center">
