@@ -1129,6 +1129,77 @@ For k = p + m with fixed m and p = 2^j > m, the same coordinates give α_1, …,
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the relative-trace argument is new.
 
+### Residue condition: lengths 2^j + m for 3 ≤ m ≤ 7 (elimination over a fixed field)
+
+Dated 2026-10-08 (America/New_York), tenth run of the day. This subsection carries out, for 3 ≤ m ≤ 7, the strategy recorded as a remark (not proved) in the ninth run, and proves S_k ≠ 0 for every length k whose excess over the largest power of two not exceeding it is at most 7, with the one exception recorded below under "Pending". It does not change the smallest open length (47) or the exact range of h_n.
+
+#### Assumptions
+
+- Everything in the earlier residue subsections: chains z_0 = 1, z_i² + z_i = z_{i−1}, S_k = Σ_{i=1}^k 1/z_i, N(x) = x² + x, z_i ∈ GF(2^{2^a}) iff i + 1 ≤ 2^a, so z_{p−1} has degree exactly p over F_2 when p = 2^j; the Galois action σ = F^p with σ(z_i) = z_i + z_{i−p} for p ≤ i (sixth and ninth runs); the Frobenius orbit lemma (sixth run).
+- Step 1 and Step 2 of the ninth run, which hold verbatim for any 1 ≤ m ≤ p − 1: with c = z_{p−1} and α_i := z_{p+i} + z_i z_p ∈ GF(2^p) (0 ≤ i ≤ m, α_0 = 0), one has α_i² + α_i = α_{i−1} + c z_i², Nm(z_{p+i}) = α_i² + z_i α_i + z_i² c = (1 + z_i) α_i + α_{i−1}, and the z_p-coordinate of S_{p+m} is
+    C_1 = z_1²/(α_1 + 1) + Σ_{i=2}^m z_i / ((1 + z_i) α_i + α_{i−1}),
+  so S_{p+m} ∈ GF(2^p) iff C_1 = 0. All denominators are nonzero (each Nm(z_{p+i}) is the norm of a nonzero element, and α_1 = 1 would give c = 0).
+- Elementary algebra in characteristic 2 and exact finite-field computation (python-flint 0.9.0). No literature was opened this run, and no novelty is claimed.
+
+S_W is not an input. No value of W is selected.
+
+#### Derivation
+
+Fix m and put e = 2^⌈log2(m+1)⌉, so the prefix z_1, …, z_m lies in GF(2^e), and e ≤ p whenever p = 2^j > m.
+
+Step 1 (a ring that does not depend on p). Over A_1 = GF(2^e)[x] build A_i = A_{i−1}[α_i]/(α_i² + α_i + β_i) with β_i = α_{i−1} + c z_i² and c := z_1(x² + x) (so that x plays α_1: z_1(α_1² + α_1) = z_1 · z_1² c = c because z_1³ = 1). Each A_i is free of rank 2 over A_{i−1}. Clearing denominators in C_1 gives
+    G := z_1² ∏_{i=2}^m Nm_i + (x + 1) Σ_{i=2}^m z_i ∏_{l≠i} Nm_l ∈ A_m,   Nm_i = (1 + z_i) α_i + α_{i−1},
+and C_1 = G / ((α_1 + 1) ∏ Nm_i).
+
+Step 2 (norms specialize). For u = a + b α_l with a, b ∈ A_{l−1} put N_l(u) = a² + ab + b² β_l. The identity (a + b α)(a + b + b α) = a² + ab + b²(α² + α) holds whenever α² + α = β, so for any ring map φ: A_l → K into a field, φ(N_l(u)) = φ(u) · φ'(u) with φ' the map sending α_l to φ(α_l) + 1. Define R := N_2(N_3(⋯N_m(G)⋯)) ∈ GF(2^e)[x]. The actual chain values define φ: A_m → GF(2^p) with x ↦ α_1, α_i ↦ α_i, so C_1 = 0 at the chain gives φ(G) = 0 and hence R(α_1) = 0.
+
+Lemma (elimination certificate). Fix m ≥ 2 and a prefix (z_1, …, z_m) with R ≠ 0. If p = 2^j > m and some chain of length p + m with this prefix has S_{p+m} ∈ GF(2^p), then α_1 is a root of an irreducible factor f of R over GF(2^e) of degree d with p = e·d, and N^{p−1−m}(z_1(x² + x)) ≡ z_m mod f.
+
+Proof. α_1 ∈ GF(2^p) is a root of some irreducible factor f of degree d, so GF(2^e)(α_1) = GF(2^{ed}) ⊆ GF(2^p) (using GF(2^e) ⊆ GF(2^p)), hence ed | p. Also c = z_1(α_1² + α_1) ∈ GF(2^{ed}), and c = z_{p−1} has degree p, so p | ed. Thus p = ed (in particular d is a power of two). Finally N^{p−1−m}(z_{p−1}) = z_m along the chain, and this is a polynomial condition over GF(2^e) in α_1, so it holds modulo f. ∎
+
+So for each fixed m, the set of p for which some chain has S_{p+m} ∈ GF(2^p) is contained in the finite set of e·d over surviving factors, and every S_{p+m} = 0 is in particular such a chain.
+
+#### Exact finite computation (scripts/check_residue_p_plus_m.py)
+
+Mode `filter m` computes R for every prefix (all 2^m prefixes for m ≤ 8; one per Frobenius orbit for m = 9, which gives the same set of p because Frobenius maps prefixes, R, factor degrees and the chain condition to conjugates), checks R ≠ 0, factors R over GF(2^e) and applies the chain condition. Surviving values of p:
+
+| m | e | prefixes | deg R | surviving p |
+|---|---|---|---|---|
+| 2 | 4 | 4 | 2 | 4 |
+| 3 | 4 | 8 | 6 | 8 |
+| 4 | 8 | 16 | 14 | none |
+| 5 | 8 | 32 | 30 | 8 |
+| 6 | 8 | 64 | 62 | 8, 16, 32 |
+| 7 | 8 | 128 | 126 | 8, 16, 32, 64, 256 |
+| 8 | 16 | 256 | 254 | 16, 32, 64, 128, 256, 512 |
+| 9 | 16 | 32 (orbit reps) | 510 | 16, 32, 64, 128, 256 |
+
+(The m = 2 row reproduces the ninth run: only p = 4 survives. deg R = 2^m − 2 on every prefix checked, m ≤ 9; a numerical observation, not proved.)
+
+Mode `direct m P` enumerates, in GF(2^{2P}), every chain of length P + m whose α_1 is a root of R lying in GF(2^P) and whose c satisfies the chain condition; by the lemma this contains every chain with S_{P+m} ∈ GF(2^P), so its count of S = 0 is exact. Positive control: for k = 6, 7, 11, 12, 13, 14, 15 a naive enumeration of all 2^k chains gives 8, 0, 32, 0, 48, 32, 176 chains with S_k ∈ GF(2^p), equal to the `direct` counts (k = 6, 11, 13, 14, 15 are the fifth run's failures of the subfield test). Results of `direct`: no chain has S = 0 at k = 13, 14, 15, 21, 22, 23, 38, 39, 71, 72 (128 chains at k = 71 have S_71 ∈ GF(2^64), none zero, 80 s; at k = 72, run on one prefix per Frobenius orbit, 16 representative chains have S_72 ∈ GF(2^64), none zero, 30 s).
+
+#### Theorem (lengths 2^j + m, 3 ≤ m ≤ 7)
+
+For every j and every chain, S_k ≠ 0 when k = 2^j + m with 2^j > m and m ∈ {3, 4, 5, 6}, and when m = 7 with k ≠ 263. More precisely, S_{p+m} ∉ GF(2^p) for every p = 2^j > m that is not in the surviving column of the table.
+
+Proof. For p not in the surviving column, the lemma gives S_{p+m} ∉ GF(2^p), so S_{p+m} ≠ 0. The surviving p give k = 11, 13, 14, 22, 38, 15, 23, 39, 71 and 263; all but 71 and 263 are at most 46 and covered by the eighth run's exact computation, and k = 71 is covered by the exact `direct` count above. ∎
+
+With the earlier lemmas (m = 0, 1, 2), S_k ≠ 0 for every k with k − 2^⌊log2 k⌋ ≤ 6, and for k − 2^⌊log2 k⌋ = 7 except possibly k = 263. The first lengths newly covered by a proof are 67, 68, 69, 70, 71, 131, ….
+
+#### Pending
+
+- k = 263 (m = 7, p = 256): p = 256 survives the filter, so S_263 ∈ GF(2^256) is not excluded by the lemma; the exact `direct 7 256` count had not finished when this subsection was written.
+- m = 8 and m = 9 have finite surviving sets (table), so each would be closed by `direct` counts at k = 72, 136, 264, 520 and k = 73, 137, 265 (the rest are at most 46). Only k = 72 is recorded (no zero); the others are not recorded here.
+
+#### Still open
+
+- Residue conjecture for k ≥ 47 with k − 2^⌊log2 k⌋ ≥ 8 (and k = 263): Σ_{i=1}^k 1/z_i ≠ 0 for every chain. Not proved, and no counterexample is known. The smallest open length stays 47 = 32 + 15, so exact h_n remains proved only for 3 ≤ n ≤ 48.
+- A uniform version: the method needs, for each m, a nonzero R on every prefix and a finite surviving set; m ranges up to p − 1, so no fixed list of m covers all k.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that elimination by relative norms is new.
+
 
 ---
 
