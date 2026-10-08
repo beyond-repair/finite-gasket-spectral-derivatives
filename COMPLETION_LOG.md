@@ -1,6 +1,24 @@
 # Completion log — finite-gasket-spectral-derivatives
 
-## Proved this run (2026-10-02, Dirichlet bottom ratio)
+## Proved this run (2026-10-08, free decimation hit predicate)
+
+Dated 2026-10-08 (America/New_York).
+
+- Definition: for λ ∈ Spec(L_n) \ {3,5,6}, λ is a hit iff R(λ) = λ(5−λ) ∈ Spec(L_{n−1}); h_n = hit mass / N(n). Defined here; SPECTRUM.md's "0.4–0.7" string is not identified with it.
+- Theorem: for every n ≥ 3, 1 − μ_exc(n) − 5·2^n/(3^{n+1}+3) ≤ h_n ≤ 1 − μ_exc(n); hence h_n → 4/9. Non-decimating mass is O((2/3)^n).
+- Proof structure (README, section "Free decimation hit predicate"):
+  1. Midpoint extension for λ ∉ {2,5}; restriction to V_{n−1} injective.
+  2. Decimation identity re-derived, with the free-corner defect: ((L_n−λ)u)(c) = ((6−λ)/Δ)((L_{n−1}−R)v)(c) + (2λ/(2−λ)) v(c), Δ = (2−λ)(5−λ). Interior rows have no defect.
+  3. DN_n(λ) ≅ DN_{n−1}(R(λ)) for λ ∉ {2,5,6} (DN = eigenfunctions vanishing on V_0).
+  4. Counting with free mult(5), mult(6) theorems and N(n): c_n = 2c_{n−1} − 1 − dim DN_n(2) for n ≥ 3, where c_n = N(n) − Σ dim DN_n(λ) is the corner-visible dimension.
+  5. Exact base c_2 = 11 (rational Krylov rank, finite exact computation); so c_n ≤ 5·2^{n−1}+1.
+  6. Every DN mode off {3,5,6} is a hit (n ≥ 3); λ = 0 is a corner-visible hit; so non-hits ≤ c_n − 1.
+- Corollary resting on classical Qiu §2 Dirichlet structure (as used in the bottom-ratio theorem; not reopened this run): 2 ∉ Spec(L_D) for m ≥ 2, so DN_n(2) = 0 and c_n = 5·2^{n−1}+1 exactly for n ≥ 2.
+- Numerical (scripts/check_decimation_hits.py, n = 1..6): c_n = 6, 11, 21, 41, 81, 161; non-hits 5, 9, 20, 40, 80, 160; h_n ≈ 0.167, 0.067, 0.071, 0.154, 0.238, 0.302; identity residual ≤ 2.2e−15. (hits+exceptional)/N = 0.40, 0.52, 0.67 for n = 2..4 is compatible with the old "0.4–0.7" string; that is a guess, not an identification.
+- Still open: whether a corner-visible eigenvalue can be a coincidental hit. If never, non-hits = 5·2^{n−1} exactly (observed n = 3..6 only).
+- Not a consequence: no W selected, no continuum limit, force, stress, or momentum; no novelty claim.
+
+## Proved previously (2026-10-02, Dirichlet bottom ratio)
 
 Dated 2026-10-02 (America/New_York).
 
@@ -111,5 +129,6 @@ Dated 2026-10-02 (America/New_York).
 ## Still open
 
 - No further exceptional multiplicity columns remain in sierpinski-geometry-045 SPECTRUM.md. Free mult(3), mult(5), mult(6) are theorems, and their total exceptional mass μ_exc → 5/9 is a theorem for n ≥ 3.
-- Dirichlet bottom ratio λ_min(n)/λ_min(n−1) → 1/5 is now a theorem for L_D (this run).
-- Decimation hit rates: SPECTRUM.md’s “hit rates … roughly 0.4–0.7” remains a **numerical observation**. The exceptional-mass theorem does not define or prove a hit predicate; 1 − μ_exc → 4/9 is only a complementary mass fraction, not a proved hit rate. Defining a precise hit predicate on free Spec(L_n) \ {3,5,6} and proving that the hit mass equals 1 − μ_exc (or another closed fraction) is still open.
+- Dirichlet bottom ratio λ_min(n)/λ_min(n−1) → 1/5 is a theorem for L_D (2026-10-02).
+- Decimation hit rates: with the hit predicate defined in README ("Free decimation hit predicate"), h_n → 4/9 is now a theorem (2026-10-08), with 1 − μ_exc − 5·2^n/(3^{n+1}+3) ≤ h_n ≤ 1 − μ_exc for n ≥ 3. SPECTRUM.md's informal "0.4–0.7" string remains a numerical observation of an unspecified quantity.
+- Open: exclude coincidental hits among corner-visible eigenvalues (would give h_n exactly; observed n = 3..6). Also open: an elementary proof of DN_n(2) = 0 that does not cite Qiu §2.
