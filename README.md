@@ -1176,24 +1176,26 @@ Mode `filter m` computes R for every prefix (all 2^m prefixes for m ≤ 8; one p
 
 (The m = 2 row reproduces the ninth run: only p = 4 survives. deg R = 2^m − 2 on every prefix checked, m ≤ 9; a numerical observation, not proved.)
 
-Mode `direct m P` enumerates, in GF(2^{2P}), every chain of length P + m whose α_1 is a root of R lying in GF(2^P) and whose c satisfies the chain condition; by the lemma this contains every chain with S_{P+m} ∈ GF(2^P), so its count of S = 0 is exact. Positive control: for k = 6, 7, 11, 12, 13, 14, 15 a naive enumeration of all 2^k chains gives 8, 0, 32, 0, 48, 32, 176 chains with S_k ∈ GF(2^p), equal to the `direct` counts (k = 6, 11, 13, 14, 15 are the fifth run's failures of the subfield test). Results of `direct`: no chain has S = 0 at k = 13, 14, 15, 21, 22, 23, 38, 39, 71, 72 (128 chains at k = 71 have S_71 ∈ GF(2^64), none zero, 80 s; at k = 72, run on one prefix per Frobenius orbit, 16 representative chains have S_72 ∈ GF(2^64), none zero, 30 s).
+Mode `direct m P` enumerates, in GF(2^{2P}), every chain of length P + m whose α_1 is a root of R lying in GF(2^P) and whose c satisfies the chain condition; by the lemma this contains every chain with S_{P+m} ∈ GF(2^P), so its count of S = 0 is exact. Positive control: for k = 6, 7, 11, 12, 13, 14, 15 a naive enumeration of all 2^k chains gives 8, 0, 32, 0, 48, 32, 176 chains with S_k ∈ GF(2^p), equal to the `direct` counts (k = 6, 11, 13, 14, 15 are the fifth run's failures of the subfield test). Results of `direct`: no chain has S = 0 at k = 13, 14, 15, 21, 22, 23, 38, 39, 71, 72, 73, 136, 137 (128 chains at k = 71 have S_71 ∈ GF(2^64), none zero, 80 s; orbit-reduced counts at k = 72, 73, 136, 137: 16, 8, 16, 32 representative chains with S ∈ GF(2^p), none zero).
 
 #### Theorem (lengths 2^j + m, 3 ≤ m ≤ 7)
 
-For every j and every chain, S_k ≠ 0 when k = 2^j + m with 2^j > m and m ∈ {3, 4, 5, 6}, and when m = 7 with k ≠ 263. More precisely, S_{p+m} ∉ GF(2^p) for every p = 2^j > m that is not in the surviving column of the table.
+For every j and every chain, S_k ≠ 0 when k = 2^j + m with 2^j > m and m ∈ {3, 4, 5, 6}, when m = 7 with k ≠ 263, when m = 8 with k ∉ {264, 520}, and when m = 9 with k ≠ 265. More precisely, S_{p+m} ∉ GF(2^p) for every p = 2^j > m that is not in the surviving column of the table.
 
-Proof. For p not in the surviving column, the lemma gives S_{p+m} ∉ GF(2^p), so S_{p+m} ≠ 0. The surviving p give k = 11, 13, 14, 22, 38, 15, 23, 39, 71 and 263; all but 71 and 263 are at most 46 and covered by the eighth run's exact computation, and k = 71 is covered by the exact `direct` count above. ∎
+Proof. For p not in the surviving column, the lemma gives S_{p+m} ∉ GF(2^p), so S_{p+m} ≠ 0. The surviving p for 3 ≤ m ≤ 9 give the finite list of lengths recorded in the table and Pending; those ≤ 46 are covered by the eighth run, and k = 71, 72, 73, 136, 137 are covered by the exact `direct` counts above. ∎
 
-With the earlier lemmas (m = 0, 1, 2), S_k ≠ 0 for every k with k − 2^⌊log2 k⌋ ≤ 6, and for k − 2^⌊log2 k⌋ = 7 except possibly k = 263. The first lengths newly covered by a proof are 67, 68, 69, 70, 71, 131, ….
+With the earlier lemmas (m = 0, 1, 2), S_k ≠ 0 for every k with k − 2^⌊log2 k⌋ ≤ 6, for excess 7 except possibly k = 263, for excess 8 except possibly k ∈ {264, 520}, and for excess 9 except possibly k = 265. The first lengths newly covered by a proof are 67–73, 131–137, ….
 
 #### Pending
 
 - k = 263 (m = 7, p = 256): p = 256 survives the filter, so S_263 ∈ GF(2^256) is not excluded by the lemma; the exact `direct 7 256` count had not finished when this subsection was written.
-- m = 8 and m = 9 have finite surviving sets (table), so each would be closed by `direct` counts at k = 72, 136, 264, 520 and k = 73, 137, 265 (the rest are at most 46). Only k = 72 is recorded (no zero); the others are not recorded here.
+- m = 8: surviving p include 256 and 512, so k = 264 and 520 remain after the recorded zeros at k = 72 and 136 (and k ≤ 46 for p ≤ 32).
+- m = 9: surviving p include 256, so k = 265 remains after the recorded zeros at k = 73 and 137 (and k ≤ 46 for p ≤ 32).
+- m = 10 filter (orbit reps): surviving p = {16, 32, 64, 128, 256}; R ≠ 0, deg R = 1022. No `direct` counts recorded for those lengths beyond 46.
 
 #### Still open
 
-- Residue conjecture for k ≥ 47 with k − 2^⌊log2 k⌋ ≥ 8 (and k = 263): Σ_{i=1}^k 1/z_i ≠ 0 for every chain. Not proved, and no counterexample is known. The smallest open length stays 47 = 32 + 15, so exact h_n remains proved only for 3 ≤ n ≤ 48.
+- Residue conjecture for k ≥ 47 with k − 2^⌊log2 k⌋ ≥ 10, and for the pending lengths 263, 264, 265, 520: Σ_{i=1}^k 1/z_i ≠ 0 for every chain. Not proved, and no counterexample is known. The smallest open length stays 47 = 32 + 15, so exact h_n remains proved only for 3 ≤ n ≤ 48.
 - A uniform version: the method needs, for each m, a nonzero R on every prefix and a finite surviving set; m ranges up to p − 1, so no fixed list of m covers all k.
 
 #### Not a consequence
