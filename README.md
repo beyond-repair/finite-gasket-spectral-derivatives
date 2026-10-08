@@ -898,6 +898,48 @@ This extends the previous range 3 ≤ n ≤ 18.
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the finite-field argument is new.
 
 
+### Residue condition: lengths 2^j + 1 and the limits of the subfield test
+
+Dated 2026-10-08 (America/New_York), fifth run of the day.
+
+#### Assumptions
+
+- Everything in "Residue condition: power-of-two lemma and exhaustive check to k = 31": N(x) = x² + x = F + 1, E_j = ker N^{2^j} = GF(2^{2^j}), and along a chain z_0 = 1, z_i² + z_i = z_{i−1}, one has z_i ∈ E_j if and only if i + 1 ≤ 2^j.
+- Elementary algebra in characteristic 2 only. No literature was opened this run, and no novelty is claimed.
+
+S_W is not an input. No value of W is selected.
+
+#### Derivation
+
+Pairing identity. Since z_i(z_i + 1) = z_{i−1},
+    1/z_i + 1/(z_i + 1) = (z_i + 1 + z_i)/z_{i−1} = 1/z_{i−1},
+so 1/z_{i−1} + 1/z_i = 1/(z_i + 1) for every i ≥ 1. The element z_i + 1 is the sibling root of y² + y = z_{i−1}.
+
+Lemma (lengths 2^j + 1). Let j ≥ 1, p = 2^j, k = p + 1. By the pairing identity at i = p + 1,
+    S_{p+1} = S_{p−1} + 1/z_p + 1/z_{p+1} = S_{p−1} + 1/w,   w = z_{p+1} + 1.
+Every z_i with i ≤ p − 1 lies in the field E_j, so S_{p−1} ∈ E_j. Because N is additive and N(1) = 0, N^p(w) = N^p(z_{p+1}) = z_1, and z_1 ≠ 0 (z_1² + z_1 = 1). So w ∉ E_j = ker N^p, hence 1/w ∉ E_j, and S_{p+1} ∉ E_j. In particular S_{p+1} ≠ 0 for every chain. This settles the case k = 2^{j−1} + 1 that the previous run's Galois-conjugation remark left without a contradiction.
+
+Negative result (the subfield test does not extend). For 2^j < k < 2^{j+1} with p = 2^j, the lemma and the power-of-two lemma both prove S_k ≠ 0 by showing S_k ∉ E_j. That stronger property is false in general. Exhaustive counts in GF(2^64) (scripts/check_residue_p_plus_one.py; k = 15 by a separate run of the same loop) give the number of chains with S_k ∈ GF(2^p):
+    k = 6: 8 of 64;  k = 11: 32 of 2048;  k = 13: 48 of 8192;  k = 14: 32 of 16384;  k = 15: 176 of 32768,
+and 0 for k = 7, 10, 12 (as well as for k = 3, 5, 9, covered by the lemma). On those chains S_k is still nonzero (exhaustive check), but the reason is not membership outside the subfield. So S_k ∉ GF(2^p) cannot prove the conjecture for all k, and k = p + 2, k = p + 3, and k = 2p − 1 are not uniformly covered by it (k = 6, 11, 15 fail).
+
+Reformulation (recorded, not used for the corollary). Let A_k = F_2[t]/(N^k(t) + 1). Its points are exactly the chain endpoints z_k, and S_k is the image of Σ_{m<k} 1/N^m(t). So the conjecture for k says S_k is a unit in A_k, that is, its norm to F_2 is 1. Taking norms one Artin–Schreier step at a time (z ↦ z + 1 over c = z² + z, with S ↦ S + 1/z) gives polynomials G_0 = S, G_1 = zS² + S + 1, G_2 = zS⁴ + S³ + 1, …, where powers of z (units) have been removed, and the conjecture for k becomes G_k(1, 0) = 1. A symbolic computation gives G_k(1, 0) = 1 for k ≤ 7, which is consistent with the exhaustive check. The number of terms grows (3, 3, 13, 27, 103, 365, 1651 for k = 1..7), and no closed form was found.
+
+#### Corollary (theorem plus finite exact computation)
+
+S_k ≠ 0 for every chain when 1 ≤ k ≤ 33 (k ≤ 31 by computation, k = 32 by the power-of-two lemma, k = 33 = 2^5 + 1 by the lemma above), and when k = 2^j or k = 2^j + 1 for any j. By the two-adic reduction theorem, a coincidental hit at level n needs some open k ≤ n − 2 with n − k even; the smallest open k is 34, so n ≥ 36. Hence for 3 ≤ n ≤ 35 there are no coincidental hits, and
+    h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3)   exactly.
+This extends the previous range 3 ≤ n ≤ 34.
+
+#### Still open
+
+- Residue conjecture for k ≥ 34 with k ∉ {2^j, 2^j + 1}: Σ_{i=1}^k 1/z_i ≠ 0 for every chain. Not proved, and no counterexample is known.
+- As before, failure of the residue test would only remove this obstruction; it would not by itself produce a hit.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the finite-field argument is new.
+
 ---
 
 <div align="center">
