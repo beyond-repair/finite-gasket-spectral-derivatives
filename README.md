@@ -857,6 +857,46 @@ This extends the F_p gcd certificate (3 ≤ n ≤ 11) of the previous subsection
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that reducing spectral questions mod 2 is new.
 
+### Residue condition: power-of-two lemma and exhaustive check to k = 31
+
+Dated 2026-10-08 (America/New_York), fourth run of the day.
+
+#### Assumptions
+
+- Everything in "Two-adic reduction of coincidental hits", in particular its theorem: a coincidental hit at level n ≥ 3 needs some k with 1 ≤ k ≤ n − 2, n − k even, and a chain z_0 = 1, z_i² + z_i = z_{i−1} over the algebraic closure of F_2 with S_k = Σ_{i=1}^k 1/z_i = 0.
+- Elementary finite-field facts only: Frobenius F(x) = x² is F_2-linear on the algebraic closure of F_2, and {x : x^{2^d} = x} is the field GF(2^d). No literature was opened this run, and no novelty is claimed.
+
+S_W is not an input. No value of W is selected.
+
+#### Derivation
+
+Write N(x) = x² + x, so N = F + 1 as F_2-linear operators. F and 1 commute and the characteristic is 2, so for every j ≥ 0
+    N^{2^j} = F^{2^j} + 1,   hence   ker N^{2^j} = GF(2^{2^j}) =: E_j,
+which is a field. Along a chain, N^i(z_i) = z_0 = 1 ≠ 0 and N(1) = 0, so N^{i+1}(z_i) = 0 and N^i(z_i) ≠ 0. Therefore z_i ∈ E_j if and only if i + 1 ≤ 2^j.
+
+Lemma (power-of-two lengths). Let k = 2^j with j ≥ 0. Every z_i with i ≤ k − 1 lies in the field E_j, so S_{k−1} ∈ E_j, while z_k ∉ E_j, so 1/z_k ∉ E_j. Hence S_k = S_{k−1} + 1/z_k ∉ E_j; in particular S_k ≠ 0, for every chain.
+
+Remark (no contradiction obtained beyond powers of two). For 2^{j−1} ≤ i < 2^j, the generator σ = F^{2^{j−1}} of Gal(E_j/E_{j−1}) acts on a chain by σ(z_i) = z_i + z_{i−2^{j−1}} and fixes z_i for i < 2^{j−1}. This gives a second proof of the lemma at k = 2^j, but applying σ to S_k = 0 for k = 2^{j−1} + 1 produced no contradiction in this run. The general case stays open.
+
+#### Exact finite verification (1 ≤ k ≤ 31)
+
+Because N^{32} = 0 on GF(2^32) and ker N = {0, 1}, every chain of length k ≤ 31 lies in GF(2^32) = F_2[x]/(x^32 + x^7 + x^3 + x^2 + 1), and the two roots of y² + y = z_{i−1} are y and y + 1. scripts/check_residue_extension.py checks that this modulus is irreducible (x^{2^32} ≡ x and gcd(x^{2^16} − x, f) = 1). It then compiles scripts/residue_chains_gf2_32.c, which enumerates all 2^k chains for every k ≤ 31 (2^32 − 2 chain prefixes in total) and confirms S_k ≠ 0 each time. S_k is carried as num/den with den = z_1 ⋯ z_k ≠ 0, so the zero test is exact. As a cross-check between two independent field models, the histogram of the N-level of S_k (the least m with N^m(S_k) = 0, which does not depend on the model of the field) over all chains with k ≤ 10 agrees between GF(2^32) (C) and GF(2^64) (Python, from scripts/check_coincidental_reduction.py). The C program's portable multiplication (no carry-less multiply instruction) reproduces the same histogram.
+
+#### Corollary (theorem plus finite exact computation)
+
+S_k ≠ 0 for every chain when 1 ≤ k ≤ 32 (k ≤ 31 by computation, k = 32 by the lemma) and when k is any power of two. By the two-adic reduction theorem, a coincidental hit would need k ≥ 33 with k not a power of two, n − k even, and n ≥ k + 2, so n ≥ 35. Hence for 3 ≤ n ≤ 34 there are no coincidental hits, the non-hit mass is exactly 5 · 2^{n−1}, and
+    h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3)   exactly.
+This extends the previous range 3 ≤ n ≤ 18.
+
+#### Still open
+
+- Residue conjecture for k ≥ 33 that are not powers of two (equivalently, for all k): Σ_{i=1}^k 1/z_i ≠ 0 for every chain. Not proved, and no counterexample is known. The trace of S_k over E_j and the N-level of S_k both vary from chain to chain (checked for k ≤ 13 and k ≤ 12), so neither is an invariant that would prove it.
+- As before, failure of the residue test would only remove this obstruction; it would not by itself produce a hit.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the finite-field argument is new.
+
 
 ---
 

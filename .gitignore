@@ -5,3 +5,4 @@ build/
 dist/
 .venv/
 .pytest_cache/
+scripts/residue_chains_gf2_32

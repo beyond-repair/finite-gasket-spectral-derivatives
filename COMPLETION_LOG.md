@@ -1,6 +1,18 @@
 # Completion log — finite-gasket-spectral-derivatives
 
-## Proved this run (2026-10-08, third run: two-adic reduction of coincidental hits)
+## Proved this run (2026-10-08, fourth run: residue condition to k = 32 and all powers of two)
+
+Dated 2026-10-08 (America/New_York).
+
+- Lemma (README "Residue condition: power-of-two lemma and exhaustive check to k = 31"): for every j ≥ 0 and every chain z_0 = 1, z_i² + z_i = z_{i−1} over the algebraic closure of F_2, S_{2^j} = Σ_{i=1}^{2^j} 1/z_i ≠ 0.
+- Proof structure: N = x² + x = F + 1 gives N^{2^j} = F^{2^j} + 1, so ker N^{2^j} = GF(2^{2^j}) is a field; z_i lies in it iff i + 1 ≤ 2^j; so S_{2^j − 1} is in the field and 1/z_{2^j} is not.
+- Finite exact computation (scripts/check_residue_extension.py driving scripts/residue_chains_gf2_32.c): modulus x^32 + x^7 + x^3 + x^2 + 1 irreducible; all 2^k chains in GF(2^32) have S_k ≠ 0 for 1 ≤ k ≤ 31; the N-level histogram of S_k for k ≤ 10 agrees with the independent GF(2^64) model.
+- Corollary: S_k ≠ 0 for all k ≤ 32 and all powers of two, so a coincidental hit needs n ≥ 35, and h_n = 1 − μ_exc(n) − 5·2^n/(3^{n+1}+3) exactly for 3 ≤ n ≤ 34 (previously n ≤ 18).
+- Negative results recorded: Galois conjugation by F^{2^{j−1}} gave no contradiction at k = 2^{j−1} + 1; the trace of S_k and the N-level of S_k are not chain-invariant (k ≤ 13, k ≤ 12), so neither proves the conjecture.
+- Still open: the residue conjecture for k ≥ 33 that are not powers of two, hence the exact h_n formula for n ≥ 35.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
+## Proved previously (2026-10-08, third run: two-adic reduction of coincidental hits)
 
 Dated 2026-10-08 (America/New_York).
 
@@ -10,7 +22,7 @@ Dated 2026-10-08 (America/New_York).
 - Still open: the residue conjecture Σ_{i=1}^k 1/z_i ≠ 0 for all k and all chains z_0 = 1, z_i² + z_i = z_{i−1} over F̄_2. If true, the exact h_n formula holds for all n ≥ 3. Not proved; no counterexample known.
 - No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
 
-## Proved this run (2026-10-08, second run: corner channels and coincidental hits)
+## Proved previously (2026-10-08, second run: corner channels and coincidental hits)
 
 Dated 2026-10-08 (America/New_York).
 
@@ -153,5 +165,5 @@ Dated 2026-10-02 (America/New_York).
 - No further exceptional multiplicity columns remain in sierpinski-geometry-045 SPECTRUM.md. Free mult(3), mult(5), mult(6) are theorems, and their total exceptional mass μ_exc → 5/9 is a theorem for n ≥ 3.
 - Dirichlet bottom ratio λ_min(n)/λ_min(n−1) → 1/5 is a theorem for L_D (2026-10-02).
 - Decimation hit rates: with the hit predicate defined in README ("Free decimation hit predicate"), h_n → 4/9 is now a theorem (2026-10-08), with 1 − μ_exc − 5·2^n/(3^{n+1}+3) ≤ h_n ≤ 1 − μ_exc for n ≥ 3. SPECTRUM.md's informal "0.4–0.7" string remains a numerical observation of an unspecified quantity.
-- Coincidental hits among corner-visible eigenvalues: excluded for 3 ≤ n ≤ 11 by an exact finite certificate (2026-10-08, corner channels), and for 3 ≤ n ≤ 18 by the two-adic reduction plus a residue check for k ≤ 16 (2026-10-08, third run); for general n this is reduced to the residue conjecture Σ 1/z_i ≠ 0 in characteristic 2, which is open.
+- Coincidental hits among corner-visible eigenvalues: excluded for 3 ≤ n ≤ 11 by an exact finite certificate (2026-10-08, corner channels), and for 3 ≤ n ≤ 18 by the two-adic reduction plus a residue check for k ≤ 16 (2026-10-08, third run); for general n this is reduced to the residue conjecture Σ 1/z_i ≠ 0 in characteristic 2, which is open. Fourth run: the residue condition holds for all k ≤ 32 and every power of two k, so exact h_n now holds for 3 ≤ n ≤ 34; open for k ≥ 33 not a power of two.
 - Elementary proof of DN_n(2) = 0 (n ≥ 3) without Qiu §2: done (2026-10-08, from c_n = 5·2^{n−1}+1 via corner channels).
