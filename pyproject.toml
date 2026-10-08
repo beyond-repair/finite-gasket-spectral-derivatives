@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "finite-gasket-spectral-derivatives"
+version = "0.1.0"
+description = "W-derivatives of (1/2) Tr ln K on the finite gasket. No continuum, no selected W, no thrust."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+gasket-spectral = "gasket_spectral.cli:main"
+
+[tool.setuptools]
+packages = ["gasket_spectral"]
+
+[tool.setuptools.package-dir]
+gasket_spectral = "scripts"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

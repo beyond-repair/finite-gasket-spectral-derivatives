@@ -29,6 +29,31 @@ Classification follows [ADL-Governance](https://github.com/beyond-repair/ADL-Gov
 
 ---
 
+## ▌ RUN IT
+
+Needs Python 3.10+ and NumPy. From a fresh clone:
+
+```bash
+git clone https://github.com/beyond-repair/finite-gasket-spectral-derivatives
+cd finite-gasket-spectral-derivatives
+python3 -m venv .venv && . .venv/bin/activate
+pip install -e ".[test]"
+
+gasket-spectral kernel --level 3 --w 0.1          # Gamma_loop, dGamma/dW, V'' at a prescribed W
+gasket-spectral kernel --level 3 --w 0.1 --json
+gasket-spectral kernel --eigenvalues 0,2,6,6 --w 0.1
+gasket-spectral decimation --nmax 6               # supporting numerics for the hit-predicate section
+python -m pytest                                  # 16 tests
+```
+
+`kernel` builds the free Laplacian L = D − A on `build_gasket(level)` (levels 0–7, default 3; the same constructor as `scripts/check_decimation_hits.py`) or takes `--eigenvalues`, then evaluates the three formulas below at the W you pass. `--w` is required and never defaulted, because this repository does not select W. `--omega2` defaults to 1. If K = ω²I − W L is not positive definite (W at or past the spectral wall ω²/λ_max, which is 1/6 for ω² = 1 and level ≥ 2), it prints the wall and exits 2. Bad input also exits 2.
+
+Without installing, the same commands run from the repository root as `python3 -m scripts kernel ...` and `python3 -m scripts decimation`, and the tests as `python3 -m unittest discover -s tests` (NumPy still required). CI runs `python -m unittest tests/test_spectral_derivatives.py`.
+
+The CLI and its tests are numerical checks of the kernel and the constructor. They are not proofs of the theorems below and do not raise the claim cap.
+
+---
+
 ## ▌ PRESERVED BODY
 
 # Finite gasket spectral derivatives
