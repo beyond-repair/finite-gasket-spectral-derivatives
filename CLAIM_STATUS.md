@@ -10,6 +10,7 @@
 |---|---|---|
 | `gamma_loop`, `dgamma_dw`, `v_second` on a supplied eigenvalue list | IMPLEMENTED + locally TESTED | `scripts/spectral_derivatives.py`; `tests/test_spectral_derivatives.py`; local unittest 5 passed (Sweep-283) |
 | Positive-definiteness guard `omega^2 - W lambda > 0`, including `omega2 != 1` | IMPLEMENTED + locally TESTED | `test_omega2_scales_the_positive_wall` |
+| `gasket-spectral` CLI (`kernel` on `build_gasket(level)` or a supplied list, `decimation`), installable via `pyproject.toml` | IMPLEMENTED + locally TESTED | `scripts/cli.py`; `tests/test_cli.py` (11 tests). W is a required input. Numerical checks only; not a proof and no claim raise |
 | Actions `spectral-kernel` on kernel commit `7e2ca1b` | OBSERVED success | run 37671378075, conclusion success, 2026-10-07. Prior success run 37069941476 on `19a1264e`. Not a gasket proof. |
 | Power-series remainder / hypergeometric identities | CLAIMED (prose derivation in README) | not executed as a test in this repository |
 | Free `mult(6) = (3^n - 3)/2` on `build_gasket(n)` | CLAIMED | prose argument in README / COMPLETION_LOG.md; graph constructor lives in `sierpinski-geometry-045`, not in this tree |
