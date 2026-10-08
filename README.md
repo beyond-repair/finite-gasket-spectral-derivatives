@@ -988,6 +988,51 @@ This extends the previous range 3 ≤ n ≤ 35.
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the orbit argument is new.
 
+
+### Residue condition: logarithmic-derivative form and a polynomial gcd certificate
+
+Dated 2026-10-08 (America/New_York), seventh run of the day. This subsection proves an exact reformulation of the residue conjecture and gives an independent finite check. It does not prove the conjecture and does not extend the range k ≤ 45.
+
+Setting (unchanged). Chains z_0 = 1, z_i² + z_i = z_{i−1} over the algebraic closure of F_2, S_k = Σ_{i=1}^k 1/z_i. Write N(t) = t² + t, A_k(t) = N^k(t) + 1 and Π_k(t) = ∏_{j<k} N^j(t) in F_2[t].
+
+#### Lemma (logarithmic-derivative form)
+
+1. N is additive over F_2 and N′ = 1, so every iterate N^j is additive with (N^j)′ = 1, and N^j(t) = Σ_{i ⊆ j} t^{2^i} (the sum over i whose binary digits are a subset of those of j; this is (F + 1)^j with F the Frobenius, expanded by Lucas's theorem).
+2. The chain endpoints z_k are exactly the roots of A_k. There are 2^k of them, all distinct because A_k′ = 1, and they form a coset of the k-dimensional F_2-space ker N^k. For k = 2^B − 1, N^k(t) = Σ_{i<2^B} t^{2^i} is the trace polynomial of GF(2^{2^B}); every chain of length k lies in that field (degree lemma of the sixth run), and that field has exactly 2^{2^B−1} = 2^k elements of trace one. So for k = 2^B − 1 the endpoints are exactly the trace-one elements of GF(2^{2^B}).
+3. Since z_i = N^{k−i}(z_k) and (N^j)′ = 1, S_k = Σ_{j<k} 1/N^j(z_k) = Π_k′(z_k)/Π_k(z_k), a logarithmic derivative. Here Π_k(z_k) = z_1 ⋯ z_k ≠ 0.
+4. The product of Π_k over all roots of A_k is 1. Indeed N^j maps the roots of A_k onto the roots of A_{k−j}, each one hit 2^j times, and the product of the roots of the monic polynomial A_m is A_m(0) = 1 in characteristic 2. Hence the norm of S_k (the product over all 2^k chains) is the resultant Res(A_k, Π_k′) ∈ F_2, and, because A_k is separable, the number of chains with S_k = 0 equals deg gcd(A_k, Π_k′).
+5. Square decomposition. Write Π_k = a_k² + t b_k² with a_k, b_k ∈ F_2[t]. In characteristic 2, Π_k′ = b_k², so S_k(z_k) = 0 if and only if b_k(z_k) = 0. From Π_k(t) = t Π_{k−1}(N(t)) one gets a_0 = 1, b_0 = 0 and
+       a_k(t) = t b_{k−1}(N(t)),   b_k(t) = a_{k−1}(N(t)) + t b_{k−1}(N(t)),
+   with deg b_k = 2^{k−1} − 1.
+
+Corollary (exact reformulation). For each k the residue condition holds for every chain of length k if and only if gcd(N^k(t) + 1, Π_k′(t)) = 1 in F_2[t], equivalently gcd(N^k(t) + 1, b_k(t)) = 1. This gives the earlier norm reformulation (subsection "lengths 2^j + 1", G_k(1, 0) = 1) an explicit form: the norm is a resultant of two explicit polynomials. No term-by-term identification with the G_k polynomials is claimed.
+
+Proof notes. Items 1–3 are direct. In 4, N^j is 2^j-to-1 from the roots of A_k onto the roots of A_{k−j} because it is additive with kernel of size 2^j and maps A_k-roots to A_{k−j}-roots. In 5, Π_k(t) = t a_{k−1}(Nt)² + t²(t + 1) b_{k−1}(Nt)² = (t b_{k−1}(Nt))² + t (a_{k−1}(Nt)² + (t b_{k−1}(Nt))²), and the decomposition into a square plus t times a square is unique.
+
+#### Negative remarks
+
+- Evaluated along a chain, the recursion in 5 is multiplication by the matrix [[0, z_i], [1, z_i]], and the condition b_k(z_k) = 0 unwinds to S_{k−1} = 1/z_k, which is the definition of S_k = 0 again. The recursion alone gives no proof.
+- The gcd test with schoolbook Euclid costs on the order of 2^{2k} bit operations (no fast half-gcd library is installed on the box), so it does not compete with the Frobenius-reduced enumeration that reached k = 45. Its value is independence: it uses no chain enumeration, no root solver and no model of GF(2^64).
+
+#### Exact finite verification (scripts/check_residue_logderiv.py)
+
+- (N^j)′ = 1, deg Π_k = 2^k − 1 and deg Π_k′ = 2^k − 2 (k ≤ 12).
+- At every chain endpoint in GF(2^64), Π_k(z_k) · S_k = Π_k′(z_k), and the product of Π_k(z_k) over all endpoints is 1 (k ≤ 8).
+- The square decomposition and its recursion hold, with deg b_k = 2^{k−1} − 1 (k ≤ 10), and N^{2^B−1} is the trace polynomial (B ≤ 5).
+- Positive control for the gcd count: for k ≤ 10 and c ∈ {t^m, t^m + 1 : m < 16}, deg gcd(A_k, Π_k′ + c Π_k) equals the number of chains with S_k = c(z_k), counted by enumeration. Seventeen (k, c) pairs have a nonzero count (for example k = 7, c = t³: 8 chains), and all match.
+- Certificate: gcd(N^k + 1, Π_k′) = 1 in F_2[t] for every 1 ≤ k ≤ 21 (k = 21 took 80 s). This re-derives S_k ≠ 0 for k ≤ 21 without chains.
+
+Numerical observation (not used). The Euclidean remainder sequence of (A_k, Π_k′) has 1, 3, 4, 9, 14, 26, 54, 108, 203, 376, 754, 1512, 3009, 6150, 12274, 24653, 49325, 98185, 196780, 393449 division steps for k = 1, …, 20 (about 0.375 · 2^k for large k), and the sequence of degree drops from the top, 2^k − deg r_i, agrees with that for k − 1 on an initial segment whose length roughly doubles with k (65590 steps at k = 20). No pattern was extracted that proves gcd = 1.
+
+#### Status after this run
+
+- Unchanged range: S_k ≠ 0 for every chain when k ≤ 45 or k ∈ {2^j, 2^j + 1}, and h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3) exactly for 3 ≤ n ≤ 47.
+- Still open: the residue conjecture for k ≥ 46 with k ∉ {2^j, 2^j + 1}, now equivalently gcd(N^k + 1, Π_k′) = 1 in F_2[t]. The case k = 2^B − 1 is the statement that Σ_{j<k} 1/N^j(x) ≠ 0 for every trace-one x in GF(2^{2^B}); it is open for B ≥ 6.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the logarithmic-derivative identity or the resultant formulation is new. No literature was opened this run.
+
 ---
 
 <div align="center">
