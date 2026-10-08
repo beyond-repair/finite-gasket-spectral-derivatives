@@ -784,7 +784,7 @@ This upgrades the n = 3..6 floating-point observation of the hit subsection (hit
 
 #### Still open
 
-- Coincidental hits for general n ≥ 12, that is, gcd(Q_n Qt_n, H_{n−1}∘R) = λ for all n. Reduction mod 23 also gave the minimal gcd degrees in both channels for every n = 3..9 tested (mod 3 only in the symmetric channel), but no inductive structure mod a fixed prime was found that would carry this to all n. So this is not proved.
+- Coincidental hits for general n ≥ 12, that is, gcd(Q_n Qt_n, H_{n−1}∘R) = λ for all n. (Update, third run of 2026-10-08: reduced to one residue condition in characteristic 2 and settled for n ≤ 18; see “Two-adic reduction of coincidental hits”.) Reduction mod 23 also gave the minimal gcd degrees in both channels for every n = 3..9 tested (mod 3 only in the symmetric channel), but no inductive structure mod a fixed prime was found that would carry this to all n. So this is not proved.
 - The symmetric-channel poles P_n = 2 − R^{n−1}(λ) and standard-channel poles Pt_n are recorded as algebra only; they are not identified with a Dirichlet spectrum here.
 
 #### Numerical observation
@@ -794,6 +794,68 @@ The same script compares with eigh on the constructor for n = 0..6: the Schur id
 #### Not a consequence
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the Schur-complement form of spectral decimation or these closed forms are new.
+
+
+### Two-adic reduction of coincidental hits on build_gasket(n)
+
+Dated 2026-10-08 (America/New_York), third run of the day.
+
+#### Assumptions
+
+- Everything in "Corner channels and coincidental hits": the channel recursion x_n(λ) = A(λ) x_{n−1}(R(λ)) + B(λ) for x ∈ {s, t}, with A(λ) = (6 − λ)/Δ, B(λ) = 2λ/(2 − λ), Δ = (2 − λ)(5 − λ); the reduced forms Q_n/P_n and Qt_n/Pt_n; the cancellation analysis of Step 4; s_m(6) = t_m(6) = −3 (m ≥ 1); poles of both channels lie in (0, 6); the roots of Q_n (Qt_n) are exactly the eigenvalues seen by the symmetric (standard) channel.
+- From earlier subsections: DN_m(2) = 0 for every m ≥ 1 (m = 1: DN_1 = 0; m = 2: d_2 = N(2) − c_2 = 4 = dim DN_2(6) + dim DN_2(5); m ≥ 3: corner-channel corollary); corner values vanish on ker(L_n − λ) for λ ∈ {3, 5, 6}, n ≥ 3; a DN eigenvalue μ at level n − 1 has a first index j ≤ n − 3 with R^j(μ) = a ∈ {2, 5, 6} and DN_{n−1−j}(a) ≠ 0.
+- Algebraic facts used: eigenvalues are algebraic integers; for a prime 𝔭 above 2 in a number field containing the relevant numbers, reduction mod 𝔭 is a ring map to a finite field of characteristic 2, and the 2-adic valuation v (v(2) = 1) extends to that field. No literature was opened this run, and no novelty is claimed for the method.
+
+S_W is not an input. No value of W is selected.
+
+#### Derivation
+
+Write T(x) = x² + x over F_2, so R(z) = z(5 − z) reduces to T.
+
+Step 1 (mod-2 form of the channels). Over ℤ, (2 − λ) Qt_n = (6 − λ) Qt_{n−1}(R) + 2R · Pt_{n−1}(R) and, for n ≥ 2, (λ − 2)(λ − 5) Q_n = (6 − λ) Q_{n−1}(R) + 2R · P_{n−1}(R). Reducing mod 2 and cancelling λ (respectively λ(λ + 1)) in the domain F_2[x] gives Qt_n ≡ Qt_{n−1}∘T and (x + 1) Q_n ≡ Q_{n−1}∘T. With Qt_0 = 3 − λ ≡ x + 1 and Q_1 = λ(λ − 4) ≡ x², induction (using T^{j+1} = T^j (T^j + 1)) gives
+    Qt_n ≡ T^n(x) + 1,    Q_n ≡ x · T^{n−1}(x)    (mod 2, n ≥ 1).
+So a standard-channel eigenvalue λ has residue λ̄ with T^n(λ̄) = 1, and a symmetric-channel eigenvalue has λ̄ = 0 or T^{n−1}(λ̄) = 0; in both symmetric cases T^n(λ̄) = 0. Since T(0) = T(1) = 0, T^j(λ̄) ∉ {0, 1} for j < n in the standard case.
+
+Step 2 (same-channel exclusion). Let n ≥ 2, x ∈ {s, t}, x_{n−1} = q/p reduced, and let λ ∉ {0, 2, 5, 6} be a zero of the reduced x_n. Off {2, 5} the reduced numerator vanishes exactly where N(λ) = (6 − λ) q(R(λ)) + 2R(λ) p(R(λ)) does. If q(R(λ)) = 0 then p(R(λ)) ≠ 0 and N(λ) = 2R(λ)p(R(λ)) ≠ 0, because R(λ) = 0 forces λ ∈ {0, 5}. If p(R(λ)) = 0 then N(λ) = (6 − λ)q(R(λ)) ≠ 0. So R(λ) is neither a zero nor a pole of x_{n−1}: a coincidental hit never lands on an eigenvalue seen by its own channel.
+
+Step 3 (cross-channel exclusion, mod 2). Let μ = R(λ), so μ̄ = T(λ̄). If λ is standard and μ is symmetric at level n − 1, then T^{n−1}(μ̄) = 0 by Step 1, so T^n(λ̄) = 0 ≠ 1. If λ is symmetric and μ is standard, then T^{n−1}(μ̄) = 1, so T^n(λ̄) = 1, contradicting T^n(λ̄) = 0.
+
+Step 4 (DN branch, standard channel, mod 2). If μ is a DN eigenvalue at level n − 1, then R^k(λ) = a ∈ {2, 5, 6} with k = j + 1 ≤ n − 2, so T^k(λ̄) ∈ {0, 1} with k < n, which Step 1 forbids for a standard eigenvalue.
+
+Step 5 (λ = 2). Qt_n(2) ≡ T^n(0) + 1 = 1 (mod 2), so 2 is not standard. For the symmetric channel, differentiate s_n Δ = (6 − λ)s_{n−1}(R) + 2R at λ = 2 (s_n is regular at 2 for n ≥ 2) and at λ = 6 (s_m(6) = −3): s_n(2) = −(5 + 4 s′_{n−1}(6))/3 and s′_m(6) = (1 − s_{m−1}(−6))/4, so
+    s_n(2) = (s_{n−2}(−6) − 6)/3    (n ≥ 2).
+From the spectral resolution, 1/s_m(−6) = (1/3) Σ_k |⟨1_{V_0}, e_k⟩|²/(λ_k + 6) ≤ 1/6, with equality only if 1_{V_0} is constant, which fails for m ≥ 1. Hence s_n(2) > 0 for n ≥ 3 (and s_2(2) = 0, matching the root 2 of Q_2). So 2 is never a corner-visible eigenvalue for n ≥ 3.
+
+Step 6 (DN branch, symmetric channel, two-adic). Now λ is symmetric, λ ∉ {0, 2, 3, 5, 6}, and R^k(λ) = a with k ≤ n − 2 minimal. The value a = 2 is impossible because DN_m(2) = 0 for all m. Put m = n − k ≥ 2, w_i = R^{k−i}(λ) (so w_0 = a, w_k = λ, w_i ∉ {2, 5, 6} for i ≥ 1), y_0 = s_m(a), y_i = A(w_i) y_{i−1} + B(w_i). Because s_m is regular at a and A, B are regular at each w_i, y_i = s_{m+i}(w_i), and y_k = s_n(λ) must be 0.
+- For a = 6: w_1 = 3, y_1 = A(3)(−3) + B(3) = −3/2. For i ≥ 2, w_{i−1} is a unit, so w_i and 5 − w_i are units, A(w_i) is a unit and v(B(w_i)) = 1. Hence v(y_i) = −1 for all i ≥ 1, and y_k ≠ 0.
+- For a = 5: s_m(5) = 5(3^{m−2} − 1)/2 (from s′_m(0) = −(3^m + 1)/2, which follows from differentiating the recursion at 0, and then differentiating at 5). Every w_i with i ≥ 1 is a unit with 5 − w_i a unit, so A(w_i) is a unit and v(B(w_i)) = 1. If m is odd, v(y_0) = v(3^{m−2} − 1) − 1 = 0, so v(y_i) = 0 for all i, and y_k ≠ 0.
+- For a = 5 and m even, y_0 = 0 (m = 2) or v(y_0) ≥ 2. Then η_i = y_i/2 is integral, and its residue obeys η̄_i = η̄_{i−1}/(1 + z_i) + 1 with z_i = w̄_i, z_0 = 1, z_{i−1} = z_i² + z_i, η̄_0 = 0. Since 1/z_i = (1/z_{i−1})(1 + z_i), the substitution θ_i = η̄_i/z_i telescopes to
+    η̄_k = z_k · S_k,    S_k := Σ_{i=1}^{k} 1/z_i.
+  If S_k ≠ 0 then v(y_k) = 1 and y_k ≠ 0.
+
+#### Theorem (two-adic reduction)
+
+For every n ≥ 3, a coincidental hit λ at level n, if one exists, is seen only by the symmetric channel and satisfies R^k(λ) = 5 for some k with 1 ≤ k ≤ n − 2 and n − k even, with R^i(λ) ∉ {2, 5, 6} for i < k, and the residue chain z_i = R^{k−i}(λ) mod 𝔭 satisfies S_k = Σ_{i=1}^k 1/z_i = 0 in characteristic 2, for every prime 𝔭 above 2. In particular:
+- the standard channel never has coincidental hits, for any n;
+- coincidental hits never reach eigenvalues of the same channel, the other channel, or the DN chains that end at 6;
+- λ = 2 is not an eigenvalue seen at the corners for n ≥ 3.
+
+#### Exact finite verification of the residue condition
+
+The residue statement depends only on k. Over F_2, T^k(x) + 1 is separable (its derivative is 1), and on GF(2^64) the map T is nilpotent with a one-dimensional kernel, so all 2^k roots of T^k(x) = 1 lie in GF(2^64) for k ≤ 63. scripts/check_coincidental_reduction.py checks that the modulus x^64 + x^4 + x^3 + x + 1 is irreducible, enumerates all 2^k chains, and confirms S_k ≠ 0 for every chain with 1 ≤ k ≤ 16. It also verifies the mod-2 congruences of Step 1 and the values s_m(6), s_m(5), s_n(2) exactly for n, m ≤ 8.
+
+Corollary (finite exact computation plus the theorem above). A coincidental hit needs k ≥ 17, hence n ≥ 19. So for 3 ≤ n ≤ 18 there are no coincidental hits, the non-hit mass is exactly 5 · 2^{n−1}, and
+    h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3)   exactly.
+This extends the F_p gcd certificate (3 ≤ n ≤ 11) of the previous subsection to n ≤ 18 by a different route; the two agree on the overlap.
+
+#### Still open
+
+- Residue conjecture: for every k ≥ 1 and every chain z_0 = 1, z_i² + z_i = z_{i−1} in the algebraic closure of F_2, Σ_{i=1}^k 1/z_i ≠ 0. Equivalently, after S_k = S_{k−1} + 1/z_k, z_{k−1} S_{k−1}² + S_{k−1} + 1 ≠ 0. Verified for k ≤ 16 only. If it holds for all k, the exact h_n formula holds for every n ≥ 3. Neither a proof nor a counterexample is known here, and failure of the residue test would not by itself produce a hit (it only removes this obstruction).
+- No 5-adic or 3-adic argument was found for the a = 5, m even case: the valuations of A(w_i) y_{i−1} and B(w_i) tie at every step.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that reducing spectral questions mod 2 is new.
 
 
 ---

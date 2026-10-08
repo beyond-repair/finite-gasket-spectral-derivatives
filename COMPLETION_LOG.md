@@ -1,5 +1,15 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Proved this run (2026-10-08, third run: two-adic reduction of coincidental hits)
+
+Dated 2026-10-08 (America/New_York).
+
+- Theorem (two-adic reduction; README "Two-adic reduction of coincidental hits"): for every n ≥ 3, a coincidental hit at level n, if any, is seen only by the symmetric channel, has R^k(λ) = 5 with 1 ≤ k ≤ n − 2 and n − k even, and its residue chain z_i = R^{k−i}(λ) mod 𝔭 (𝔭 above 2) satisfies Σ_{i=1}^k 1/z_i = 0 in characteristic 2. The standard channel has no coincidental hits for any n, and λ = 2 is not corner-visible for n ≥ 3.
+- Proof structure: (1) mod 2, Qt_n ≡ T^n(x) + 1 and Q_n ≡ x·T^{n−1}(x) with T(x) = x² + x; (2) same-channel exclusion from the reduced numerator (6 − λ)q(R) + 2R p(R); (3) cross-channel and standard-DN cases contradict the mod-2 forms; (4) s_n(2) = (s_{n−2}(−6) − 6)/3 > 0 by a Herglotz bound; (5) symmetric DN chains: v_2(y_i) = −1 for chains ending at 6, v_2(y_i) = 0 for chains ending at 5 with m odd, using s_m(5) = 5(3^{m−2} − 1)/2; for m even the residue of y_k/2 telescopes to z_k·Σ 1/z_i.
+- Finite exact computation (scripts/check_coincidental_reduction.py): all 2^k residue chains in GF(2^64) have Σ 1/z_i ≠ 0 for 1 ≤ k ≤ 16, and the mod-2 congruences and channel values were checked exactly for n, m ≤ 8. Corollary: no coincidental hits and h_n = 1 − μ_exc(n) − 5·2^n/(3^{n+1}+3) exactly for 3 ≤ n ≤ 18 (previously n ≤ 11).
+- Still open: the residue conjecture Σ_{i=1}^k 1/z_i ≠ 0 for all k and all chains z_0 = 1, z_i² + z_i = z_{i−1} over F̄_2. If true, the exact h_n formula holds for all n ≥ 3. Not proved; no counterexample known.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Proved this run (2026-10-08, second run: corner channels and coincidental hits)
 
 Dated 2026-10-08 (America/New_York).
@@ -143,5 +153,5 @@ Dated 2026-10-02 (America/New_York).
 - No further exceptional multiplicity columns remain in sierpinski-geometry-045 SPECTRUM.md. Free mult(3), mult(5), mult(6) are theorems, and their total exceptional mass μ_exc → 5/9 is a theorem for n ≥ 3.
 - Dirichlet bottom ratio λ_min(n)/λ_min(n−1) → 1/5 is a theorem for L_D (2026-10-02).
 - Decimation hit rates: with the hit predicate defined in README ("Free decimation hit predicate"), h_n → 4/9 is now a theorem (2026-10-08), with 1 − μ_exc − 5·2^n/(3^{n+1}+3) ≤ h_n ≤ 1 − μ_exc for n ≥ 3. SPECTRUM.md's informal "0.4–0.7" string remains a numerical observation of an unspecified quantity.
-- Coincidental hits among corner-visible eigenvalues: excluded for 3 ≤ n ≤ 11 by an exact finite certificate (2026-10-08, corner channels), so h_n is exact there; open for general n.
+- Coincidental hits among corner-visible eigenvalues: excluded for 3 ≤ n ≤ 11 by an exact finite certificate (2026-10-08, corner channels), and for 3 ≤ n ≤ 18 by the two-adic reduction plus a residue check for k ≤ 16 (2026-10-08, third run); for general n this is reduced to the residue conjecture Σ 1/z_i ≠ 0 in characteristic 2, which is open.
 - Elementary proof of DN_n(2) = 0 (n ≥ 3) without Qiu §2: done (2026-10-08, from c_n = 5·2^{n−1}+1 via corner channels).
