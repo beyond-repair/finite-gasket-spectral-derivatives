@@ -1,6 +1,18 @@
 # Completion log — finite-gasket-spectral-derivatives
 
-## Proved this run (2026-10-08, fifth run: residue lengths 2^j + 1)
+## Proved this run (2026-10-08, sixth run: Frobenius orbit reduction, residue check to k = 45)
+
+Dated 2026-10-08 (America/New_York).
+
+- Lemma (README "Residue condition: Frobenius orbit reduction and exact check to k = 45"): for each k, with B = ⌈log₂(k+1)⌉, every Frobenius orbit of length-k chains has exactly 2^B elements, S_k(F chain) = S_k(chain)², and keeping one arbitrary child at every power-of-two depth (both children elsewhere) gives exactly one chain per orbit. So S_k ≠ 0 for all chains iff it holds on these 2^{k−B} representatives, and one reduced tree walk checks all k ≤ K.
+- Proof structure: a chain is fixed by z_k, whose degree over F_2 is 2^B because z_k ∈ GF(2^{2^a}) = ker N^{2^a} iff k + 1 ≤ 2^a; σ_b = F^{2^b} = N^{2^b} + 1 fixes the chain below depth 2^b and swaps the depth-2^b entry with its sibling; apply σ_b for b increasing; count orbits.
+- Finite exact computation (scripts/check_residue_orbits.py driving scripts/residue_orbits_gf2_64.c, GF(2^64)): S_k ≠ 0 on every reduced chain for 1 ≤ k ≤ 45 (2^39 representatives at k = 45). The reduction was checked exactly: Galois-invariant Tr_d(S_k) = 1 counts agree between full enumeration in GF(2^64) and GF(2^32) (Python, k ≤ 11) and satisfy full = 2^B · reduced in C for k ≤ 22.
+- Corollary: S_k ≠ 0 for all k ≤ 45 and all k = 2^j, 2^j + 1; the smallest open length is 46, so a coincidental hit needs n ≥ 48, and h_n = 1 − μ_exc(n) − 5·2^n/(3^{n+1}+3) exactly for 3 ≤ n ≤ 47 (previously n ≤ 35).
+- Negative remark: the reduction saves only the factor 2^{⌈log₂(k+1)⌉}; it does not prove the conjecture, and the exhaustive cost stays exponential in k.
+- Still open: the residue conjecture for k ≥ 46 with k not of the form 2^j or 2^j + 1, hence the exact h_n formula for n ≥ 48.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
+## Proved previously (2026-10-08, fifth run: residue lengths 2^j + 1)
 
 Dated 2026-10-08 (America/New_York).
 
@@ -177,5 +189,5 @@ Dated 2026-10-02 (America/New_York).
 - No further exceptional multiplicity columns remain in sierpinski-geometry-045 SPECTRUM.md. Free mult(3), mult(5), mult(6) are theorems, and their total exceptional mass μ_exc → 5/9 is a theorem for n ≥ 3.
 - Dirichlet bottom ratio λ_min(n)/λ_min(n−1) → 1/5 is a theorem for L_D (2026-10-02).
 - Decimation hit rates: with the hit predicate defined in README ("Free decimation hit predicate"), h_n → 4/9 is now a theorem (2026-10-08), with 1 − μ_exc − 5·2^n/(3^{n+1}+3) ≤ h_n ≤ 1 − μ_exc for n ≥ 3. SPECTRUM.md's informal "0.4–0.7" string remains a numerical observation of an unspecified quantity.
-- Coincidental hits among corner-visible eigenvalues (updated fifth run: lengths 2^j + 1 also proved, exact h_n for 3 ≤ n ≤ 35, open for k ≥ 34 not of the form 2^j or 2^j + 1): excluded for 3 ≤ n ≤ 11 by an exact finite certificate (2026-10-08, corner channels), and for 3 ≤ n ≤ 18 by the two-adic reduction plus a residue check for k ≤ 16 (2026-10-08, third run); for general n this is reduced to the residue conjecture Σ 1/z_i ≠ 0 in characteristic 2, which is open. Fourth run: the residue condition holds for all k ≤ 32 and every power of two k, so exact h_n now holds for 3 ≤ n ≤ 34; open for k ≥ 33 not a power of two.
+- Coincidental hits among corner-visible eigenvalues (updated sixth run: Frobenius orbit reduction, S_k ≠ 0 for all k ≤ 45, exact h_n for 3 ≤ n ≤ 47, open for k ≥ 46 not of the form 2^j or 2^j + 1; fifth run: lengths 2^j + 1 proved, exact h_n for 3 ≤ n ≤ 35): excluded for 3 ≤ n ≤ 11 by an exact finite certificate (2026-10-08, corner channels), and for 3 ≤ n ≤ 18 by the two-adic reduction plus a residue check for k ≤ 16 (2026-10-08, third run); for general n this is reduced to the residue conjecture Σ 1/z_i ≠ 0 in characteristic 2, which is open. Fourth run: the residue condition holds for all k ≤ 32 and every power of two k, so exact h_n now holds for 3 ≤ n ≤ 34; open for k ≥ 33 not a power of two.
 - Elementary proof of DN_n(2) = 0 (n ≥ 3) without Qiu §2: done (2026-10-08, from c_n = 5·2^{n−1}+1 via corner channels).

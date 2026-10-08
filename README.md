@@ -940,6 +940,54 @@ This extends the previous range 3 ≤ n ≤ 34.
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the finite-field argument is new.
 
+### Residue condition: Frobenius orbit reduction and exact check to k = 45
+
+Dated 2026-10-08 (America/New_York), sixth run of the day.
+
+#### Assumptions
+
+- Everything in "Residue condition: power-of-two lemma and exhaustive check to k = 31" and "Residue condition: lengths 2^j + 1 and the limits of the subfield test": N(x) = x² + x = F + 1 with F(x) = x², E_a = ker N^{2^a} = GF(2^{2^a}), and along a chain z_0 = 1, z_i² + z_i = z_{i−1}, one has z_i ∈ E_a if and only if i + 1 ≤ 2^a.
+- The two-adic reduction theorem, in the form used before: a coincidental hit at level n ≥ 3 needs some k with 1 ≤ k ≤ n − 2, n − k even, and a chain with S_k = Σ_{i=1}^k 1/z_i = 0.
+- Elementary Galois theory of finite fields only. No literature was opened this run, and no novelty is claimed.
+
+S_W is not an input. No value of W is selected.
+
+#### Derivation
+
+A chain of length k is determined by its top entry, since z_i = N^{k−i}(z_k), and the two continuations of a chain of length j − 1 are y and y + 1, where y² + y = z_{j−1}. So the chains form a binary tree whose depth-j nodes are the chains of length j.
+
+Lemma (Frobenius orbits of chains). Fix k ≥ 1, let B = ⌈log₂(k + 1)⌉ and d = 2^B.
+1. F maps chains to chains, and S_k(F(chain)) = S_k(chain)². So S_k vanishes on a chain if and only if it vanishes on every chain in its F-orbit.
+2. Every F-orbit of length-k chains has exactly d elements. The orbit of a chain is the orbit of z_k, whose size is the degree of z_k over F_2. That degree is a power of two, and z_k ∈ E_a if and only if k + 1 ≤ 2^a, so it equals d. Hence there are exactly 2^{k−B} orbits.
+3. For 2^b ≤ k, the element σ_b = F^{2^b} = N^{2^b} + 1 acts by σ_b(z_i) = z_i + z_{i−2^b} for i ≥ 2^b and fixes z_i for i < 2^b. In particular it fixes the chain up to depth 2^b − 1 and replaces z_{2^b} by its sibling z_{2^b} + 1.
+4. Let R_k be any set of length-k chains obtained this way: at every depth j that is a power of two, keep one child of each node (the choice may be arbitrary), and at every other depth keep both children. Then |R_k| = 2^{k−B}, because exactly B depths in 1..k are powers of two. Every orbit meets R_k: starting from any chain, for b = 0, 1, …, B − 1 in increasing order, apply σ_b whenever the depth-2^b entry is not the kept child of its prefix. By 3, this repairs depth 2^b and does not change any shallower depth, so later steps do not undo earlier ones, and the final chain lies in R_k. Comparing |R_k| with the number of orbits in 2, every orbit meets R_k exactly once.
+
+Corollary (reduced test). For every k, S_k ≠ 0 for all 2^k chains if and only if S_k ≠ 0 on the 2^{k−B} chains of R_k. The truncations of R_K to depth j are a valid R_j, so one walk of the reduced tree to depth K checks every k ≤ K at once, at a cost of about 2^{K−⌈log₂(K+1)⌉} chains at the top level instead of 2^K.
+
+#### Exact finite verification (1 ≤ k ≤ 45)
+
+Every chain of length k ≤ 63 lies in GF(2^64) = F_2[x]/(x^64 + x^4 + x^3 + x + 1), whose modulus is checked irreducible in scripts/check_coincidental_reduction.py. scripts/residue_orbits_gf2_64.c walks the reduced tree, keeping the root returned by a fixed linear solver at depths 1, 2, 4, 8, 16, 32 and both roots elsewhere. It carries S_k as num/den with den = z_1 ⋯ z_k ≠ 0, so the zero test is exact, and it finds S_k ≠ 0 at every node for 1 ≤ k ≤ 45. That is 2^{39} reduced chains at k = 45, covering all 2^{45} chains.
+
+Checks of the reduction itself, all exact (scripts/check_residue_orbits.py):
+- The number of chains with Tr_d(S_k) = 1, where Tr_d is the trace from GF(2^d) to F_2, is a Galois invariant count. Full enumeration in two independent field models, GF(2^64) and GF(2^32), in Python, gives the same counts for k ≤ 11: 2, 4, 4, 8, 24, 40, 72, 144, 240, 560, 1008.
+- In C, for every k ≤ 22, the full tree has 2^k nodes at depth k, the reduced tree has 2^{k−B}, and the full count with Tr_d(S_k) = 1 equals d times the reduced count (for example k = 22: 2099296 = 32 · 65603). The C full counts agree with the Python counts for k ≤ 11.
+- The carry-less multiplication is checked against schoolbook multiplication, and the linear root solver is self-tested on the image of N.
+
+#### Corollary (theorem plus finite exact computation)
+
+S_k ≠ 0 for every chain when 1 ≤ k ≤ 45 (by the reduced computation), and when k = 2^j or k = 2^j + 1 for any j (by the two earlier lemmas). The smallest open length is k = 46. By the two-adic reduction theorem, a coincidental hit at level n needs an open k ≤ n − 2 with n − k even. For n = 47 that would be an odd k ≤ 45, and none is open, so a hit needs n ≥ 48. Hence for 3 ≤ n ≤ 47 there are no coincidental hits, and
+    h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3)   exactly.
+This extends the previous range 3 ≤ n ≤ 35.
+
+#### Still open
+
+- Residue conjecture for k ≥ 46 with k ∉ {2^j, 2^j + 1}: Σ_{i=1}^k 1/z_i ≠ 0 for every chain. Not proved, and no counterexample is known. The orbit reduction only saves a factor 2^{⌈log₂(k+1)⌉}; it is not a proof for all k, and exhaustive computation stays exponential in k.
+- As before, failure of the residue test would only remove this obstruction; it would not by itself produce a hit.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the orbit argument is new.
+
 ---
 
 <div align="center">

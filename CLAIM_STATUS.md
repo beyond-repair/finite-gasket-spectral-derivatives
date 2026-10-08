@@ -26,7 +26,8 @@
 | Residue sums `S_k ≠ 0` for every chain when k = 2^j (all j) | CLAIMED | prose argument in README "Residue condition: power-of-two lemma and exhaustive check to k = 31" |
 | Residue sums `S_k ≠ 0` for every chain, 1 ≤ k ≤ 31; exact `h_n` formula for 3 ≤ n ≤ 34 | CLAIMED (theorem + finite exact computation) | `scripts/check_residue_extension.py` + `scripts/residue_chains_gf2_32.c` (exhaustive in GF(2^32); not a test) |
 | Residue sums `S_k ≠ 0` for every chain when k = 2^j + 1 (all j ≥ 1); exact `h_n` formula for 3 ≤ n ≤ 35 | CLAIMED (theorem + finite exact computation) | prose argument in README "Residue condition: lengths 2^j + 1 and the limits of the subfield test"; supporting `scripts/check_residue_p_plus_one.py` (not a test) |
-| Exact `h_n` formula for all n | NOT CLAIMED | open; the residue conjecture `Σ_{i≤k} 1/z_i ≠ 0` for all k ≥ 34 not of the form 2^j or 2^j + 1 would suffice (not known to be necessary) |
+| Frobenius orbit reduction of the residue test (one child at power-of-two depths gives one chain per orbit); residue sums `S_k ≠ 0` for every chain, 1 ≤ k ≤ 45; exact `h_n` formula for 3 ≤ n ≤ 47 | CLAIMED (theorem + finite exact computation) | prose lemma in README "Residue condition: Frobenius orbit reduction and exact check to k = 45"; `scripts/check_residue_orbits.py` + `scripts/residue_orbits_gf2_64.c` (reduced tree in GF(2^64); not a test) |
+| Exact `h_n` formula for all n | NOT CLAIMED | open; the residue conjecture `Σ_{i≤k} 1/z_i ≠ 0` for all k ≥ 46 not of the form 2^j or 2^j + 1 would suffice (not known to be necessary) |
 | SPECTRUM.md informal "0.4–0.7" string | NOT CLAIMED | numerical observation of an unspecified quantity |
 | Continuum limit, selected W, force, thrust | NOT CLAIMED | forbidden by README scope |
 

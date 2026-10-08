@@ -6,3 +6,4 @@ dist/
 .venv/
 .pytest_cache/
 scripts/residue_chains_gf2_32
+scripts/residue_orbits_gf2_64
