@@ -1,6 +1,18 @@
 # Completion log — finite-gasket-spectral-derivatives
 
-## Proved this run (2026-10-08, free decimation hit predicate)
+## Proved this run (2026-10-08, second run: corner channels and coincidental hits)
+
+Dated 2026-10-08 (America/New_York).
+
+- Theorem (corner channels): for n ≥ 1 the corner Schur complement of L_n − λ is t_n I + ((s_n − t_n)/3) J with s_0 = −λ, t_0 = 3 − λ and s_n = [(6 − λ)s_{n−1}(R) + 2R]/Δ (same for t_n). In reduced form s_n = Q_n/(2 − R^{n−1}(λ)) and t_n = Qt_n/Π_{k<n}(5 − R^k(λ)), with integer Q_n, Qt_n of leading coefficient ±1 and degrees 2^{n−1}+1 and 2^n. The symmetric channel sees 2^{n−1}+1 distinct eigenvalues, the standard channel 2^n (corner rank 2 each), so c_n = 5·2^{n−1} + 1 for all n ≥ 1.
+- Proof structure (README, "Corner channels and coincidental hits"): S_3 symmetry splits S_n; Schur complements compose through the hit subsection's corner-defect identity; the channel functions are Herglotz-type, so reduced numerator degree counts distinct visible eigenvalues; exact cancellations at λ = 5 (symmetric only, s(0) = 0) and λ = 2 (s_m(6) = t_m(6) = −3), and none elsewhere.
+- Corollary: dim DN_n(2) = 0 for n ≥ 3 by an elementary argument (no Qiu §2), and c_2 = 11 is now a theorem rather than a Krylov computation. Closes the second open item of the previous run.
+- Reduction: coincidental hits at level n are among the nonzero roots of gcd(Q_n Qt_n, H_{n−1}∘R), with H_{n−1} = Q_{n−1}Qt_{n−1}Π_{j≤n−3}Π_{a∈{2,5,6}}(R^j − a) (its roots contain Spec(L_{n−1}); DN eigenvalues iterate into {2,5,6} because DN_1 = 0).
+- Finite exact certificate (scripts/check_corner_channels.py, F_p with p = 2^61 − 1; exact Z recursion to n = 8): for 3 ≤ n ≤ 11 the gcds have degree 1 (= λ) and 0. Hence for 3 ≤ n ≤ 11 there are no coincidental hits and h_n = 1 − μ_exc(n) − 5·2^n/(3^{n+1}+3) exactly. Upgrades the n = 3..6 floating-point observation.
+- Still open: no coincidental hits for all n (general proof). Mod 23 gave minimal gcd degrees in both channels for n = 3..9, but no induction mod a fixed prime was found.
+- No literature opened this run; the Schur-complement form of spectral decimation is standard and no novelty is claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
+## Proved previously (2026-10-08, free decimation hit predicate)
 
 Dated 2026-10-08 (America/New_York).
 
@@ -131,4 +143,5 @@ Dated 2026-10-02 (America/New_York).
 - No further exceptional multiplicity columns remain in sierpinski-geometry-045 SPECTRUM.md. Free mult(3), mult(5), mult(6) are theorems, and their total exceptional mass μ_exc → 5/9 is a theorem for n ≥ 3.
 - Dirichlet bottom ratio λ_min(n)/λ_min(n−1) → 1/5 is a theorem for L_D (2026-10-02).
 - Decimation hit rates: with the hit predicate defined in README ("Free decimation hit predicate"), h_n → 4/9 is now a theorem (2026-10-08), with 1 − μ_exc − 5·2^n/(3^{n+1}+3) ≤ h_n ≤ 1 − μ_exc for n ≥ 3. SPECTRUM.md's informal "0.4–0.7" string remains a numerical observation of an unspecified quantity.
-- Open: exclude coincidental hits among corner-visible eigenvalues (would give h_n exactly; observed n = 3..6). Also open: an elementary proof of DN_n(2) = 0 that does not cite Qiu §2.
+- Coincidental hits among corner-visible eigenvalues: excluded for 3 ≤ n ≤ 11 by an exact finite certificate (2026-10-08, corner channels), so h_n is exact there; open for general n.
+- Elementary proof of DN_n(2) = 0 (n ≥ 3) without Qiu §2: done (2026-10-08, from c_n = 5·2^{n−1}+1 via corner channels).

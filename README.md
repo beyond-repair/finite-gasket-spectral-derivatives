@@ -711,7 +711,7 @@ The Dirichlet bottom-ratio subsection uses Qiu §2: for m ≥ 2 every Dirichlet 
 
 #### Still open
 
-Whether a corner-visible eigenvalue λ (DN_n(λ) = 0, λ ≠ 0) can be a coincidental hit, i.e. R(λ) ∈ Spec(L_{n−1}) without decimation. If none occurs, the non-hit count is exactly 5·2^{n−1} and h_n = 1 − μ_exc(n) − 5·2^n/(3^{n+1}+3) exactly. This is a numerical observation for n = 3..6 only, not proved.
+Whether a corner-visible eigenvalue λ (DN_n(λ) = 0, λ ≠ 0) can be a coincidental hit, i.e. R(λ) ∈ Spec(L_{n−1}) without decimation. If none occurs, the non-hit count is exactly 5·2^{n−1} and h_n = 1 − μ_exc(n) − 5·2^n/(3^{n+1}+3) exactly. This is a numerical observation for n = 3..6 only, not proved. (Update, later on 2026-10-08: settled exactly for 3 ≤ n ≤ 11 by a finite certificate, and DN_n(2) = 0 proved without Qiu; see “Corner channels and coincidental hits”. General n remains open.)
 
 #### Numerical observation
 
@@ -720,6 +720,80 @@ scripts/check_decimation_hits.py (eigh on the same constructor, tolerances 1e−
 #### Not a consequence
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim the hit predicate or the corner defect formula is new.
+
+
+### Corner channels and coincidental hits on build_gasket(n)
+
+Dated 2026-10-08 (America/New_York), second run of the day.
+
+#### Assumptions
+
+- Same free gasket graph build_gasket(n), free L_n = D − A, V_0, V_{n−1} ⊂ V_n, R(z) = z(5 − z), Δ = (2 − λ)(5 − λ), c_n, r_n(λ), DN_n(λ) and the hit predicate exactly as in "Free decimation hit predicate". Level 0 is the triangle, L_0 = 3I − J.
+- The rotation/reflection group S_3 of the triangle acts on build_gasket(n) by graph automorphisms that permute V_0 (the constructor is symmetric under it).
+- Already proved in this file and used: Step 1 (midpoint extension), Step 2 (decimation identity with corner defect), Step 3 (DN isomorphism), Step 4 recursion c_n = 2c_{n−1} − 1 − dim DN_n(2) (n ≥ 3); corner values vanish on ker(L_n − 6) (n ≥ 2), on ker(L_n − 5) (n ≥ 3), and on ker(L_n − 3) (n ≥ 3, because the free mult(3) proof shows every 3-eigenfunction restricts on V_{n−1} to an element of ker(L_{n−1} − 6), and restriction keeps corner values).
+- No literature was opened for this subsection. Writing spectral decimation through a Schur complement is a standard technique; no claim is made that the closed forms below are new.
+
+S_W is not an input. No value of W is selected.
+
+#### Derivation
+
+Step 1 (corner Schur complement). For λ off Spec(L_D^{(n)}) let S_n(λ) be the Schur complement of L_n − λ onto V_0; then S_n(λ)^{−1} = G_n(λ) := [(L_n − λ)^{−1}]_{V_0 V_0}. G_n commutes with the S_3 permutation matrices, whose commutant on ℝ³ is span{I, J}, so
+    S_n(λ) = t_n(λ) I + ((s_n(λ) − t_n(λ))/3) J,
+with s_n the eigenvalue on (1,1,1) (symmetric channel) and t_n the eigenvalue on its orthogonal complement (standard channel, two-dimensional). For level 0, s_0 = −λ and t_0 = 3 − λ.
+
+Step 2 (recursion). By Step 2 of the hit subsection, for λ ∉ {2, 5} the Schur complement of L_n − λ onto V_{n−1} is ((6 − λ)/Δ)(L_{n−1} − R(λ)) + (2λ/(2 − λ)) P_{V_0}. Schur complements compose (eliminate the midpoints, then V_{n−1} \ V_0), and adding a multiple of P_{V_0} commutes with eliminating V_{n−1} \ V_0. Hence, as an identity of rational functions,
+    S_n(λ) = ((6 − λ)/Δ) S_{n−1}(R(λ)) + (2λ/(2 − λ)) I,
+    s_n(λ) = [(6 − λ) s_{n−1}(R(λ)) + 2R(λ)] / Δ,   t_n(λ) = [(6 − λ) t_{n−1}(R(λ)) + 2R(λ)] / Δ.
+Both channels obey the same affine recursion, so t_n − s_n = 3 Π_{k=0}^{n−1} A(R^k(λ)) with A(x) = (6 − x)/((2 − x)(5 − x)).
+
+Step 3 (channel functions are Herglotz-type). From the spectral resolution, 1/s_n(λ) = (1/3) Σ_k |⟨1_{V_0}, e_k⟩|² /(λ_k − λ) and 1/t_n(λ) = (1/2) Σ_k |⟨e, e_k⟩|²/(λ_k − λ) with e = 1_{c_1} − 1_{c_2}. These have simple poles with positive residues exactly at the distinct eigenvalues seen by the respective channel; zeros lie strictly between consecutive poles. So if σ_n (τ_n) is the number of distinct eigenvalues seen by the symmetric (standard) channel, the reduced form of s_n (t_n) has numerator degree σ_n (τ_n) and denominator degree one less, with all denominator roots strictly inside the spectral range and none at 0 for s_n (0 is a pole of 1/s_n, the constants). The residue of G_n at λ is minus the eigenprojection compressed to V_0; it is S_3-invariant, so its rank is r_n(λ) = [λ seen by the symmetric channel] + 2·[λ seen by the standard channel]. Hence c_n = σ_n + 2τ_n.
+
+Step 4 (exact cancellations). Write s_{n−1} = q/p reduced. The recursion gives numerator (6 − λ)q(R) + 2Rp(R) (degree 2σ_{n−1} + 1, leading term from (6 − λ)q(R)) over Δ p(R) (degree 2σ_{n−1}).
+- λ = 5: R = 0 and the numerator equals q(0) = 0, because s_{n−1}(0) = 0. The factor (5 − λ) cancels once.
+- λ = 2: R = 6. For m ≥ 1, s_m(6) = A(6)s_{m−1}(−6) + 2·6/(2 − 6) = −3 (A(6) = 0, and −6 is not a pole of s_{m−1}). So for n ≥ 2 the numerator at λ = 2 is 4p(6)(s_{n−1}(6) + 3) = 0 and (2 − λ) cancels once. For n = 1 the numerator at 2 is −4, so no cancellation.
+- Roots of p(R(λ)): there q(R) ≠ 0, so the numerator equals (6 − λ)q(R), which vanishes only at λ = 6, and R(6) = −6 is not a root of p. No cancellation.
+So for n ≥ 2 the reduced pair has degrees (2σ_{n−1} − 1, 2σ_{n−1} − 2), giving σ_n = 2σ_{n−1} − 1 with σ_1 = 2, and the reduced denominator is p(R(λ)).
+For the standard channel, t_m(0) = 3(3/5)^m ≠ 0 and 0 is not a pole of t_m, so (5 − λ) never cancels; t_m(6) = −3 for every m ≥ 0 (t_0(6) = −3 directly), so (2 − λ) cancels once for every n ≥ 1; the same argument as above excludes other cancellations. So τ_n = 2τ_{n−1} with τ_0 = 1.
+
+#### Theorem (corner channels)
+
+For every integer n ≥ 1, in reduced form,
+    s_n = Q_n / P_n,  P_n(λ) = 2 − R^{n−1}(λ),
+    t_n = Qt_n / Pt_n,  Pt_n(λ) = Π_{k=0}^{n−1} (5 − R^k(λ)),
+where Q_n, Qt_n are integer polynomials with leading coefficient ±1, deg Q_n = 2^{n−1} + 1 and deg Qt_n = 2^n. The symmetric channel sees exactly σ_n = 2^{n−1} + 1 distinct eigenvalues of L_n (the roots of Q_n) and the standard channel sees τ_n = 2^n (the roots of Qt_n, each with corner rank 2). Consequently
+    c_n = 5 · 2^{n−1} + 1   for every n ≥ 1
+(c_0 = 3). Integrality and the leading coefficients follow by induction from the recursion, since the divisions in Step 4 are by the monic factors λ − 5 and λ − 2 and the leading term always comes from (6 − λ)q(R).
+
+#### Corollary (DN_n(2) = 0 without the classical Dirichlet input)
+
+Inserting c_n = 5 · 2^{n−1} + 1 into c_n = 2c_{n−1} − 1 − dim DN_n(2) gives dim DN_n(2) = 0 for every n ≥ 3. This replaces the Qiu §2 citation in the Corollary of the hit subsection by an elementary argument, and replaces the finite rational Krylov computation of c_2 = 11 by the theorem.
+
+#### Reduction of the coincidental-hit question
+
+Let n ≥ 3. A coincidental hit is a corner-visible λ ≠ 0 with R(λ) ∈ Spec(L_{n−1}). Every eigenvalue of L_{n−1} is a root of
+    H_{n−1}(μ) := Q_{n−1}(μ) Qt_{n−1}(μ) Π_{j=0}^{n−3} Π_{a∈{2,5,6}} (R^j(μ) − a),
+because corner-visible eigenvalues are roots of Q_{n−1} Qt_{n−1}, and iterating Step 3 shows a DN eigenvalue μ at level m satisfies R^j(μ) ∈ {2, 5, 6} for some 0 ≤ j ≤ m − 2 (the chain cannot reach level 1, since DN_1 = 0: the three corner rows force all pairwise sums of midpoint values to vanish). So coincidental hits at level n are exactly among the roots λ ≠ 0 of gcd(Q_n Qt_n, H_{n−1}∘R), and none exist when that gcd is λ.
+
+#### Exact finite certificate (3 ≤ n ≤ 11)
+
+scripts/check_corner_channels.py builds Q_n, Qt_n by the recursion (exact integer arithmetic up to n = 8, asserting the Step 4 divisions have remainder 0; over F_p with p = 2^61 − 1 up to n = 11) and computes gcds over F_p. Since every polynomial involved has leading coefficient ±1, its reduction mod p keeps its degree, so the degree of the F_p gcd is an upper bound for the degree of the gcd over ℚ. For every 3 ≤ n ≤ 11: deg gcd(Q_n, H_{n−1}∘R) = 1 (and λ divides it) and deg gcd(Qt_n, H_{n−1}∘R) = 0. Hence, for 3 ≤ n ≤ 11, as a finite exact computation:
+- no corner-visible eigenvalue other than 0 is a decimation hit, and every corner-visible λ ≠ 0 has DN_n(λ) = 0;
+- the non-hit mass is exactly c_n − 1 = 5 · 2^{n−1}, the hit count is N(n) − M_exc(n) − 5 · 2^{n−1}, and
+    h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3)   exactly.
+This upgrades the n = 3..6 floating-point observation of the hit subsection (hit counts 3, 19, 87, 331) to exact statements and extends them to n ≤ 11.
+
+#### Still open
+
+- Coincidental hits for general n ≥ 12, that is, gcd(Q_n Qt_n, H_{n−1}∘R) = λ for all n. Reduction mod 23 also gave the minimal gcd degrees in both channels for every n = 3..9 tested (mod 3 only in the symmetric channel), but no inductive structure mod a fixed prime was found that would carry this to all n. So this is not proved.
+- The symmetric-channel poles P_n = 2 − R^{n−1}(λ) and standard-channel poles Pt_n are recorded as algebra only; they are not identified with a Dirichlet spectrum here.
+
+#### Numerical observation
+
+The same script compares with eigh on the constructor for n = 0..6: the Schur identity residual (exact rational evaluation of Q/P at λ = 0.37) is at most 2 · 10^{−14}; channel counts σ_n = 1, 2, 3, 5, 9, 17, 33 and τ_n = 1, 2, 4, …, 64; c_n = 3, 6, 11, 21, 41, 81, 161; and r_n(3) = 0 for n = 1..6. In floating point, the smallest distance from R(λ) to Spec(L_{n−1}) over corner-visible λ ≠ 0 shrinks from about 1.0 at n = 1 to about 4 · 10^{−4} at n = 5, which is why the exact certificate is used instead of tolerances.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the Schur-complement form of spectral decimation or these closed forms are new.
 
 
 ---
