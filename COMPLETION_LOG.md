@@ -1,5 +1,20 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-09 ~3:55am EDT / hourly routine: excess m=11 filter + directs through p=128)
+
+Dated 2026-10-09 (America/New_York), first run of the day (hourly locked-kernel routine, Phase A documentation only).
+
+- **Progress / exact finite computation** (not a theorem covering all excess 11): scripts/check_residue_p_plus_m.py (python-flint), filter and direct modes, orbit-reduced where noted. Scratch logs under `/workspace/scratch-res/` (repo_filter_m11.log, indep_excess_filter_m11.log, repo_direct_m11_p{16,32,64,128}.log). Not vendored into the tree (prior practice).
+- Filter m=11 (orbit, e=16, prefixes=128): R ≠ 0 on every prefix, degR=2046. Power-of-two-degree factors (p: count) = {16: 259, 32: 64, 64: 37, 128: 12, 256: 7, 512: 5, 1024: 2}. Surviving chain condition (p: count) = {16: 66, 32: 24, 64: 21, 128: 6, 256: 5, 512: 3, 1024: 1}. Wall time ≈ 1511 s (independent filter agrees: R_zero=0, same survivor counts, ≈ 1551 s).
+- Exact direct zeros (orbit mode, S = 0 count = 0, EXIT:0) at:
+  - p=16 → k=27: adm_c=65, chains=266240, S_in_GF=132, S=0=0, t=520.5s
+  - p=32 → k=43: adm_c=48, chains=196608, S_in_GF=96, S=0=0, t=2905.9s
+  - p=64 → k=75: adm_c=84, chains=344064, S_in_GF=168, S=0=0, t=2842.3s
+  - p=128 → k=139: adm_c=48, chains=196608, S_in_GF=96, S=0=0, t=11769.0s
+- **Pending (do not claim excess ≤ 11 yet):** directs at p=256 (k=267), p=512 (k=523), p=1024 (k=1035). Until those S=0 counts are 0, excess ≤ 11 is **not** proved. At documentation time, `direct 11 256 orbit` was still running; p=512 and p=1024 not started.
+- Range unchanged: smallest open length still 47 = 32 + 15; exact h_n for 3 ≤ n ≤ 48.
+- Assumptions / theorems / numerical checks kept separate. No novelty claim. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Proved this run (2026-10-08, tenth run: residue lengths 2^j + m, 3 ≤ m ≤ 10)
 
 Dated 2026-10-08 (America/New_York).

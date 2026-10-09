@@ -1175,7 +1175,7 @@ Mode `filter m` computes R for every prefix (all 2^m prefixes for m ≤ 8; one p
 | 9 | 16 | 32 (orbit reps) | 510 | 16, 32, 64, 128, 256 |
 | 10 | 16 | 64 (orbit reps) | 1022 | 16, 32, 64, 128, 256 |
 
-(The m = 2 row reproduces the ninth run: only p = 4 survives. deg R = 2^m − 2 on every prefix checked, m ≤ 10; a numerical observation, not proved. An m = 11 filter run, recorded only as an observation, also has R ≠ 0 and a finite survivor set including p = 1024.)
+(The m = 2 row reproduces the ninth run: only p = 4 survives. deg R = 2^m − 2 on every prefix checked, m ≤ 10; a numerical observation, not proved. For m = 11 filter + directs through p = 128, see the following subsection "Residue condition: excess m=11 (partial: filter + directs through p=128)"; not a theorem for all excess 11.)
 
 Mode `direct m P` enumerates, in GF(2^{2P}), every chain of length P + m whose α_1 is a root of R lying in GF(2^P) and whose c satisfies the chain condition; by the lemma this contains every chain with S_{P+m} ∈ GF(2^P), so its count of S = 0 is exact. Positive control: for k = 6, 7, 11, 12, 13, 14, 15 a naive enumeration of all 2^k chains gives 8, 0, 32, 0, 48, 32, 176 chains with S_k ∈ GF(2^p), equal to the `direct` counts (k = 6, 11, 13, 14, 15 are the fifth run's failures of the subfield test). Results of `direct` (this run, scripts/check_residue_p_plus_m.py): no chain has S = 0 at k = 13, 14, 15, 21, 22, 23, 38, 39, 71, 72, 73, 136, 137, 264. Supporting orbit-reduced counts from the same algorithm (scratch logs matching the overlapping lengths above): S = 0 also at k = 263, 265, 520, 74, 138, 266. In every case some chains have S ∈ GF(2^p) (nonzero), so the subfield test alone does not prove these lengths.
 
@@ -1189,7 +1189,7 @@ With the earlier lemmas (m = 0, 1, 2), S_k ≠ 0 for every k with k − 2^⌊log
 
 #### Pending
 
-None for 3 ≤ m ≤ 10. An m = 11 filter has finite survivors including p = 1024 (k = 1035); those `direct` counts are not recorded this run.
+None for 3 ≤ m ≤ 10. Partial m = 11 progress (filter + directs through p = 128) is recorded in the next subsection; directs at p = 256, 512, 1024 remain open, so excess ≤ 11 is not proved.
 
 #### Still open
 
@@ -1199,6 +1199,45 @@ None for 3 ≤ m ≤ 10. An m = 11 filter has finite survivors including p = 102
 #### Not a consequence
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that elimination by relative norms is new.
+
+### Residue condition: excess m=11 (partial: filter + directs through p=128)
+
+Dated 2026-10-09 (America/New_York), ~3:55am EDT / hourly locked-kernel routine (Phase A documentation). This subsection records **progress / exact finite computation** for excess m = 11. It does **not** claim a theorem that S_k ≠ 0 for every chain with excess ≤ 11. Survivors p = 256, 512, 1024 still need `direct` counts. Range of exact h_n is unchanged.
+
+#### Assumptions
+
+- Everything in "Residue condition: lengths 2^j + m for 3 ≤ m ≤ 10 (elimination over a fixed field)": the elimination lemma (C_1 clears to G; iterated relative norm R ∈ GF(2^e)[x]; R ≠ 0 forces surviving p = e·d with the chain condition), the `filter` / `direct` modes of scripts/check_residue_p_plus_m.py, and the orbit reduction for prefixes / chains.
+- Exact finite-field computation (python-flint). No literature opened this run; no novelty claimed.
+
+S_W is not an input. No value of W is selected.
+
+#### Exact finite computation (scripts/check_residue_p_plus_m.py)
+
+Filter m=11 (orbit, e=16, prefixes=128): R ≠ 0 on every prefix, degR=2046. Power-of-two-degree factors (p: count) = {16: 259, 32: 64, 64: 37, 128: 12, 256: 7, 512: 5, 1024: 2}. Surviving chain condition (p: count) = {16: 66, 32: 24, 64: 21, 128: 6, 256: 5, 512: 3, 1024: 1}. Wall ≈ 1511 s. An independent filter agrees (R_zero=0, same survivor counts, ≈ 1551 s). Scratch: `/workspace/scratch-res/repo_filter_m11.log`, `indep_excess_filter_m11.log` (not vendored).
+
+Mode `direct 11 P orbit` (exact S = 0 count among chains with S ∈ GF(2^P) on the admissible set):
+
+| p | k = p+11 | adm_c | chains | S ∈ GF(2^p) | S = 0 | time (s) |
+|---|---|---|---|---|---|---|
+| 16 | 27 | 65 | 266240 | 132 | 0 | 520.5 |
+| 32 | 43 | 48 | 196608 | 96 | 0 | 2905.9 |
+| 64 | 75 | 84 | 344064 | 168 | 0 | 2842.3 |
+| 128 | 139 | 48 | 196608 | 96 | 0 | 11769.0 |
+
+All four EXIT:0. Scratch: `/workspace/scratch-res/repo_direct_m11_p{16,32,64,128}.log` (not vendored). In every completed case some chains have S ∈ GF(2^p) (nonzero), so the subfield test alone does not prove these lengths.
+
+#### Pending
+
+Directs at p=256 (k=267), p=512 (k=523), p=1024 (k=1035). Until those S = 0 counts are 0, **excess ≤ 11 is not proved**. At the time of this write-up, `direct 11 256 orbit` was still running; p=512 and p=1024 were not started. Do not read this subsection as a Theorem for m = 11.
+
+#### Still open
+
+- Residue conjecture for k ≥ 47 with k − 2^⌊log2 k⌋ ≥ 11 (equivalently, after closing m = 11 survivors and higher excesses). Smallest open length still 47; exact h_n for 3 ≤ n ≤ 48 only.
+- Full excess ≤ 11 as a theorem: blocked on the three pending directs above.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim a theorem for all excess-11 lengths.
 
 
 ---
