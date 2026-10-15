@@ -1,5 +1,15 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-15 ~9:03am EDT / hourly routine: reduced walk KMAX = 48 started)
+
+Dated 2026-10-15 (America/New_York).
+
+- Record current before this run: head 2be0828; excess ≤ 11 theorem; deg R = 2^m − 2 for m ≤ 12 (finite exact); S_k ≠ 0 for k ≤ 47; exact h_n for 3 ≤ n ≤ 49; smallest open length 48; excess m = 12 lift rep S = 0 count 0 at k = 28, 44, 76, 140; k = 268, 524, 2060, 4108 pending.
+- **Status check (Priority A / B blocked)**: the three pending m = 12 `lift rep` jobs are still running with no result lines yet — p = 256 (k = 268, pid ~290555, since 07:34 EDT), p = 512 (k = 524, pid ~261335, since 07:14 EDT), p = 2048 (k = 2060, pid ~261337, since 07:14 EDT). Logs `/workspace/scratch-res/lifted_rep_m12_p{256,512,2048}.log` still hold only the start timestamp. The independent `filter 12 orbit` cross-check (pid ~162924, since 05:33 EDT) still has an empty log. p = 4096 (k = 4108) was not started (CPU slots occupied; prefer not starving the three lifts). Excess ≤ 12 remains **not** claimed.
+- **Pending, not claimed (Priority C)**: started the unchanged reduced walk `scripts/residue_orbits_gf2_64.c` with KMAX = 48 (smallest open length 48 = 32 + 16). `validate` at KMAX = 24 passed EXIT:0 first. Fresh build is byte-identical to walk47 (sha256 1b35db9d…f451). Binary `/workspace/scratch-res/walk48`, log `/workspace/scratch-res/repo_orbits_k48.log` (start 09:05:49 EDT). OMP_NUM_THREADS = 2 so the three lifts keep CPU. Expect ~2× the k = 47 wall (~3 h); the program prints per-k lines only after the full tree finishes. **Not** claimed: no S = 0 count at k = 48 yet; range unchanged.
+- Range unchanged: exact h_n for 3 ≤ n ≤ 49; smallest open length 48 = 32 + 16. Still open: residue conjecture for k ≥ 48 with excess ≥ 12 (excess 12 partially closed); deg R conjecture for m ≥ 13.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Progress this run (2026-10-15 ~7:58am EDT / hourly routine: excess m = 12 lifts, first four lengths)
 
 Dated 2026-10-15 (America/New_York).

@@ -1375,6 +1375,7 @@ This extends the previous range 3 ≤ n ≤ 48 by one level. For n = 50 the open
 
 - Residue conjecture for k ≥ 48 with k − 2^⌊log2 k⌋ ≥ 12. Next open lengths: 48, 49, …, 63 (excess 16–31), then 76 = 64 + 12.
 - Exact h_n for n ≥ 50.
+- **Pending, not claimed (2026-10-15 ~9:05am EDT, hourly routine)**: unchanged reduced walk `scripts/residue_orbits_gf2_64.c` started with KMAX = 48 (`validate` at KMAX = 24 passed; binary `/workspace/scratch-res/walk48` byte-identical to walk47, sha256 1b35db9d…f451; log `/workspace/scratch-res/repo_orbits_k48.log`, start 09:05:49 EDT; OMP_NUM_THREADS = 2). Expect ~2× the k = 47 wall (~3 h). No S = 0 count at k = 48 yet; range stays 3 ≤ n ≤ 49 until the walk finishes with zeros = 0.
 
 #### Not a consequence
 
@@ -1417,6 +1418,7 @@ Exact `lift rep` results that have finished (EXIT:0, logs `/workspace/scratch-re
 - k = 28 and k = 44 agree with the reduced walk (S_k ≠ 0 for k ≤ 47): controls, no new length.
 - Finite exact computation + elimination/lifted-`direct` lemmas: S_76 ≠ 0 and S_140 ≠ 0 for every chain. Neither is the smallest open length 48, so the h_n range is unchanged.
 - Still running at 7:58am EDT: k = 268 (p = 256, restarted 07:53), k = 524 (p = 512) and k = 2060 (p = 2048) since 07:13; k = 4108 (p = 4096) queued after 2048. Excess ≤ 12 remains **pending** until those four report S = 0 count 0.
+- Status check 2026-10-15 ~9:05am EDT (hourly routine): p = 256, 512, 2048 still running (logs hold only start timestamps; no S = 0 line yet); `filter 12 orbit` still empty; p = 4096 not started (CPU). Excess ≤ 12 still **not** claimed. Separately, the KMAX = 48 reduced walk was started (see "exact check to k = 47" Still open); it does not close excess 12.
 
 #### Range
 
