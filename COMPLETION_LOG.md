@@ -1,5 +1,15 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Proved this run (2026-10-15 ~4:51am EDT / hourly routine: k = 47 walk closed; excess m = 12 filter started)
+
+Dated 2026-10-15 (America/New_York).
+
+- Record current before this run: head 35b3b90; excess ≤ 11 theorem; deg R = 2^m − 2 theorem for m ≤ 11; smallest open length 47; exact h_n for 3 ≤ n ≤ 48; reduced walk KMAX = 47 running.
+- **Exact finite computation**: the unchanged reduced walk `scripts/residue_orbits_gf2_64.c` with KMAX = 47 finished EXIT:0 at 05:29:51 EDT (93 min 48 s wall, 374.7 user CPU-min): `k=47 reduced_chains=2199023255552 orbit_size=64 chains_covered=2^47 zeros=0 ok`, and zeros = 0 at every k ≤ 47. Source has no diff against the commit; a fresh build is byte-identical to the binary that ran. Scratch `/workspace/scratch-res/repo_orbits_k47.log`.
+- **Corollary (theorem + finite computation)**: S_k ≠ 0 for every chain when 1 ≤ k ≤ 47. Smallest open length is now 48 = 32 + 16. By the two-adic reduction theorem, exact h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3) for **3 ≤ n ≤ 49** (was 3 ≤ n ≤ 48). README "Residue condition: exact check to k = 47 (2026-10-15)".
+- Excess m = 12: see the update below (filter / prepare in progress at this commit; not claimed).
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Progress this run (2026-10-15 ~3:56am EDT / hourly routine: k=520 lift control; k=47 walk started)
 
 Dated 2026-10-15 (America/New_York).

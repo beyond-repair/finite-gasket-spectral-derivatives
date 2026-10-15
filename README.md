@@ -1291,7 +1291,7 @@ Scratch logs: `/workspace/scratch-res/lifted_*.log`, cache `lifted_m11.json.d/` 
 - Exact finite computation: S_k ≠ 0 on every chain for every surviving p of m = 11, by the lemma above plus the `rep` / `direct` counts: k = 27, 43, 75, 139, 267, 523, 1035 (S = 0 count 0 in every case).
 - **Theorem (excess ≤ 11).** For every j and every chain, S_k ≠ 0 when k = 2^j + m with 2^j > m and 0 ≤ m ≤ 11. More precisely: with the earlier lemmas for excess 0, 1, 2 and the elimination theorem for 3 ≤ m ≤ 10, it remains only to treat m = 11; the filter gives surviving p ∈ {16, 32, 64, 128, 256, 512, 1024}, and every corresponding `direct` / `lift rep` S = 0 count is zero. Proof structure identical to the m ≤ 10 theorem (elimination lemma + finite survivors + exact zeros).
 - Unchanged range: smallest open length still 47 = 32 + 15 (excess 15); exact h_n for 3 ≤ n ≤ 48 only. Closing excess 11 does **not** move that range.
-- Pending, not claimed (2026-10-15 ~3:56am EDT): the unchanged Frobenius-reduced walk `scripts/residue_orbits_gf2_64.c` was started with KMAX = 47 (2^41 reduced chains in GF(2^64); `validate` at KMAX = 24 passed first). If it reports zero S = 0 at k = 47, the smallest open length becomes 48 and exact h_n extends to 3 ≤ n ≤ 49; until then the range stays 3 ≤ n ≤ 48. Scratch log `/workspace/scratch-res/repo_orbits_k47.log`.
+- Pending at 3:56am EDT, **resolved 2026-10-15 ~5:30am EDT** (zero S = 0 at k = 47; see "Residue condition: exact check to k = 47"): the unchanged Frobenius-reduced walk `scripts/residue_orbits_gf2_64.c` was started with KMAX = 47 (2^41 reduced chains in GF(2^64); `validate` at KMAX = 24 passed first). If it reports zero S = 0 at k = 47, the smallest open length becomes 48 and exact h_n extends to 3 ≤ n ≤ 49; until then the range stays 3 ≤ n ≤ 48. Scratch log `/workspace/scratch-res/repo_orbits_k47.log`.
 
 #### Not a consequence
 
@@ -1346,6 +1346,35 @@ For every m ≥ 2 and every admissible chain prefix in GF(2^e) with e = 2^⌈log
 #### Not a consequence
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that deg R = 2^m − 2 is a classical theorem.
+
+### Residue condition: exact check to k = 47 (2026-10-15)
+
+Dated 2026-10-15 (America/New_York), ~5:30am EDT / hourly locked-kernel routine. This subsection adds one length to the exact finite check. It proves no new infinite family.
+
+#### Assumptions
+
+- Everything in "Residue condition: Frobenius orbit reduction and exact check to k = 45" and "exact check to k = 46": chains z_0 = 1, z_i² + z_i = z_{i−1}, S_k = Σ_{i=1}^k 1/z_i, the orbit lemma, and the fact that every chain of length k ≤ 63 lies in GF(2^64).
+- The two-adic reduction theorem: a coincidental hit at level n ≥ 3 needs some k with 1 ≤ k ≤ n − 2, n − k even, and a chain with S_k = 0.
+- No literature was opened this run, and no novelty is claimed. S_W is not an input. No value of W is selected.
+
+#### Exact finite verification (1 ≤ k ≤ 47)
+
+The unchanged program scripts/residue_orbits_gf2_64.c (no diff against the committed source; a fresh `gcc -O3 -march=native -fopenmp` build is byte-identical to the binary that ran, sha256 1b35db9d…f451) was run with KMAX = 47 (`validate` at KMAX = 24 passed first). It printed `ok` with zeros = 0 at every depth 1 ≤ k ≤ 47, with exactly 2^{k−⌈log₂(k+1)⌉} reduced chains at each depth; at k = 47 that is `reduced_chains=2199023255552` (= 2^41), orbit size 64, covering all 2^47 chains. Exit status 0; wall time 93 min 48 s, 374.7 user CPU-minutes (the box was shared with other jobs). Last line of the log at 05:29:51 EDT. Scratch log `/workspace/scratch-res/repo_orbits_k47.log` (not vendored, prior practice).
+
+#### Corollary (theorem plus finite exact computation)
+
+S_k ≠ 0 for every chain when 1 ≤ k ≤ 47, and (by the recorded theorems) whenever k − 2^⌊log2 k⌋ ≤ 11. The smallest open length is now k = 48 = 32 + 16 (excess 16). A coincidental hit at level n needs an open k ≤ n − 2 with n − k even. For n = 49 that would be an odd k ≤ 47, and none is open, so a hit needs n ≥ 50. Hence for 3 ≤ n ≤ 49 there are no coincidental hits, and
+    h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3)   exactly.
+This extends the previous range 3 ≤ n ≤ 48 by one level. For n = 50 the open even length k = 48 is not excluded, so the range stops at 49.
+
+#### Still open
+
+- Residue conjecture for k ≥ 48 with k − 2^⌊log2 k⌋ ≥ 12. Next open lengths: 48, 49, …, 63 (excess 16–31), then 76 = 64 + 12.
+- Exact h_n for n ≥ 50.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
 
 ---
 
