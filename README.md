@@ -1322,7 +1322,7 @@ Define the max A_1-coefficient degree of a tower element by reading all nested (
 
 | claim | status | evidence |
 |---|---|---|
-| deg R = 2^m − 2 on every checked prefix | **theorem for m ≤ 12 (finite exact)** | all prefixes for 1 ≤ m ≤ 6 and orbit prefixes for m = 7, 8 (`filter` / instrumented `eliminate`); m = 9, 10, 11 orbit already recorded (deg R = 510, 1022, 2046); m = 12 orbit (256 prefixes) from `scripts/check_residue_lifted.py prepare 12` (2026-10-15, EXIT:0, deg R = 4094 on every prefix, `assert not R.is_zero()` passed). The independent `check_residue_p_plus_m.py filter 12 orbit` cross-check was still running at write-up |
+| deg R = 2^m − 2 on every checked prefix | **theorem for m ≤ 12 (finite exact)** | all prefixes for 1 ≤ m ≤ 6 and orbit prefixes for m = 7, 8 (`filter` / instrumented `eliminate`); m = 9, 10, 11 orbit already recorded (deg R = 510, 1022, 2046); m = 12 orbit (256 prefixes) from `scripts/check_residue_lifted.py prepare 12` (2026-10-15, EXIT:0, deg R = 4094 on every prefix, `assert not R.is_zero()` passed). Independent `check_residue_p_plus_m.py filter 12 orbit` finished EXIT:0 at 09:42:26 EDT with the same degR=4094 and the same survivor dict (cross-check, not an input) |
 | d_0 = m − 1 and the recurrence d_r = 2 d_{r−1} − (m − r − 1) | **exact for m ≤ 8** | all prefixes m ≤ 6; orbit m = 7, 8; zero mismatches |
 | R ∈ GF(2^e)[x²] (equivalently R′ = 0 in char 2) | **exact for m ≤ 8** | all prefixes m ≤ 6; orbit m = 7, 8; no odd-power coefficients |
 
@@ -1334,7 +1334,9 @@ For every m with 1 ≤ m ≤ 12 and every prefix used by the recorded `filter` r
 
 Proof. Finite exact computation as in the table; the m ≤ 10 nonzero claim and the m = 11 filter line were already recorded, and this run rechecked m ≤ 8 including the degree sequence. ∎
 
-Addendum (2026-10-15 ~6:55am EDT): m = 12 added from `prepare 12` (same `eliminate` routine that reproduced the m = 11 filter survivor counts). This is a single exact run; the second, independent `filter 12 orbit` run had not finished at write-up and is a cross-check, not an input.
+Addendum (2026-10-15 ~6:55am EDT): m = 12 added from `prepare 12` (same `eliminate` routine that reproduced the m = 11 filter survivor counts). This is a single exact run; the second, independent `filter 12 orbit` is a cross-check, not an input.
+
+Addendum (2026-10-15 ~10:00am EDT): independent `filter 12 orbit` finished EXIT:0 at 09:42:26 EDT (e=16, prefixes=256, degR=4094, time=17334.6s); surviving chain condition (p: count)={16: 133, 32: 56, 64: 29, 128: 17, 256: 13, 512: 5, 2048: 1, 4096: 2}, matching `prepare 12` exactly.
 
 #### Conjecture (open)
 
@@ -1373,7 +1375,7 @@ This extends the previous range 3 ≤ n ≤ 48 by one level. For n = 50 the open
 
 #### Still open
 
-- Residue conjecture for k ≥ 48 with k − 2^⌊log2 k⌋ ≥ 12. Next open lengths: 48, 49, …, 63 (excess 16–31), then 76 = 64 + 12.
+- Residue conjecture for k ≥ 48 with k − 2^⌊log2 k⌋ ≥ 12. Next open lengths: 48, 49, …, 63 (excess 16–31); among excess-12 lengths, k = 76 and k = 140 are already certified S ≠ 0 (see excess m = 12 Progress), with k = 268, 524, 2060, 4108 still pending certification toward excess ≤ 12 (not claimed).
 - Exact h_n for n ≥ 50.
 - **Pending, not claimed (2026-10-15 ~9:05am EDT, hourly routine)**: unchanged reduced walk `scripts/residue_orbits_gf2_64.c` started with KMAX = 48 (`validate` at KMAX = 24 passed; binary `/workspace/scratch-res/walk48` byte-identical to walk47, sha256 1b35db9d…f451; log `/workspace/scratch-res/repo_orbits_k48.log`, start 09:05:49 EDT; OMP_NUM_THREADS = 2). Expect ~2× the k = 47 wall (~3 h). No S = 0 count at k = 48 yet; range stays 3 ≤ n ≤ 49 until the walk finishes with zeros = 0.
 
@@ -1402,7 +1404,7 @@ Consequence of the elimination lemma (proved): for m = 12, S_{p+12} ∉ GF(2^p),
 
 #### Pending (not claimed)
 
-Exact `lift rep` zero counts at the eight surviving lengths k = 28, 44, 76, 140, 268, 524, 2060, 4108. Runs started 06:54 EDT (logs `/workspace/scratch-res/lifted_rep_m12_p{P}.log`). Excess ≤ 12 becomes a theorem only when every one of them reports S = 0 count 0. Note k = 28 and k = 44 are already covered by the reduced walk (k ≤ 47), so those two serve as controls.
+Exact `lift rep` zero counts at the eight surviving lengths k = 28, 44, 76, 140, 268, 524, 2060, 4108. Runs started 06:54 EDT (logs `/workspace/scratch-res/lifted_rep_m12_p{P}.log`). As of ~10:00am EDT, finished with S = 0 count 0 at k = 28, 44, 76, 140, 268; still pending k = 524, 2060 (running) and k = 4108 (not started). Excess ≤ 12 becomes a theorem only when every one of them reports S = 0 count 0. Note k = 28 and k = 44 are already covered by the reduced walk (k ≤ 47), so those two serve as controls.
 
 #### Progress (2026-10-15 ~7:58am EDT, hourly routine; still not claimed as excess ≤ 12)
 
@@ -1419,6 +1421,21 @@ Exact `lift rep` results that have finished (EXIT:0, logs `/workspace/scratch-re
 - Finite exact computation + elimination/lifted-`direct` lemmas: S_76 ≠ 0 and S_140 ≠ 0 for every chain. Neither is the smallest open length 48, so the h_n range is unchanged.
 - Still running at 7:58am EDT: k = 268 (p = 256, restarted 07:53), k = 524 (p = 512) and k = 2060 (p = 2048) since 07:13; k = 4108 (p = 4096) queued after 2048. Excess ≤ 12 remains **pending** until those four report S = 0 count 0.
 - Status check 2026-10-15 ~9:05am EDT (hourly routine): p = 256, 512, 2048 still running (logs hold only start timestamps; no S = 0 line yet); `filter 12 orbit` still empty; p = 4096 not started (CPU). Excess ≤ 12 still **not** claimed. Separately, the KMAX = 48 reduced walk was started (see "exact check to k = 47" Still open); it does not close excess 12.
+
+#### Progress (2026-10-15 ~10:00am EDT, hourly routine; still not claimed as excess ≤ 12)
+
+Independent filter cross-check finished EXIT:0 at 09:42:26 EDT (`/workspace/scratch-res/repo_filter_m12.log`):
+
+- `filter m=12 e=16 prefixes=256 degR=4094` power-of-two-degree factors (p: count)={16: 512, 32: 111, 64: 60, 128: 27, 256: 17, 512: 7, 2048: 1, 4096: 2, 8192: 1}; surviving chain condition (p: count)={16: 133, 32: 56, 64: 29, 128: 17, 256: 13, 512: 5, 2048: 1, 4096: 2}; time=17334.6s. Matches `prepare 12` survivors exactly (including p = 4096: 2). Cross-check only; not an input to the deg R lemma.
+
+Exact `lift rep` at k = 268 finished EXIT:0 at 09:24:33 EDT (`/workspace/scratch-res/lifted_rep_m12_p256.log`):
+
+| k | p | surviving factors | chains examined | S ∈ GF(2^p) | S = 0 | time |
+|---|---|---|---|---|---|---|
+| 268 | 256 | 13 | 106496 | 26 | 0 | 6578.3 s |
+
+- Finite exact computation + elimination/lifted-`direct` lemmas: S_268 ≠ 0 for every chain.
+- Still pending toward excess ≤ 12: k = 524 (p = 512) and k = 2060 (p = 2048) `lift rep` still running; k = 4108 (p = 4096) **not started** this run (CPU already has walk48 + two lifts). Excess ≤ 12 still **not** claimed.
 
 #### Range
 

@@ -1,5 +1,17 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-15 ~10:00am EDT / hourly routine: excess m = 12 filter done + lift k = 268)
+
+Dated 2026-10-15 (America/New_York).
+
+- Record current before this run: head 3da6173; excess ≤ 11 theorem; deg R = 2^m − 2 for m ≤ 12 (finite exact); S_k ≠ 0 for k ≤ 47; exact h_n for 3 ≤ n ≤ 49; smallest open length 48; excess m = 12 lift rep S = 0 count 0 at k = 28, 44, 76, 140; k = 268, 524, 2060 pending; k = 4108 not started; `filter 12 orbit` was still empty at the prior write-up.
+- **Exact finite computation (A)**: independent `scripts/check_residue_p_plus_m.py filter 12 orbit` finished EXIT:0 at 09:42:26 EDT: `filter m=12 e=16 prefixes=256 degR=4094` power-of-two-degree factors (p: count)={16: 512, 32: 111, 64: 60, 128: 27, 256: 17, 512: 7, 2048: 1, 4096: 2, 8192: 1}; surviving chain condition (p: count)={16: 133, 32: 56, 64: 29, 128: 17, 256: 13, 512: 5, 2048: 1, 4096: 2}; time=17334.6s. Matches `prepare 12` survivors exactly (including p = 4096: 2). Scratch `/workspace/scratch-res/repo_filter_m12.log`.
+- **Exact finite computation (B)**: `scripts/check_residue_lifted.py lift … 256 rep` at m = 12 finished EXIT:0 at 09:24:33 EDT: `lift[rep] k=268 (p=256, m=12, orbit reps): surviving factors=13, roots used=13, chains examined=106496, with S in GF(2^p)=26, with S = 0: 0, time=6578.3s`. Scratch `/workspace/scratch-res/lifted_rep_m12_p256.log`.
+- **Consequence (finite computation + recorded lemmas)**: S_268 ≠ 0 for every chain. Together with elimination + prior lifts this leaves only k = 524, 2060, 4108 as excess-12 lengths not yet certified.
+- **Pending, not claimed**: `lift rep` still running at k = 524 (p = 512) and k = 2060 (p = 2048); k = 4108 (p = 4096) not started this run (CPU already has walk48 + two lifts). Excess ≤ 12 is **not** a theorem yet. Separately, the KMAX = 48 reduced walk is still running (no result yet); range unchanged.
+- Range unchanged: exact h_n for 3 ≤ n ≤ 49; smallest open length 48 = 32 + 16. Still open: residue conjecture for k ≥ 48 with excess ≥ 12 (excess 12 partially closed); deg R conjecture for m ≥ 13.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Progress this run (2026-10-15 ~9:03am EDT / hourly routine: reduced walk KMAX = 48 started)
 
 Dated 2026-10-15 (America/New_York).
