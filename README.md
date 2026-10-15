@@ -1322,7 +1322,7 @@ Define the max A_1-coefficient degree of a tower element by reading all nested (
 
 | claim | status | evidence |
 |---|---|---|
-| deg R = 2^m − 2 on every checked prefix | **theorem for m ≤ 11 (finite exact)** | this run: all prefixes for 1 ≤ m ≤ 6 and orbit prefixes for m = 7, 8 (`filter` / instrumented `eliminate`); m = 9, 10, 11 orbit already recorded (deg R = 510, 1022, 2046) |
+| deg R = 2^m − 2 on every checked prefix | **theorem for m ≤ 12 (finite exact)** | all prefixes for 1 ≤ m ≤ 6 and orbit prefixes for m = 7, 8 (`filter` / instrumented `eliminate`); m = 9, 10, 11 orbit already recorded (deg R = 510, 1022, 2046); m = 12 orbit (256 prefixes) from `scripts/check_residue_lifted.py prepare 12` (2026-10-15, EXIT:0, deg R = 4094 on every prefix, `assert not R.is_zero()` passed). The independent `check_residue_p_plus_m.py filter 12 orbit` cross-check was still running at write-up |
 | d_0 = m − 1 and the recurrence d_r = 2 d_{r−1} − (m − r − 1) | **exact for m ≤ 8** | all prefixes m ≤ 6; orbit m = 7, 8; zero mismatches |
 | R ∈ GF(2^e)[x²] (equivalently R′ = 0 in char 2) | **exact for m ≤ 8** | all prefixes m ≤ 6; orbit m = 7, 8; no odd-power coefficients |
 
@@ -1330,13 +1330,15 @@ Supporting commands (light CPU; does not run heavy lifts): `scripts/check_residu
 
 #### Lemma (partial)
 
-For every m with 1 ≤ m ≤ 11 and every prefix used by the recorded `filter` runs (all 2^m prefixes when that was how `filter` was run; one Frobenius-orbit representative per prefix orbit when `orbit` was used), the elimination polynomial satisfies deg R = 2^m − 2 and R ≠ 0.
+For every m with 1 ≤ m ≤ 12 and every prefix used by the recorded `filter` runs (for m = 12, the orbit prefixes of `prepare 12`) (all 2^m prefixes when that was how `filter` was run; one Frobenius-orbit representative per prefix orbit when `orbit` was used), the elimination polynomial satisfies deg R = 2^m − 2 and R ≠ 0.
 
 Proof. Finite exact computation as in the table; the m ≤ 10 nonzero claim and the m = 11 filter line were already recorded, and this run rechecked m ≤ 8 including the degree sequence. ∎
 
+Addendum (2026-10-15 ~6:55am EDT): m = 12 added from `prepare 12` (same `eliminate` routine that reproduced the m = 11 filter survivor counts). This is a single exact run; the second, independent `filter 12 orbit` run had not finished at write-up and is a cross-check, not an input.
+
 #### Conjecture (open)
 
-For every m ≥ 2 and every admissible chain prefix in GF(2^e) with e = 2^⌈log2(m+1)⌉, deg R = 2^m − 2. Equivalently (given the checked pattern), d_0 = m − 1 and the norm recurrence above hold for every m. No counterexample is known; a uniform proof is not claimed.
+For every m ≥ 2 and every admissible chain prefix in GF(2^e) with e = 2^⌈log2(m+1)⌉, deg R = 2^m − 2 (open for m ≥ 13). Equivalently (given the checked pattern), d_0 = m − 1 and the norm recurrence above hold for every m. No counterexample is known; a uniform proof is not claimed.
 
 #### Still open
 
@@ -1361,6 +1363,8 @@ Dated 2026-10-15 (America/New_York), ~5:30am EDT / hourly locked-kernel routine.
 
 The unchanged program scripts/residue_orbits_gf2_64.c (no diff against the committed source; a fresh `gcc -O3 -march=native -fopenmp` build is byte-identical to the binary that ran, sha256 1b35db9d…f451) was run with KMAX = 47 (`validate` at KMAX = 24 passed first). It printed `ok` with zeros = 0 at every depth 1 ≤ k ≤ 47, with exactly 2^{k−⌈log₂(k+1)⌉} reduced chains at each depth; at k = 47 that is `reduced_chains=2199023255552` (= 2^41), orbit size 64, covering all 2^47 chains. Exit status 0; wall time 93 min 48 s, 374.7 user CPU-minutes (the box was shared with other jobs). Last line of the log at 05:29:51 EDT. Scratch log `/workspace/scratch-res/repo_orbits_k47.log` (not vendored, prior practice).
 
+- Supporting only (not an input): an independent sampled walk (`/workspace/scratch-res/indep_orbits_sample.c`, stride 64 over reduced chains, offsets 0, 37, 63; finished 06:01–06:06 EDT) also reports zeros = 0 at every k ≤ 47 (2^35 nodes per offset at k = 47). It covers 3/64 of the reduced chains and is a consistency check of the full walk, not a second proof.
+
 #### Corollary (theorem plus finite exact computation)
 
 S_k ≠ 0 for every chain when 1 ≤ k ≤ 47, and (by the recorded theorems) whenever k − 2^⌊log2 k⌋ ≤ 11. The smallest open length is now k = 48 = 32 + 16 (excess 16). A coincidental hit at level n needs an open k ≤ n − 2 with n − k even. For n = 49 that would be an odd k ≤ 47, and none is open, so a hit needs n ≥ 50. Hence for 3 ≤ n ≤ 49 there are no coincidental hits, and
@@ -1375,6 +1379,37 @@ This extends the previous range 3 ≤ n ≤ 48 by one level. For n = 50 the open
 #### Not a consequence
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
+
+### Residue condition: excess m = 12 (partial: elimination + survivors; lifts pending)
+
+Dated 2026-10-15 (America/New_York), ~6:55am EDT / hourly locked-kernel routine. Same method as "Residue condition: excess m=11, lifted form of `direct` (2026-10-15)". This subsection does **not** prove excess ≤ 12.
+
+#### Assumptions
+
+- The elimination lemma and the lifted-`direct` lemma recorded for m ≤ 11 (no new assumption). e = 16 for m = 12 (e = 2^⌈log2 13⌉).
+- Exact finite-field arithmetic (python-flint). No literature opened; no novelty claimed.
+
+#### Exact finite computation
+
+`scripts/check_residue_lifted.py prepare 12 /workspace/scratch-res/lifted_m12.json` finished EXIT:0 at 06:01:38 EDT (256 orbit prefixes; 192 computed in the final call after a resumed cache; 1776.0 s for that call):
+
+- R ≠ 0 on every prefix (the script asserts this), deg R = 4094 = 2^12 − 2 on every prefix.
+- Power-of-two-degree factors (p: count) = {16: 512, 32: 111, 64: 60, 128: 27, 256: 17, 512: 7, 2048: 1, 4096: 2, 8192: 1}.
+- Surviving chain condition (p: count) = {16: 133, 32: 56, 64: 29, 128: 17, 256: 13, 512: 5, 2048: 1, 4096: 2}. No factor survives at p = 1024 or p = 8192.
+
+Consequence of the elimination lemma (proved): for m = 12, S_{p+12} ∉ GF(2^p), hence S_{p+12} ≠ 0, for every power of two p > 12 outside {16, 32, 64, 128, 256, 512, 2048, 4096}. In particular S_k ≠ 0 for k = 1036 (p = 1024) and k = 8204 (p = 8192), and for every k = 2^j + 12 with 2^j ≥ 16384.
+
+#### Pending (not claimed)
+
+Exact `lift rep` zero counts at the eight surviving lengths k = 28, 44, 76, 140, 268, 524, 2060, 4108. Runs started 06:54 EDT (logs `/workspace/scratch-res/lifted_rep_m12_p{P}.log`). Excess ≤ 12 becomes a theorem only when every one of them reports S = 0 count 0. Note k = 28 and k = 44 are already covered by the reduced walk (k ≤ 47), so those two serve as controls.
+
+#### Range
+
+Unchanged: smallest open length 48 = 32 + 16; exact h_n for 3 ≤ n ≤ 49. Closing excess 12 would not move that range (48 has excess 16).
+
+#### Not a consequence
+
+Does not select W; no continuum limit, force, stress, or momentum.
 
 ---
 

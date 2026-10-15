@@ -1,5 +1,18 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-15 ~6:55am EDT / hourly routine: excess m = 12 elimination; deg R lemma to m ≤ 12)
+
+Dated 2026-10-15 (America/New_York).
+
+- Record current before this run: head 759170d; excess ≤ 11 theorem; deg R = 2^m − 2 theorem for m ≤ 11; S_k ≠ 0 for k ≤ 47; exact h_n for 3 ≤ n ≤ 49; smallest open length 48.
+- **Exact finite computation**: `scripts/check_residue_lifted.py prepare 12` finished EXIT:0 at 06:01:38 EDT (256 orbit prefixes, e = 16). R ≠ 0 on every prefix (asserted), deg R = 4094 = 2^12 − 2 on every prefix. Surviving chain condition (p: count) = {16: 133, 32: 56, 64: 29, 128: 17, 256: 13, 512: 5, 2048: 1, 4096: 2}; none at p = 1024 or 8192. Scratch `/workspace/scratch-res/lifted_m12.json`, `/workspace/scratch-res/lifted_prepare_m12.log`.
+- **Lemma extended (finite exact)**: deg R = 2^m − 2 and R ≠ 0 on every checked prefix for m ≤ 12 (was m ≤ 11). Conjecture for m ≥ 13 unchanged. The independent `filter 12 orbit` run (since 05:13 EDT) is a pending cross-check, not an input. README "degree of the elimination polynomial R".
+- **Proved consequence (elimination lemma)**: S_{p+12} ≠ 0 for every power of two p > 12 outside {16, 32, 64, 128, 256, 512, 2048, 4096}, e.g. k = 1036 and k = 8204. README "excess m = 12 (partial …)".
+- **Pending, not claimed**: `lift rep` S = 0 counts at k = 28, 44, 76, 140, 268, 524, 2060, 4108, started 06:54 EDT (logs `/workspace/scratch-res/lifted_rep_m12_p{P}.log`). Excess ≤ 12 is **not** proved until all eight report 0. k = 28 and 44 are already covered by the k ≤ 47 walk and act as controls.
+- Supporting only: three independent sampled walks (stride 64, offsets 0, 37, 63) report zeros = 0 for every k ≤ 47; recorded in README "exact check to k = 47" as a consistency check.
+- Range unchanged: exact h_n for 3 ≤ n ≤ 49; smallest open length 48 = 32 + 16. Still open: residue conjecture for k ≥ 48 with excess ≥ 12; deg R conjecture for m ≥ 13.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Proved this run (2026-10-15 ~4:51am EDT / hourly routine: k = 47 walk closed; excess m = 12 filter started)
 
 Dated 2026-10-15 (America/New_York).
