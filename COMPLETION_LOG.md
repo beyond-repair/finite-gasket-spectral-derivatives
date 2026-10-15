@@ -1,5 +1,20 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-15 ~1:55–2:30pm EDT / hourly routine: deg-R structural checks through m = 12)
+
+Dated 2026-10-15 (America/New_York).
+
+- Record current before this run: head 87ae4e6; excess ≤ 11 theorem; deg R = 2^m − 2 for m ≤ 12 (finite exact); d_0 = m − 1 / recurrence and R ∈ GF(2^e)[x²] exact only for m ≤ 8; S_k ≠ 0 for k ≤ 47; exact h_n for 3 ≤ n ≤ 49; excess m = 12 lift rep S = 0 count 0 at k = 28, 44, 76, 140, 268, 524; k = 2060 running, k = 4108 queued; walk48 and prepare 13 running.
+- **Assumptions**: locked K = ω²I − WL (ω = 1, λ_max = 6, K > 0 iff W < 1/6); the elimination tower A_1 = GF(2^e)[x], A_i = A_{i−1}[α_i]/(α_i² + α_i + β_i), G and R = N_2(⋯N_m(G)⋯) exactly as in `scripts/check_residue_p_plus_m.py eliminate`; Frobenius orbit reduction of prefixes for m ≥ 7 as already used by `filter … orbit` / `prepare`. No continuum, force, stress, momentum, or selected W.
+- **Exact finite computation**: new `scripts/check_degR_structure.py M [workers [cache]]` runs the repo's `eliminate` unchanged, wrapping only `make_ring` so each relative norm records the max GF(2^e)-degree over all nested (a, b) components (d_0 before N_m; d_r after N_{m−r+1}). Mismatches are counted, not asserted. Results, all with zero mismatches on every counter (d0, rec, closed, degR, Rzero, odd, len):
+  - m = 2…6 all prefixes (4, 8, 16, 32, 64); m = 7…11 orbit prefixes (16, 16, 32, 64, 128): log `/workspace/scratch-res/degR_structure_m2_11.log` (13:58–14:02:50 EDT, EXIT:0; m = 11 225.3s).
+  - m = 12 orbit prefixes (256), 2 workers: `degR-structure m=12 e=16 orbit=True prefixes=256 … observed_seqs={[11, 12, 15, 22, 37, 68, 131, 258, 513, 1024, 2047, 4094]: 256} degR=[4094] mismatches={all 0} sum_prefix_time=1402.6s wall=703.2s`, EXIT:0 at 14:10:15 EDT. Log `/workspace/scratch-res/indep_degR_m12.log`; per-prefix cache `/workspace/scratch-res/degR_structure_m12.d/`.
+  - Cross-check (not an input): the earlier separate scratch checker `/workspace/scratch-res/indep_degR.py` (log `/workspace/scratch-res/indep_degR.log`) already gave deg R exact, R ≠ 0, no odd coefficients for m ≤ 11.
+- **Lemma status**: finite exact statements on the recorded prefixes — for 2 ≤ m ≤ 12, d_0 = m − 1, d_r = 2 d_{r−1} − (m − r − 1) at every step (so d_{m−1} = deg R = 2^m − 2), and R ∈ GF(2^e)[x²]. Strict extension of the written record from m ≤ 8 to m ≤ 12 for both structural claims. deg R = 2^m − 2 range unchanged (already m ≤ 12). Not a uniform proof; no structural explanation of evenness or of the leading-term cancellation is claimed.
+- **Pending, not claimed**: `check_degR_structure.py 13` (512 orbit prefixes, 2 workers, nice 10, cache `/workspace/scratch-res/degR_structure_m13.d`, log `/workspace/scratch-res/degR_structure_m13.log`) started ~2:12pm EDT; at ~2:15pm EDT 10/512 prefixes done, every one with the predicted sequence ending 8190 and no odd coefficients — **partial, no m = 13 claim**. `prepare 13` (pid ~517804) still running, 49/512 prefixes cached; not used. walk48 KMAX = 48 (pid ~348412) still running, log holds only the start timestamp. `lift rep` p = 2048 (k = 2060, pid ~261337) still running, log holds only the start timestamp; k = 4108 still queued behind it. Excess ≤ 12 **not** claimed.
+- Range unchanged: exact h_n for 3 ≤ n ≤ 49; S_k ≠ 0 for k ≤ 47. Still open: proof of d_0 = m − 1 / the recurrence / evenness for general m; deg R conjecture for m ≥ 13; excess ≤ 12 (pending k = 2060, 4108); residue conjecture for k ≥ 48.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Progress this run (2026-10-15 ~12:02pm EDT / hourly routine: excess m=12 lift k=524)
 
 Dated 2026-10-15 (America/New_York).
