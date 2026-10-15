@@ -1,5 +1,17 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-15 ~2:30am EDT / hourly routine: lifted `direct`, excess m=11 at p=256)
+
+Dated 2026-10-15 (America/New_York).
+
+- Record current before this run: head 92ad7bd; excess ≤ 10 is a theorem; excess 11 had filter + directs through p = 128; directs at p = 256, 512, 1024 pending. The `direct 11 256 orbit` run had been killed by box restarts (one at ≈ 02:01 EDT during this run); its log was empty.
+- **Lemma (recorded in README "Residue condition: excess m=11, lifted form of `direct` (2026-10-15)")**: the chains counted by `direct` are exactly those attached to roots of the factors that `filter` reports as surviving (uses only the recorded elimination lemma), and by the action of Frobenius^e one root per surviving factor decides whether S = 0 occurs. New script scripts/check_residue_lifted.py (`prepare`, `lift all|rep|verify`; resumable per-prefix cache).
+- **Controls (exact)**: `prepare 11` reproduces the 2026-10-09 filter survivor counts; `lift all` reproduces the recorded `direct` counts in 10 small cases (m = 3..7, p ≤ 32), at m=7 p=256 (k=263), and at m=11 p = 16, 32, 64, 128 (p=128: 1170 s vs 11769 s); `verify` at m=11 p = 32, 64 finds equal per-root counts (4096, 2, 0) within every factor.
+- **Exact finite computation**: m=11, p=256 (k=267), `rep`: 5 factors, 20480 chains, 10 with S ∈ GF(2^p), **0 with S = 0**. So S_267 ≠ 0 on every chain.
+- **Pending (do not claim excess ≤ 11)**: p=512 (k=523) and p=1024 (k=1035) `rep` runs in progress at write-up.
+- Range unchanged: smallest open length 47; exact h_n for 3 ≤ n ≤ 48.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Progress this run (2026-10-09 ~3:55am EDT / hourly routine: excess m=11 filter + directs through p=128)
 
 Dated 2026-10-09 (America/New_York), first run of the day (hourly locked-kernel routine, Phase A documentation only).

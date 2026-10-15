@@ -1240,6 +1240,63 @@ Directs at p=256 (k=267), p=512 (k=523), p=1024 (k=1035). Until those S = 0 coun
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim a theorem for all excess-11 lengths.
 
 
+### Residue condition: excess m=11, lifted form of `direct` (2026-10-15)
+
+Dated 2026-10-15 (America/New_York), ~2:30am EDT / hourly locked-kernel routine. This subsection adds an equivalent, faster form of the `direct` count and records its controls and its m = 11 results. It is **progress / exact finite computation**. Whether excess ≤ 11 is closed is stated only in the table below, from completed runs.
+
+Why a new form: the box restarted (≈ 02:01 EDT this run, and earlier), killing the long `direct 11 256 orbit` run each time; its scratch log `repo_direct_m11_p256.log` never received a result. `direct` recomputes R over GF(2^(2p)) and scans its roots there; at p = 256 that is many hours.
+
+#### Assumptions
+
+- Everything in "Residue condition: lengths 2^j + m for 3 ≤ m ≤ 10 (elimination over a fixed field)", in particular: on a chain with S_{p+m} ∈ GF(2^p), α_1 is a root of R ∈ GF(2^e)[x] in GF(2^p), c = z_1(α_1² + α_1) = z_{p−1} has degree exactly p, and the chain condition N^(p−1−m)(c) = z_m holds.
+- Exact finite-field arithmetic (python-flint 0.9.0). No literature opened; no novelty claimed. S_W is not an input. No value of W is selected.
+
+#### Lemma (reduction used by scripts/check_residue_lifted.py)
+
+1. Restriction to surviving factors. Since c ∈ GF(2^e)(α_1) has degree p, α_1 has degree exactly p/e over GF(2^e), so it is a root of an irreducible factor f of R over GF(2^e) with deg f = p/e; evaluation at a root of f is injective on GF(2^e)[x]/(f), so the chain condition at the root is equivalent to the condition modulo f that `filter` tests. Hence the chains counted by `direct` are exactly those attached to roots of the factors `filter` reports as surviving. R is therefore computed once over GF(2^e) and only surviving factors are mapped into GF(2^(2p)) by a field embedding GF(2^e) → GF(2^(2p)) (a root of the defining polynomial of GF(2^e)). The set of chains does not depend on the embedding up to a field automorphism, which preserves "S = 0" and "S ∈ GF(2^p)".
+2. One root per factor. σ = Frobenius^e fixes GF(2^e) pointwise, hence the prefix z_1..z_m and the coefficients of f; it permutes the roots of the irreducible f transitively; it maps the chains attached to a root r (all chains with c = z_1(r² + r)) bijectively onto those attached to σ(r), because the chain relations are defined over F_2; and it maps S to σ(S). So S = 0 occurs on a chain attached to some root of f iff it occurs on one attached to any single root. Mode `rep` uses one root per surviving factor; mode `verify` uses every root and asserts the per-root counts agree within each factor.
+
+Proof of both points: as stated; only the recorded elimination lemma and the Galois action are used.
+
+#### Exact finite computation (scripts/check_residue_lifted.py)
+
+`prepare 11` (orbit prefixes, e = 16, 128 prefixes, per-prefix cache so a restart resumes): R ≠ 0 on every prefix, deg R = 2046; power-of-two-degree factors and surviving chain-condition counts are identical to the 2026-10-09 `filter` line ({16: 66, 32: 24, 64: 21, 128: 6, 256: 5, 512: 3, 1024: 1}).
+
+Positive controls of `lift` (mode `all`, chains deduplicated by c) against recorded `direct` counts (adm_c, chains, S ∈ GF(2^p), S = 0):
+
+| case | `direct` (recorded) | `lift all` (this run) |
+|---|---|---|
+| m=3,4,5,6,7, p ≤ 32 (10 cases) | as printed | identical in all 10 |
+| m=7, p=256 (k=263) | 32, 8192, 64, 0 | 32, 8192, 64, 0 |
+| m=11, p=16 (k=27) | 65, 266240, 132, 0 | 65, 266240, 132, 0 |
+| m=11, p=32 (k=43) | 48, 196608, 96, 0 | 48, 196608, 96, 0 |
+| m=11, p=64 (k=75) | 84, 344064, 168, 0 | 84, 344064, 168, 0 |
+| m=11, p=128 (k=139) | 48, 196608, 96, 0 | 48, 196608, 96, 0 (1170 s vs 11769 s) |
+
+Equivariance check (`verify`, every root, no deduplication): m=7, p=32: per-root counts equal within each factor; m=11, p=32 (24 factors of degree 2): every root gives (4096 chains, 2 with S ∈ GF(2^p), 0 with S = 0).
+m=11, p=64 (21 factors of degree 4): every root gives (4096, 2, 0).
+
+m = 11 at the pending lengths (`rep`, one root per surviving factor):
+
+| p | k = p+11 | surviving factors | roots used | chains | S ∈ GF(2^p) | S = 0 | time (s) |
+|---|---|---|---|---|---|---|---|
+| 256 | 267 | 5 | 5 | 20480 | 10 | 0 | 863.4 |
+| 512 | 523 | 3 | — | — | — | pending | running |
+| 1024 | 1035 | 1 | — | — | — | pending | running |
+
+Scratch logs: `/workspace/scratch-res/lifted_*.log`, cache `lifted_m11.json.d/` (not vendored, prior practice).
+
+#### Status for excess 11
+
+- Exact finite computation: S_k ≠ 0 on every chain for k = 267 (p = 256), by the lemma above plus the `rep` count; together with the 2026-10-09 directs (and their `lift all` reproductions) this covers k = 27, 43, 75, 139, 267.
+- Pending: k = 523 (p = 512) and k = 1035 (p = 1024), runs in progress at write-up. Until both S = 0 counts are 0, **excess ≤ 11 is not proved**.
+- Unchanged: smallest open length 47 = 32 + 15; exact h_n for 3 ≤ n ≤ 48 only. Closing excess 11 would not move that range (47 has excess 15).
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum.
+
+
 ---
 
 <div align="center">
