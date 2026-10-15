@@ -1271,6 +1271,7 @@ Positive controls of `lift` (mode `all`, chains deduplicated by c) against recor
 | m=11, p=32 (k=43) | 48, 196608, 96, 0 | 48, 196608, 96, 0 |
 | m=11, p=64 (k=75) | 84, 344064, 168, 0 | 84, 344064, 168, 0 |
 | m=11, p=128 (k=139) | 48, 196608, 96, 0 | 48, 196608, 96, 0 (1170 s vs 11769 s) |
+| m=8, p=512 (k=520), `rep` | 32, 16384, 64, 0 (orbit `direct`, 9069.6 s) | 32, 16384, 64, 0 (5704.8 s; added 2026-10-15 ~3:56am EDT) |
 
 Equivariance check (`verify`, every root, no deduplication): m=7, p=32: per-root counts equal within each factor; m=11, p=32 (24 factors of degree 2): every root gives (4096 chains, 2 with S ∈ GF(2^p), 0 with S = 0).
 m=11, p=64 (21 factors of degree 4): every root gives (4096, 2, 0).
@@ -1290,6 +1291,7 @@ Scratch logs: `/workspace/scratch-res/lifted_*.log`, cache `lifted_m11.json.d/` 
 - Exact finite computation: S_k ≠ 0 on every chain for every surviving p of m = 11, by the lemma above plus the `rep` / `direct` counts: k = 27, 43, 75, 139, 267, 523, 1035 (S = 0 count 0 in every case).
 - **Theorem (excess ≤ 11).** For every j and every chain, S_k ≠ 0 when k = 2^j + m with 2^j > m and 0 ≤ m ≤ 11. More precisely: with the earlier lemmas for excess 0, 1, 2 and the elimination theorem for 3 ≤ m ≤ 10, it remains only to treat m = 11; the filter gives surviving p ∈ {16, 32, 64, 128, 256, 512, 1024}, and every corresponding `direct` / `lift rep` S = 0 count is zero. Proof structure identical to the m ≤ 10 theorem (elimination lemma + finite survivors + exact zeros).
 - Unchanged range: smallest open length still 47 = 32 + 15 (excess 15); exact h_n for 3 ≤ n ≤ 48 only. Closing excess 11 does **not** move that range.
+- Pending, not claimed (2026-10-15 ~3:56am EDT): the unchanged Frobenius-reduced walk `scripts/residue_orbits_gf2_64.c` was started with KMAX = 47 (2^41 reduced chains in GF(2^64); `validate` at KMAX = 24 passed first). If it reports zero S = 0 at k = 47, the smallest open length becomes 48 and exact h_n extends to 3 ≤ n ≤ 49; until then the range stays 3 ≤ n ≤ 48. Scratch log `/workspace/scratch-res/repo_orbits_k47.log`.
 
 #### Not a consequence
 
