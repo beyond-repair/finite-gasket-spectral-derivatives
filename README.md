@@ -1175,7 +1175,7 @@ Mode `filter m` computes R for every prefix (all 2^m prefixes for m ≤ 8; one p
 | 9 | 16 | 32 (orbit reps) | 510 | 16, 32, 64, 128, 256 |
 | 10 | 16 | 64 (orbit reps) | 1022 | 16, 32, 64, 128, 256 |
 
-(The m = 2 row reproduces the ninth run: only p = 4 survives. deg R = 2^m − 2 on every prefix checked, m ≤ 10; a numerical observation, not proved. For m = 11 filter + directs through p = 128, see the following subsection "Residue condition: excess m=11 (partial: filter + directs through p=128)"; not a theorem for all excess 11.)
+(The m = 2 row reproduces the ninth run: only p = 4 survives. deg R = 2^m − 2 on every prefix checked through m = 11; see "Residue condition: degree of the elimination polynomial R" for the partial lemma / conjecture status. For m = 11 filter + directs through p = 128, see the following subsection; excess ≤ 11 is a theorem after the 2026-10-15 lifted completes.)
 
 Mode `direct m P` enumerates, in GF(2^{2P}), every chain of length P + m whose α_1 is a root of R lying in GF(2^P) and whose c satisfies the chain condition; by the lemma this contains every chain with S_{P+m} ∈ GF(2^P), so its count of S = 0 is exact. Positive control: for k = 6, 7, 11, 12, 13, 14, 15 a naive enumeration of all 2^k chains gives 8, 0, 32, 0, 48, 32, 176 chains with S_k ∈ GF(2^p), equal to the `direct` counts (k = 6, 11, 13, 14, 15 are the fifth run's failures of the subfield test). Results of `direct` (this run, scripts/check_residue_p_plus_m.py): no chain has S = 0 at k = 13, 14, 15, 21, 22, 23, 38, 39, 71, 72, 73, 136, 137, 264. Supporting orbit-reduced counts from the same algorithm (scratch logs matching the overlapping lengths above): S = 0 also at k = 263, 265, 520, 74, 138, 266. In every case some chains have S ∈ GF(2^p) (nonzero), so the subfield test alone does not prove these lengths.
 
@@ -1189,11 +1189,11 @@ With the earlier lemmas (m = 0, 1, 2), S_k ≠ 0 for every k with k − 2^⌊log
 
 #### Pending
 
-None for 3 ≤ m ≤ 10. Partial m = 11 progress (filter + directs through p = 128) is recorded in the next subsection; directs at p = 256, 512, 1024 remain open, so excess ≤ 11 is not proved.
+None for 3 ≤ m ≤ 10. Excess m = 11 is closed in the later subsections "Residue condition: excess m=11 (partial: filter + directs through p=128)" and "Residue condition: excess m=11, lifted form of `direct` (2026-10-15)" (theorem: excess ≤ 11).
 
 #### Still open
 
-- Residue conjecture for k ≥ 47 with k − 2^⌊log2 k⌋ ≥ 11: Σ_{i=1}^k 1/z_i ≠ 0 for every chain. Not proved, and no counterexample is known. The smallest open length stays 47 = 32 + 15, so exact h_n remains proved only for 3 ≤ n ≤ 48.
+- Residue conjecture for k ≥ 47 with k − 2^⌊log2 k⌋ ≥ 12: Σ_{i=1}^k 1/z_i ≠ 0 for every chain. Not proved, and no counterexample is known. The smallest open length stays 47 = 32 + 15, so exact h_n remains proved only for 3 ≤ n ≤ 48.
 - A uniform version: the method needs, for each m, a nonzero R on every prefix and a finite surviving set; m ranges up to p − 1, so no fixed list of m covers all k.
 
 #### Not a consequence
@@ -1202,7 +1202,7 @@ This subsection does not select W, does not state a continuum limit, a force, a 
 
 ### Residue condition: excess m=11 (partial: filter + directs through p=128)
 
-Dated 2026-10-09 (America/New_York), ~3:55am EDT / hourly locked-kernel routine (Phase A documentation). This subsection records **progress / exact finite computation** for excess m = 11. It does **not** claim a theorem that S_k ≠ 0 for every chain with excess ≤ 11. Survivors p = 256, 512, 1024 still need `direct` counts. Range of exact h_n is unchanged.
+Dated 2026-10-09 (America/New_York), ~3:55am EDT / hourly locked-kernel routine (Phase A documentation). This subsection records the filter and directs through p = 128 for excess m = 11. Survivors p = 256, 512, 1024 were completed later by the lifted form (2026-10-15); excess ≤ 11 is now a theorem (see "Residue condition: excess m=11, lifted form of `direct` (2026-10-15)"). Range of exact h_n is unchanged.
 
 #### Assumptions
 
@@ -1226,23 +1226,22 @@ Mode `direct 11 P orbit` (exact S = 0 count among chains with S ∈ GF(2^P) on t
 
 All four EXIT:0. Scratch: `/workspace/scratch-res/repo_direct_m11_p{16,32,64,128}.log` (not vendored). In every completed case some chains have S ∈ GF(2^p) (nonzero), so the subfield test alone does not prove these lengths.
 
-#### Pending
+#### Pending (resolved 2026-10-15)
 
-Directs at p=256 (k=267), p=512 (k=523), p=1024 (k=1035). Until those S = 0 counts are 0, **excess ≤ 11 is not proved**. At the time of this write-up, `direct 11 256 orbit` was still running; p=512 and p=1024 were not started. Do not read this subsection as a Theorem for m = 11.
+As of this 2026-10-09 write-up, directs at p=256, 512, 1024 were open. They were completed by the lifted form on 2026-10-15 (all S = 0 counts 0); see the next subsection. Excess ≤ 11 is a theorem there.
 
 #### Still open
 
-- Residue conjecture for k ≥ 47 with k − 2^⌊log2 k⌋ ≥ 11 (equivalently, after closing m = 11 survivors and higher excesses). Smallest open length still 47; exact h_n for 3 ≤ n ≤ 48 only.
-- Full excess ≤ 11 as a theorem: blocked on the three pending directs above.
+- Residue conjecture for k ≥ 47 with k − 2^⌊log2 k⌋ ≥ 12. Smallest open length still 47; exact h_n for 3 ≤ n ≤ 48 only.
 
 #### Not a consequence
 
-This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim a theorem for all excess-11 lengths.
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum.
 
 
 ### Residue condition: excess m=11, lifted form of `direct` (2026-10-15)
 
-Dated 2026-10-15 (America/New_York), ~2:30am EDT / hourly locked-kernel routine. This subsection adds an equivalent, faster form of the `direct` count and records its controls and its m = 11 results. It is **progress / exact finite computation**. Whether excess ≤ 11 is closed is stated only in the table below, from completed runs.
+Dated 2026-10-15 (America/New_York), ~2:30am EDT / hourly locked-kernel routine; table and status updated ~3:37am EDT when p = 512 and p = 1024 finished. This subsection adds an equivalent, faster form of the `direct` count and records its controls and its m = 11 results. With both pending rows complete (S = 0 count 0), excess ≤ 11 is a **theorem** (see Status).
 
 Why a new form: the box restarted (≈ 02:01 EDT this run, and earlier), killing the long `direct 11 256 orbit` run each time; its scratch log `repo_direct_m11_p256.log` never received a result. `direct` recomputes R over GF(2^(2p)) and scans its roots there; at p = 256 that is many hours.
 
@@ -1281,21 +1280,70 @@ m = 11 at the pending lengths (`rep`, one root per surviving factor):
 | p | k = p+11 | surviving factors | roots used | chains | S ∈ GF(2^p) | S = 0 | time (s) |
 |---|---|---|---|---|---|---|---|
 | 256 | 267 | 5 | 5 | 20480 | 10 | 0 | 863.4 |
-| 512 | 523 | 3 | — | — | — | pending | running |
-| 1024 | 1035 | 1 | — | — | — | pending | running |
+| 512 | 523 | 3 | 3 | 12288 | 6 | 0 | 4494.2 |
+| 1024 | 1035 | 1 | 1 | 4096 | 2 | 0 | 3145.2 |
 
 Scratch logs: `/workspace/scratch-res/lifted_*.log`, cache `lifted_m11.json.d/` (not vendored, prior practice).
 
 #### Status for excess 11
 
-- Exact finite computation: S_k ≠ 0 on every chain for k = 267 (p = 256), by the lemma above plus the `rep` count; together with the 2026-10-09 directs (and their `lift all` reproductions) this covers k = 27, 43, 75, 139, 267.
-- Pending: k = 523 (p = 512) and k = 1035 (p = 1024), runs in progress at write-up. Until both S = 0 counts are 0, **excess ≤ 11 is not proved**.
-- Unchanged: smallest open length 47 = 32 + 15; exact h_n for 3 ≤ n ≤ 48 only. Closing excess 11 would not move that range (47 has excess 15).
+- Exact finite computation: S_k ≠ 0 on every chain for every surviving p of m = 11, by the lemma above plus the `rep` / `direct` counts: k = 27, 43, 75, 139, 267, 523, 1035 (S = 0 count 0 in every case).
+- **Theorem (excess ≤ 11).** For every j and every chain, S_k ≠ 0 when k = 2^j + m with 2^j > m and 0 ≤ m ≤ 11. More precisely: with the earlier lemmas for excess 0, 1, 2 and the elimination theorem for 3 ≤ m ≤ 10, it remains only to treat m = 11; the filter gives surviving p ∈ {16, 32, 64, 128, 256, 512, 1024}, and every corresponding `direct` / `lift rep` S = 0 count is zero. Proof structure identical to the m ≤ 10 theorem (elimination lemma + finite survivors + exact zeros).
+- Unchanged range: smallest open length still 47 = 32 + 15 (excess 15); exact h_n for 3 ≤ n ≤ 48 only. Closing excess 11 does **not** move that range.
 
 #### Not a consequence
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum.
 
+### Residue condition: degree of the elimination polynomial R
+
+Dated 2026-10-15 (America/New_York), ~3:26am EDT / hourly locked-kernel routine (Priority B). This subsection records a **partial lemma** and a **conjecture** about deg R for the elimination polynomial of scripts/check_residue_p_plus_m.py / check_residue_lifted.py. It does not select W. (Excess ≤ 11 was proved separately on this same run from the completed lifts.)
+
+#### Assumptions
+
+- Everything in "Residue condition: lengths 2^j + m for 3 ≤ m ≤ 10 (elimination over a fixed field)": the tower A_1 = GF(2^e)[x], A_i = A_{i−1}[α_i]/(α_i² + α_i + β_i), G ∈ A_m, R = N_2(⋯N_m(G)⋯) ∈ GF(2^e)[x], and e = 2^⌈log2(m+1)⌉.
+- Exact finite-field arithmetic (python-flint). No literature opened; no novelty claimed.
+
+#### Derivation (what is proved vs checked)
+
+A_m is free of rank 2^{m−1} over A_1. The iterated relative norm R equals the determinant of multiplication-by-G as an A_1-linear endomorphism of A_m. Hence if every A_1-coefficient of G in the monomial α-basis has degree ≤ d, then deg R ≤ d · 2^{m−1}. This is a general upper bound only; the observed degree is much sharper.
+
+Define the max A_1-coefficient degree of a tower element by reading all nested (a, b) components down to A_1. For the specific G of `eliminate`, exact checks give a rigid degree sequence under successive norms N_m, …, N_2:
+
+- d_0 := max A_1-coeff degree of G equals m − 1;
+- d_r = 2 d_{r−1} − (m − r − 1) for r = 1, …, m − 1;
+- closed form for r ≥ 1: d_r = 2^{r+1} + m − r − 3, so d_{m−1} = 2^m − 2.
+
+(The recurrence is an algebraic identity once the two bullets hold; it is not itself a proof that those bullets hold for every m.)
+
+#### Exact finite computation
+
+| claim | status | evidence |
+|---|---|---|
+| deg R = 2^m − 2 on every checked prefix | **theorem for m ≤ 11 (finite exact)** | this run: all prefixes for 1 ≤ m ≤ 6 and orbit prefixes for m = 7, 8 (`filter` / instrumented `eliminate`); m = 9, 10, 11 orbit already recorded (deg R = 510, 1022, 2046) |
+| d_0 = m − 1 and the recurrence d_r = 2 d_{r−1} − (m − r − 1) | **exact for m ≤ 8** | all prefixes m ≤ 6; orbit m = 7, 8; zero mismatches |
+| R ∈ GF(2^e)[x²] (equivalently R′ = 0 in char 2) | **exact for m ≤ 8** | all prefixes m ≤ 6; orbit m = 7, 8; no odd-power coefficients |
+
+Supporting commands (light CPU; does not run heavy lifts): `scripts/check_residue_p_plus_m.py filter M` / `filter M orbit`.
+
+#### Lemma (partial)
+
+For every m with 1 ≤ m ≤ 11 and every prefix used by the recorded `filter` runs (all 2^m prefixes when that was how `filter` was run; one Frobenius-orbit representative per prefix orbit when `orbit` was used), the elimination polynomial satisfies deg R = 2^m − 2 and R ≠ 0.
+
+Proof. Finite exact computation as in the table; the m ≤ 10 nonzero claim and the m = 11 filter line were already recorded, and this run rechecked m ≤ 8 including the degree sequence. ∎
+
+#### Conjecture (open)
+
+For every m ≥ 2 and every admissible chain prefix in GF(2^e) with e = 2^⌈log2(m+1)⌉, deg R = 2^m − 2. Equivalently (given the checked pattern), d_0 = m − 1 and the norm recurrence above hold for every m. No counterexample is known; a uniform proof is not claimed.
+
+#### Still open
+
+- A proof of d_0 = m − 1 and of the leading-term cancellation that produces d_r = 2 d_{r−1} − (m − r − 1) for general m (the crude determinant bound with d = m − 1 only gives deg R ≤ (m − 1) 2^{m−1}).
+- Whether R ∈ GF(2^e)[x²] for all m (checked through m = 8).
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that deg R = 2^m − 2 is a classical theorem.
 
 ---
 

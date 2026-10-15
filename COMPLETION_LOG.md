@@ -1,5 +1,19 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Proved this run (2026-10-15 ~3:37am EDT / hourly routine: excess ≤ 11 theorem + deg R partial)
+
+Dated 2026-10-15 (America/New_York).
+
+- Record current before this run: head e821373; excess ≤ 10 theorem; excess 11 had filter + lifts through p = 256 (S=0 count 0); p = 512 and p = 1024 `rep` lifts were already running (left alone).
+- **Exact finite computation (Priority A)**: both pending `lift rep` runs finished EXIT:0 with S = 0 count 0.
+  - p=512 (k=523): `lift[rep] k=523 (p=512, m=11, orbit reps): surviving factors=3, roots used=3, chains examined=12288, with S in GF(2^p)=6, with S = 0: 0, time=4494.2s per-factor (chains, S in GF, S=0) for one root=[(4096, 2, 0), (4096, 2, 0), (4096, 2, 0)]` — scratch `/workspace/scratch-res/lifted_rep_m11_p512.log`.
+  - p=1024 (k=1035): `lift[rep] k=1035 (p=1024, m=11, orbit reps): surviving factors=1, roots used=1, chains examined=4096, with S in GF(2^p)=2, with S = 0: 0, time=3145.2s per-factor (chains, S in GF, S=0) for one root=[(4096, 2, 0)]` — scratch `/workspace/scratch-res/lifted_rep_m11_p1024.log`.
+- **Theorem**: S_k ≠ 0 for every chain whenever k − 2^⌊log2 k⌋ ≤ 11. Proof structure as for excess ≤ 10: elimination lemma (R ≠ 0, finite surviving p) + exact zero counts at every surviving (m, p) with m ≤ 11 (prior directs / lifts for m ≤ 10 and for m = 11 at p ∈ {16,32,64,128,256}; this run for p ∈ {512,1024}). First lengths newly covered by a proof include 523 and 1035 (among others already listed for m ≤ 10).
+- **Partial lemma (Priority B, deg R)**: README "Residue condition: degree of the elimination polynomial R". deg R = 2^m − 2 is a theorem for m ≤ 11 by finite exact check; the same identity for all m ≥ 2 remains a conjecture. Structural exact checks (m ≤ 8): d_0 = m − 1, d_r = 2 d_{r−1} − (m − r − 1), R ∈ GF(2^e)[x²]. No counterexample found.
+- Range unchanged: smallest open length still 47 = 32 + 15 (excess 15); exact h_n for 3 ≤ n ≤ 48. Closing excess 11 does **not** move that range.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
+
 ## Progress this run (2026-10-15 ~2:30am EDT / hourly routine: lifted `direct`, excess m=11 at p=256)
 
 Dated 2026-10-15 (America/New_York).
