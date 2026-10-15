@@ -1271,7 +1271,7 @@ Positive controls of `lift` (mode `all`, chains deduplicated by c) against recor
 | m=11, p=32 (k=43) | 48, 196608, 96, 0 | 48, 196608, 96, 0 |
 | m=11, p=64 (k=75) | 84, 344064, 168, 0 | 84, 344064, 168, 0 |
 | m=11, p=128 (k=139) | 48, 196608, 96, 0 | 48, 196608, 96, 0 (1170 s vs 11769 s) |
-| m=8, p=512 (k=520), `rep` | 32, 16384, 64, 0 (orbit `direct`, 9069.6 s) | 32, 16384, 64, 0 (5704.8 s; added 2026-10-15 ~3:56am EDT) |
+| m=8, p=512 (k=520) | 32, 16384, 64, 0 (orbit `direct`, 9069.6 s) | 32, 16384, 64, 0 (5704.8 s; added 2026-10-15 ~3:56am EDT) |
 
 Equivariance check (`verify`, every root, no deduplication): m=7, p=32: per-root counts equal within each factor; m=11, p=32 (24 factors of degree 2): every root gives (4096 chains, 2 with S ∈ GF(2^p), 0 with S = 0).
 m=11, p=64 (21 factors of degree 4): every root gives (4096, 2, 0).
