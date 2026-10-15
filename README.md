@@ -1375,7 +1375,7 @@ This extends the previous range 3 ≤ n ≤ 48 by one level. For n = 50 the open
 
 #### Still open
 
-- Residue conjecture for k ≥ 48 with k − 2^⌊log2 k⌋ ≥ 12. Next open lengths: 48, 49, …, 63 (excess 16–31); among excess-12 lengths, k = 76 and k = 140 are already certified S ≠ 0 (see excess m = 12 Progress), with k = 268, 524, 2060, 4108 still pending certification toward excess ≤ 12 (not claimed).
+- Residue conjecture for k ≥ 48 with k − 2^⌊log2 k⌋ ≥ 12. Next open lengths: 48, 49, …, 63 (excess 16–31); among excess-12 lengths, k = 76, 140, 268, and 524 are already certified S ≠ 0 (see excess m = 12 Progress), with k = 2060 and 4108 still pending certification toward excess ≤ 12 (not claimed).
 - Exact h_n for n ≥ 50.
 - **Pending, not claimed (2026-10-15 ~9:05am EDT, hourly routine)**: unchanged reduced walk `scripts/residue_orbits_gf2_64.c` started with KMAX = 48 (`validate` at KMAX = 24 passed; binary `/workspace/scratch-res/walk48` byte-identical to walk47, sha256 1b35db9d…f451; log `/workspace/scratch-res/repo_orbits_k48.log`, start 09:05:49 EDT; OMP_NUM_THREADS = 2). Expect ~2× the k = 47 wall (~3 h). No S = 0 count at k = 48 yet; range stays 3 ≤ n ≤ 49 until the walk finishes with zeros = 0.
 
@@ -1404,7 +1404,7 @@ Consequence of the elimination lemma (proved): for m = 12, S_{p+12} ∉ GF(2^p),
 
 #### Pending (not claimed)
 
-Exact `lift rep` zero counts at the eight surviving lengths k = 28, 44, 76, 140, 268, 524, 2060, 4108. Runs started 06:54 EDT (logs `/workspace/scratch-res/lifted_rep_m12_p{P}.log`). As of ~10:00am EDT, finished with S = 0 count 0 at k = 28, 44, 76, 140, 268; still pending k = 524, 2060 (running) and k = 4108 (not started). Excess ≤ 12 becomes a theorem only when every one of them reports S = 0 count 0. Note k = 28 and k = 44 are already covered by the reduced walk (k ≤ 47), so those two serve as controls.
+Exact `lift rep` zero counts at the eight surviving lengths k = 28, 44, 76, 140, 268, 524, 2060, 4108. Runs started 06:54 EDT (logs `/workspace/scratch-res/lifted_rep_m12_p{P}.log`). As of ~12:02pm EDT, finished with S = 0 count 0 at k = 28, 44, 76, 140, 268, 524; still pending k = 2060 (running) and k = 4108 (queued after 2048, not live). Excess ≤ 12 becomes a theorem only when every one of them reports S = 0 count 0. Note k = 28 and k = 44 are already covered by the reduced walk (k ≤ 47), so those two serve as controls.
 
 #### Progress (2026-10-15 ~7:58am EDT, hourly routine; still not claimed as excess ≤ 12)
 
@@ -1435,7 +1435,19 @@ Exact `lift rep` at k = 268 finished EXIT:0 at 09:24:33 EDT (`/workspace/scratch
 | 268 | 256 | 13 | 106496 | 26 | 0 | 6578.3 s |
 
 - Finite exact computation + elimination/lifted-`direct` lemmas: S_268 ≠ 0 for every chain.
-- Still pending toward excess ≤ 12: k = 524 (p = 512) and k = 2060 (p = 2048) `lift rep` still running; k = 4108 (p = 4096) **not started** this run (CPU already has walk48 + two lifts). Excess ≤ 12 still **not** claimed.
+- As of that write-up, still pending toward excess ≤ 12: k = 524 (p = 512) and k = 2060 (p = 2048) `lift rep` still running; k = 4108 (p = 4096) not started. (Superseded for k = 524 by the ~12:02pm Progress below.)
+
+#### Progress (2026-10-15 ~12:02pm EDT, hourly routine; still not claimed as excess ≤ 12)
+
+Exact `lift rep` at k = 524 finished EXIT:0 at 11:50:52 EDT (`/workspace/scratch-res/lifted_rep_m12_p512.log`):
+
+| k | p | surviving factors | chains examined | S ∈ GF(2^p) | S = 0 | time |
+|---|---|---|---|---|---|---|
+| 524 | 512 | 5 | 40960 | 10 | 0 | 17764.6 s |
+
+- Finite exact computation + elimination/lifted-`direct` lemmas: S_524 ≠ 0 for every chain.
+- Still pending toward excess ≤ 12: k = 2060 (p = 2048) `lift rep` still running (pid ~261337); k = 4108 (p = 4096) **queued** sequentially behind p2048 via existing parent `run 2048 4096` (pid ~261330) — not live yet; no parallel duplicate started under load. Excess ≤ 12 still **not** claimed.
+- walk48 (KMAX = 48) still running (pid ~348412; log holds only start timestamp). Range unchanged.
 
 #### Range
 

@@ -1,5 +1,17 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-15 ~12:02pm EDT / hourly routine: excess m=12 lift k=524)
+
+Dated 2026-10-15 (America/New_York).
+
+- Record current before this run: head 1484af6; excess ≤ 11 theorem; deg R = 2^m − 2 for m ≤ 12 (finite exact); S_k ≠ 0 for k ≤ 47; exact h_n for 3 ≤ n ≤ 49; smallest open length 48; excess m = 12 filter EXIT:0; lift rep S = 0 count 0 at k = 28, 44, 76, 140, 268; k = 524 / 2060 / 4108 pending; walk48 and p2048 still running.
+- **Assumptions**: locked K = ω²I − WL (ω = 1, λ_max = 6, K > 0 iff W < 1/6); elimination lemma and lifted-`direct` lemma as already recorded. No continuum, force, stress, momentum, or selected W.
+- **Exact finite computation**: `scripts/check_residue_lifted.py lift … 512 rep` at m = 12 finished EXIT:0 between 06:54:46 and 11:50:52 EDT: `lift[rep] k=524 (p=512, m=12, orbit reps): surviving factors=5, roots used=5, chains examined=40960, with S in GF(2^p)=10, with S = 0: 0, time=17764.6s per-factor (chains, S in GF, S=0) for one root=[(8192, 2, 0), (8192, 2, 0), (8192, 2, 0), (8192, 2, 0), (8192, 2, 0)]`. Scratch `/workspace/scratch-res/lifted_rep_m12_p512.log`.
+- **Consequence (finite computation + recorded lemmas)**: S_524 ≠ 0 for every chain. Together with elimination + prior lifts this leaves only k = 2060 and k = 4108 as excess-12 lengths not yet certified.
+- **Pending, not claimed**: `lift rep` at k = 2060 (p = 2048) still running (pid ~261337 since 07:22 EDT; log `/workspace/scratch-res/lifted_rep_m12_p2048.log` holds only the start timestamp). k = 4108 (p = 4096) is **queued** sequentially behind p2048 via the existing parent `bash -c 'run 2048 4096'` (pid ~261330); not live yet; no parallel duplicate started (load already high: walk48 + p2048). Excess ≤ 12 is **not** a theorem yet. Separately, the KMAX = 48 reduced walk is still running (pid ~348412; log `/workspace/scratch-res/repo_orbits_k48.log` still holds only the start timestamp; prints only at end).
+- Range unchanged: exact h_n for 3 ≤ n ≤ 49; smallest open length 48 = 32 + 16. Still open: residue conjecture for k ≥ 48 with excess ≥ 12 (excess 12 partially closed); deg R conjecture for m ≥ 13.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Progress this run (2026-10-15 ~10:00am EDT / hourly routine: excess m = 12 filter done + lift k = 268)
 
 Dated 2026-10-15 (America/New_York).
