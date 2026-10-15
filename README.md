@@ -1402,7 +1402,7 @@ This extends the previous range 3 ≤ n ≤ 48 by one level. For n = 50 the open
 
 - Residue conjecture for k ≥ 48 with k − 2^⌊log2 k⌋ ≥ 12. Next open lengths: 48, 49, …, 63 (excess 16–31); among excess-12 lengths, k = 76, 140, 268, and 524 are already certified S ≠ 0 (see excess m = 12 Progress), with k = 2060 and 4108 still pending certification toward excess ≤ 12 (not claimed).
 - Exact h_n for n ≥ 50.
-- **Pending, not claimed (2026-10-15 ~9:05am EDT, hourly routine)**: unchanged reduced walk `scripts/residue_orbits_gf2_64.c` started with KMAX = 48 (`validate` at KMAX = 24 passed; binary `/workspace/scratch-res/walk48` byte-identical to walk47, sha256 1b35db9d…f451; log `/workspace/scratch-res/repo_orbits_k48.log`, start 09:05:49 EDT; OMP_NUM_THREADS = 2). Expect ~2× the k = 47 wall (~3 h). No S = 0 count at k = 48 yet; range stays 3 ≤ n ≤ 49 until the walk finishes with zeros = 0.
+- Pending at 9:05am EDT, **resolved 2026-10-15 ~4:28pm EDT** (zero S = 0 at k = 48; see "Residue condition: exact check to k = 48 (2026-10-15)"): the unchanged reduced walk `scripts/residue_orbits_gf2_64.c` was started with KMAX = 48 (`validate` at KMAX = 24 passed; binary `/workspace/scratch-res/walk48` byte-identical to walk47, sha256 1b35db9d…f451; log `/workspace/scratch-res/repo_orbits_k48.log`, start 09:05:49 EDT; OMP_NUM_THREADS = 2) and finished EXIT:0 at 16:28:53 EDT. Exact h_n for n = 50 is now proved there; the two items above are superseded by its "Still open" list (k ≥ 49; n ≥ 51).
 
 #### Not a consequence
 
@@ -1472,15 +1472,50 @@ Exact `lift rep` at k = 524 finished EXIT:0 at 11:50:52 EDT (`/workspace/scratch
 
 - Finite exact computation + elimination/lifted-`direct` lemmas: S_524 ≠ 0 for every chain.
 - Still pending toward excess ≤ 12: k = 2060 (p = 2048) `lift rep` still running (pid ~261337); k = 4108 (p = 4096) **queued** sequentially behind p2048 via existing parent `run 2048 4096` (pid ~261330) — not live yet; no parallel duplicate started under load. Excess ≤ 12 still **not** claimed.
-- walk48 (KMAX = 48) still running (pid ~348412; log holds only start timestamp). Range unchanged.
+- walk48 (KMAX = 48) still running (pid ~348412; log holds only start timestamp). Range unchanged. (Superseded: walk48 finished EXIT:0 at 16:28:53 EDT with zeros = 0 at every k ≤ 48; see "exact check to k = 48".)
 
 #### Range
 
 Unchanged: smallest open length 48 = 32 + 16; exact h_n for 3 ≤ n ≤ 49. Closing excess 12 would not move that range (48 has excess 16).
 
+Update (2026-10-15 ~4:30pm EDT): moved by the reduced walk, not by excess 12. After the KMAX = 48 walk (see "exact check to k = 48"), the smallest open length is 49 = 32 + 17 and exact h_n holds for 3 ≤ n ≤ 50. Closing excess 12 would still not move that range (49 has excess 17).
+
 #### Not a consequence
 
 Does not select W; no continuum limit, force, stress, or momentum.
+
+### Residue condition: exact check to k = 48 (2026-10-15)
+
+Dated 2026-10-15 (America/New_York), ~4:28–5:00pm EDT / locked-kernel routine. This subsection adds one length to the exact finite check. It proves no new infinite family.
+
+#### Assumptions
+
+- Everything in "Residue condition: Frobenius orbit reduction and exact check to k = 45", "exact check to k = 46" and "exact check to k = 47": chains z_0 = 1, z_i² + z_i = z_{i−1}, S_k = Σ_{i=1}^k 1/z_i, the orbit lemma, and the fact that every chain of length k ≤ 63 lies in GF(2^64).
+- The two-adic reduction theorem: a coincidental hit at level n ≥ 3 needs some k with 1 ≤ k ≤ n − 2, n − k even, and a chain with S_k = 0.
+- No literature was opened this run, and no novelty is claimed. S_W is not an input. No value of W is selected.
+
+#### Exact finite verification (1 ≤ k ≤ 48)
+
+The unchanged program scripts/residue_orbits_gf2_64.c (no diff against the committed source since 172f122; a fresh `gcc -O3 -march=native -fopenmp` build is byte-identical to the binary that ran, `/workspace/scratch-res/walk48`, sha256 1b35db9d…f451, the same binary as walk47) was run with KMAX = 48 (`validate` at KMAX = 24 passed first, `/workspace/scratch-res/repo_orbits_k48_validate.log`). It printed `ok` with zeros = 0 at every depth 1 ≤ k ≤ 48, with exactly 2^{k−⌈log₂(k+1)⌉} reduced chains and orbit size 2^{⌈log₂(k+1)⌉} at each depth (checked line by line against the log); at k = 48 that is `reduced_chains=4398046511104` (= 2^42), orbit size 64, covering all 2^48 chains. Exit status 0; start 09:05:49 EDT, last line 16:28:53 EDT, wall about 7 h 23 min with OMP_NUM_THREADS = 2 (the box was shared with the m = 12 lifts and `prepare 13`; no CPU-time line was recorded). Scratch log `/workspace/scratch-res/repo_orbits_k48.log` (not vendored, prior practice).
+
+- No independent sampled walk was run at k = 48. The k = 47 sampled consistency check is not extended here.
+
+#### Corollary (theorem plus finite exact computation)
+
+S_k ≠ 0 for every chain when 1 ≤ k ≤ 48, and (by the recorded theorems) whenever k − 2^⌊log2 k⌋ ≤ 11. The smallest open length is now k = 49 = 32 + 17 (excess 17). A coincidental hit at level n needs an open k ≤ n − 2 with n − k even. For n = 50 that would be an even k ≤ 48, and none is open, so a hit needs n ≥ 51. Hence for 3 ≤ n ≤ 50 there are no coincidental hits, and
+    h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3)   exactly.
+This extends the previous range 3 ≤ n ≤ 49 by one level. For n = 51 the open odd length k = 49 is not excluded, so the range stops at 50.
+
+#### Still open
+
+- Residue conjecture for k ≥ 49 with k − 2^⌊log2 k⌋ ≥ 12. Next open lengths: 49, 50, …, 63 (excess 17–31); among excess-12 lengths, k = 76, 140, 268, and 524 are already certified S ≠ 0 (see excess m = 12 Progress), with k = 2060 (`lift rep` p = 2048 still running, no S = 0 line yet) and k = 4108 (queued behind it, not live) still pending. Excess ≤ 12 is **not** claimed.
+- Exact h_n for n ≥ 51.
+- deg R = 2^m − 2 (and the d_0 / recurrence / evenness checks) unchanged: exact for 2 ≤ m ≤ 13, conjecture for m ≥ 14. `prepare 13` still running (~147/512 orbit prefixes cached at ~4:57pm EDT); not used.
+- No KMAX = 49 walk was started this run (CPU in use by `lift rep` p = 2048 and the `prepare 13` workers).
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
 
 ---
 

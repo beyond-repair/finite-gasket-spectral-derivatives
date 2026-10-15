@@ -1,5 +1,18 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Proved this run (2026-10-15 ~4:28–5:00pm EDT / locked-kernel routine: k = 48 walk closed)
+
+Dated 2026-10-15 (America/New_York).
+
+- Record current before this run: head adab35f; excess ≤ 11 theorem; deg R = 2^m − 2, d_0 = m − 1 / recurrence and R ∈ GF(2^e)[x²] exact for 2 ≤ m ≤ 13; S_k ≠ 0 for k ≤ 47; exact h_n for 3 ≤ n ≤ 49; smallest open length 48; excess m = 12 lift rep S = 0 count 0 at k = 28, 44, 76, 140, 268, 524; k = 2060 running, k = 4108 queued; walk48 and `prepare 13` running.
+- **Assumptions**: locked K = ω²I − WL (ω = 1, λ_max = 6, K > 0 iff W < 1/6); two-adic reduction theorem and Frobenius orbit lemma as already recorded. No continuum, force, stress, momentum, or selected W.
+- **Exact finite computation**: the unchanged reduced walk `scripts/residue_orbits_gf2_64.c` with KMAX = 48 finished EXIT:0 at 16:28:53 EDT (started 09:05:49 EDT; ~7 h 23 min wall, OMP_NUM_THREADS = 2, box shared with lifts): `k=48 reduced_chains=4398046511104 orbit_size=64 chains_covered=2^48 zeros=0 ok`, and zeros = 0 at every k ≤ 48 (48 `ok` lines; reduced-chain and orbit counts match 2^{k−⌈log₂(k+1)⌉} / 2^{⌈log₂(k+1)⌉} at every k). `validate` KMAX = 24 passed first (`/workspace/scratch-res/repo_orbits_k48_validate.log`). Source has no diff since 172f122; a fresh `gcc -O3 -march=native -fopenmp` build is byte-identical to the binary that ran (`walk48`, sha256 1b35db9d…f451, same as walk47). Scratch `/workspace/scratch-res/repo_orbits_k48.log`.
+- **Corollary (theorem + finite computation)**: S_k ≠ 0 for every chain when 1 ≤ k ≤ 48. Smallest open length is now 49 = 32 + 17. By the two-adic reduction theorem (for n = 50 only even k ≤ 48 could give a hit, and none is open), exact h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3) for **3 ≤ n ≤ 50** (was 3 ≤ n ≤ 49). For n = 51 the open odd length 49 is not excluded. README "Residue condition: exact check to k = 48 (2026-10-15)".
+- No independent sampled walk at k = 48 (the k = 47 sampled consistency check is not extended). No KMAX = 49 walk started (CPU in use).
+- **Pending, not claimed**: excess m = 12 `lift rep` at k = 2060 (p = 2048, pid ~261337) still running, log holds only the start timestamp; k = 4108 (p = 4096) still queued behind it (parent pid ~261330). Excess ≤ 12 is **not** a theorem. `prepare 13` (pid ~517804) still running, ~147/512 orbit prefixes cached; not used.
+- Unchanged: deg R claims (exact for 2 ≤ m ≤ 13; conjecture for m ≥ 14). Still open: residue conjecture for k ≥ 49 with excess ≥ 12 (excess 12 partially closed); exact h_n for n ≥ 51; excess ≤ 12; excess-13 filter.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Progress this run (2026-10-15 ~2:55–3:10pm EDT / hourly routine: deg-R structural checks at m = 13)
 
 Dated 2026-10-15 (America/New_York).
