@@ -1403,6 +1403,21 @@ Consequence of the elimination lemma (proved): for m = 12, S_{p+12} ∉ GF(2^p),
 
 Exact `lift rep` zero counts at the eight surviving lengths k = 28, 44, 76, 140, 268, 524, 2060, 4108. Runs started 06:54 EDT (logs `/workspace/scratch-res/lifted_rep_m12_p{P}.log`). Excess ≤ 12 becomes a theorem only when every one of them reports S = 0 count 0. Note k = 28 and k = 44 are already covered by the reduced walk (k ≤ 47), so those two serve as controls.
 
+#### Progress (2026-10-15 ~7:58am EDT, hourly routine; still not claimed as excess ≤ 12)
+
+Exact `lift rep` results that have finished (EXIT:0, logs `/workspace/scratch-res/lifted_rep_m12_p{P}.log`):
+
+| k | p | surviving factors | chains examined | S ∈ GF(2^p) | S = 0 | time |
+|---|---|---|---|---|---|---|
+| 28 | 16 | 133 | 1089536 | 270 | 0 | 352.5 s |
+| 44 | 32 | 56 | 458752 | 112 | 0 | 779.7 s |
+| 76 | 64 | 29 | 237568 | 58 | 0 | 420.9 s |
+| 140 | 128 | 17 | 139264 | 34 | 0 | 855.1 s |
+
+- k = 28 and k = 44 agree with the reduced walk (S_k ≠ 0 for k ≤ 47): controls, no new length.
+- Finite exact computation + elimination/lifted-`direct` lemmas: S_76 ≠ 0 and S_140 ≠ 0 for every chain. Neither is the smallest open length 48, so the h_n range is unchanged.
+- Still running at 7:58am EDT: k = 268 (p = 256, restarted 07:53), k = 524 (p = 512) and k = 2060 (p = 2048) since 07:13; k = 4108 (p = 4096) queued after 2048. Excess ≤ 12 remains **pending** until those four report S = 0 count 0.
+
 #### Range
 
 Unchanged: smallest open length 48 = 32 + 16; exact h_n for 3 ≤ n ≤ 49. Closing excess 12 would not move that range (48 has excess 16).

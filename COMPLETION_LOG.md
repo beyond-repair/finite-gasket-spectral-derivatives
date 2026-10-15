@@ -1,5 +1,16 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-15 ~7:58am EDT / hourly routine: excess m = 12 lifts, first four lengths)
+
+Dated 2026-10-15 (America/New_York).
+
+- Record current before this run: head 6b19128; excess ≤ 11 theorem; deg R = 2^m − 2 for m ≤ 12 (finite exact); S_k ≠ 0 for k ≤ 47; exact h_n for 3 ≤ n ≤ 49; smallest open length 48.
+- **Exact finite computation**: `scripts/check_residue_lifted.py lift … rep` at m = 12 finished EXIT:0 with S = 0 count 0 at k = 28 (p = 16; 133 factors, 1089536 chains), k = 44 (p = 32; 56 factors, 458752 chains), k = 76 (p = 64; 29 factors, 237568 chains), k = 140 (p = 128; 17 factors, 139264 chains). k = 28 and 44 agree with the k ≤ 47 walk (controls).
+- **Consequence (finite computation + recorded lemmas)**: S_76 ≠ 0 and S_140 ≠ 0 for every chain. Together with the elimination result this leaves k = 268, 524, 2060, 4108 as the only excess-12 lengths not yet certified.
+- **Pending, not claimed**: `lift rep` at k = 268 (restarted 07:53 EDT), 524 and 2060 (since 07:13 EDT), and 4108 (queued). The independent `filter 12 orbit` cross-check (since 05:32 EDT) has no output yet. Excess ≤ 12 is **not** a theorem yet.
+- Range unchanged: exact h_n for 3 ≤ n ≤ 49; smallest open length 48 = 32 + 16. Still open: residue conjecture for k ≥ 48 with excess ≥ 12 (excess 12 partially closed); deg R conjecture for m ≥ 13.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Progress this run (2026-10-15 ~6:55am EDT / hourly routine: excess m = 12 elimination; deg R lemma to m ≤ 12)
 
 Dated 2026-10-15 (America/New_York).
