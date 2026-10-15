@@ -1322,15 +1322,15 @@ Define the max A_1-coefficient degree of a tower element by reading all nested (
 
 | claim | status | evidence |
 |---|---|---|
-| deg R = 2^m − 2 on every checked prefix | **theorem for m ≤ 12 (finite exact)** | all prefixes for 1 ≤ m ≤ 6 and orbit prefixes for m = 7, 8 (`filter` / instrumented `eliminate`); m = 9, 10, 11 orbit already recorded (deg R = 510, 1022, 2046); m = 12 orbit (256 prefixes) from `scripts/check_residue_lifted.py prepare 12` (2026-10-15, EXIT:0, deg R = 4094 on every prefix, `assert not R.is_zero()` passed). Independent `check_residue_p_plus_m.py filter 12 orbit` finished EXIT:0 at 09:42:26 EDT with the same degR=4094 and the same survivor dict (cross-check, not an input) |
-| d_0 = m − 1 and the recurrence d_r = 2 d_{r−1} − (m − r − 1) (hence d_{m−1} = 2^m − 2) | **exact for 2 ≤ m ≤ 12 (finite exact)** | all prefixes 2 ≤ m ≤ 6; orbit prefixes m = 7, …, 12 (16, 16, 32, 64, 128, 256 prefixes); `scripts/check_degR_structure.py M` (2026-10-15); zero mismatches; every prefix has exactly the predicted sequence (e.g. m = 12: [11, 12, 15, 22, 37, 68, 131, 258, 513, 1024, 2047, 4094] on all 256) |
-| R ∈ GF(2^e)[x²] (equivalently R′ = 0 in char 2) | **exact for 2 ≤ m ≤ 12 (finite exact)** | same prefixes and run; 0 prefixes with a nonzero odd-index coefficient; R ≠ 0 and deg R = 2^m − 2 rechecked on every prefix |
+| deg R = 2^m − 2 on every checked prefix | **theorem for m ≤ 13 (finite exact)** | all prefixes for 1 ≤ m ≤ 6 and orbit prefixes for m = 7, 8 (`filter` / instrumented `eliminate`); m = 9, 10, 11 orbit already recorded (deg R = 510, 1022, 2046); m = 12 orbit (256 prefixes) from `scripts/check_residue_lifted.py prepare 12` (2026-10-15, EXIT:0, deg R = 4094 on every prefix, `assert not R.is_zero()` passed). Independent `check_residue_p_plus_m.py filter 12 orbit` finished EXIT:0 at 09:42:26 EDT with the same degR=4094 and the same survivor dict (cross-check, not an input). m = 13 orbit (512 prefixes) from `scripts/check_degR_structure.py 13` (2026-10-15, EXIT:0 15:07:30 EDT, deg R = 8190 and R ≠ 0 on every prefix; single run, no independent m = 13 cross-check yet) |
+| d_0 = m − 1 and the recurrence d_r = 2 d_{r−1} − (m − r − 1) (hence d_{m−1} = 2^m − 2) | **exact for 2 ≤ m ≤ 13 (finite exact)** | all prefixes 2 ≤ m ≤ 6; orbit prefixes m = 7, …, 13 (16, 16, 32, 64, 128, 256, 512 prefixes); `scripts/check_degR_structure.py M` (2026-10-15); zero mismatches; every prefix has exactly the predicted sequence (e.g. m = 12: [11, 12, 15, 22, 37, 68, 131, 258, 513, 1024, 2047, 4094] on all 256; m = 13: [12, 13, 16, 23, 38, 69, 132, 259, 514, 1025, 2048, 4095, 8190] on all 512) |
+| R ∈ GF(2^e)[x²] (equivalently R′ = 0 in char 2) | **exact for 2 ≤ m ≤ 13 (finite exact)** | same prefixes and run; 0 prefixes with a nonzero odd-index coefficient; R ≠ 0 and deg R = 2^m − 2 rechecked on every prefix |
 
 Supporting commands (light CPU; does not run heavy lifts): `scripts/check_residue_p_plus_m.py filter M` / `filter M orbit`; `scripts/check_degR_structure.py M [workers [cache_dir]]` (structural checks below).
 
 #### Lemma (partial)
 
-For every m with 1 ≤ m ≤ 12 and every prefix used by the recorded `filter` runs (for m = 12, the orbit prefixes of `prepare 12`) (all 2^m prefixes when that was how `filter` was run; one Frobenius-orbit representative per prefix orbit when `orbit` was used), the elimination polynomial satisfies deg R = 2^m − 2 and R ≠ 0.
+For every m with 1 ≤ m ≤ 13 and every prefix used by the recorded `filter` runs (for m = 12, the orbit prefixes of `prepare 12`; for m = 13, the 512 orbit prefixes of `chains(…, orbit=True)` run by `check_degR_structure.py 13`) (all 2^m prefixes when that was how `filter` was run; one Frobenius-orbit representative per prefix orbit when `orbit` was used), the elimination polynomial satisfies deg R = 2^m − 2 and R ≠ 0.
 
 Proof. Finite exact computation as in the table; the m ≤ 10 nonzero claim and the m = 11 filter line were already recorded, and this run rechecked m ≤ 8 including the degree sequence. ∎
 
@@ -1353,20 +1353,24 @@ Addendum (2026-10-15 ~2:15pm EDT, structural checks through m = 12). `scripts/ch
 | 10 | 16 | 64 (orbit) | [9, 10, 13, 20, 35, 66, 129, 256, 511, 1022] | 0 | 25.6s |
 | 11 | 16 | 128 (orbit) | [10, 11, 14, 21, 36, 67, 130, 257, 512, 1023, 2046] | 0 | 225.3s |
 | 12 | 16 | 256 (orbit) | [11, 12, 15, 22, 37, 68, 131, 258, 513, 1024, 2047, 4094] | 0 | 1402.6s CPU / 703.2s wall (2 workers), EXIT:0 14:10:15 EDT |
+| 13 | 16 | 512 (orbit) | [12, 13, 16, 23, 38, 69, 132, 259, 514, 1025, 2048, 4095, 8190] | 0 | 6344.5s CPU / 3177.4s wall (2 workers, nice 10), EXIT:0 15:07:30 EDT (added ~3:10pm EDT run) |
 
 "mismatches = 0" means all seven counters (d0, rec, closed, degR, Rzero, odd, len) are 0. An earlier scratch checker (`/workspace/scratch-res/indep_degR.py`, separate copy of the elimination, log `/workspace/scratch-res/indep_degR.log`) independently gave deg R exact, R ≠ 0 and no odd coefficients for m ≤ 11 (orbit for m ≥ 7); it is a cross-check, not an input. The orbit reduction is the one already used by `filter … orbit` / `prepare`: for m ≥ 7 the claims are on the orbit-representative prefixes, exactly as for deg R.
 
 Hence, as finite exact statements on the recorded prefixes: for 2 ≤ m ≤ 12, d_0 = m − 1, the recurrence holds at every step, and R ∈ GF(2^e)[x²]. No m = 13 claim: `check_degR_structure.py 13` (512 orbit prefixes, cache `/workspace/scratch-res/degR_structure_m13.d`, log `/workspace/scratch-res/degR_structure_m13.log`) was started at ~2:12pm EDT and was still running at write-up; the partial `prepare 13` cache is not used.
 
+Addendum (2026-10-15 ~3:10pm EDT, m = 13). `check_degR_structure.py 13 2 /workspace/scratch-res/degR_structure_m13.d` finished EXIT:0 at 15:07:30 EDT: `degR-structure m=13 e=16 orbit=True prefixes=512 (computed this call: 512) expected_seq=[12, 13, 16, 23, 38, 69, 132, 259, 514, 1025, 2048, 4095, 8190] observed_seqs={[12, 13, 16, 23, 38, 69, 132, 259, 514, 1025, 2048, 4095, 8190]: 512} degR=[8190] mismatches={'d0': 0, 'rec': 0, 'closed': 0, 'degR': 0, 'Rzero': 0, 'odd': 0, 'len': 0} sum_prefix_time=6344.5s wall=3177.4s`. Hence the three finite exact statements (deg R = 2^m − 2 with R ≠ 0; d_0 = m − 1 with the recurrence; R ∈ GF(2^e)[x²]) now hold for 2 ≤ m ≤ 13 on the recorded prefixes (orbit representatives for m ≥ 7). For m = 13 this is a single run of the repo's unchanged `eliminate`; `prepare 13` (same routine, still running, not used) would be a second run, not an independent method. Nothing about excess m = 13 survivors (power-of-two factors of R) is claimed: this script does not factor R.
+
 #### Conjecture (open)
 
-For every m ≥ 2 and every admissible chain prefix in GF(2^e) with e = 2^⌈log2(m+1)⌉, deg R = 2^m − 2 (open for m ≥ 13). Stronger form (checked for 2 ≤ m ≤ 12): d_0 = m − 1 and the norm recurrence above hold for every m, and R ∈ GF(2^e)[x²]. (The stronger form implies deg R = 2^m − 2; the converse is not claimed.) No counterexample is known; a uniform proof is not claimed.
+For every m ≥ 2 and every admissible chain prefix in GF(2^e) with e = 2^⌈log2(m+1)⌉, deg R = 2^m − 2 (open for m ≥ 14). Stronger form (checked for 2 ≤ m ≤ 13): d_0 = m − 1 and the norm recurrence above hold for every m, and R ∈ GF(2^e)[x²]. (The stronger form implies deg R = 2^m − 2; the converse is not claimed.) No counterexample is known; a uniform proof is not claimed.
 
 #### Still open
 
-- A proof of d_0 = m − 1 and of the leading-term cancellation that produces d_r = 2 d_{r−1} − (m − r − 1) for general m (the crude determinant bound with d = m − 1 only gives deg R ≤ (m − 1) 2^{m−1}). Checked exactly (zero mismatches) for 2 ≤ m ≤ 12 only.
-- Whether R ∈ GF(2^e)[x²] for all m (checked exactly for 2 ≤ m ≤ 12; no structural reason recorded).
-- m = 13: deg R, d-sequence and evenness not yet checked on all 512 orbit prefixes (`check_degR_structure.py 13` and `prepare 13` both still running at ~2:15pm EDT).
+- A proof of d_0 = m − 1 and of the leading-term cancellation that produces d_r = 2 d_{r−1} − (m − r − 1) for general m (the crude determinant bound with d = m − 1 only gives deg R ≤ (m − 1) 2^{m−1}). Checked exactly (zero mismatches) for 2 ≤ m ≤ 13 only.
+- Whether R ∈ GF(2^e)[x²] for all m (checked exactly for 2 ≤ m ≤ 13; no structural reason recorded).
+- m = 13 was closed for the structural checks at ~3:10pm EDT (512/512 orbit prefixes, zero mismatches). Still open at m = 13: the excess-13 survivor filter (factorisation of R into power-of-two-degree factors) and any S_{p+13} lifts; `prepare 13` still running.
+- m ≥ 14: nothing checked.
 
 #### Not a consequence
 

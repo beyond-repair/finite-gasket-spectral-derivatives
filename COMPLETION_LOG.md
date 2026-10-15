@@ -1,5 +1,17 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-15 ~2:55–3:10pm EDT / hourly routine: deg-R structural checks at m = 13)
+
+Dated 2026-10-15 (America/New_York).
+
+- Record current before this run: head 742ddcc; excess ≤ 11 theorem; deg R = 2^m − 2, d_0 = m − 1 / recurrence and R ∈ GF(2^e)[x²] exact for m ≤ 12; S_k ≠ 0 for k ≤ 47; exact h_n for 3 ≤ n ≤ 49; excess m = 12 lift rep S = 0 count 0 at k = 28, 44, 76, 140, 268, 524; k = 2060 running, k = 4108 queued; walk48, prepare 13 and `check_degR_structure.py 13` running.
+- **Assumptions**: unchanged from the previous entry (locked K = ω²I − WL, the repo's elimination tower, Frobenius orbit reduction for m ≥ 7). No continuum, force, stress, momentum, or selected W.
+- **Exact finite computation**: `check_degR_structure.py 13 2 /workspace/scratch-res/degR_structure_m13.d` finished EXIT:0 at 15:07:30 EDT (started 14:14:32): `prefixes=512 observed_seqs={[12, 13, 16, 23, 38, 69, 132, 259, 514, 1025, 2048, 4095, 8190]: 512} degR=[8190] mismatches={all 7 counters 0} sum_prefix_time=6344.5s wall=3177.4s`. Log `/workspace/scratch-res/degR_structure_m13.log` (not vendored).
+- **Lemma status**: finite exact statements on the recorded prefixes (orbit representatives for m ≥ 7) now hold for 2 ≤ m ≤ 13: deg R = 2^m − 2 with R ≠ 0; d_0 = m − 1 and d_r = 2 d_{r−1} − (m − r − 1); R ∈ GF(2^e)[x²]. Extension from m ≤ 12 to m ≤ 13 for all three. Single run at m = 13 (no independent cross-check). Not a uniform proof.
+- **Not claimed**: anything about excess m = 13 (R was not factored here); excess ≤ 12 (k = 2060 still running, k = 4108 queued); walk48 still running (log holds only the start timestamp); `prepare 13` still running (not used).
+- Range unchanged: exact h_n for 3 ≤ n ≤ 49; S_k ≠ 0 for k ≤ 47. Still open: proof of the deg-R recurrence / evenness for general m; deg R conjecture for m ≥ 14; excess ≤ 12; excess-13 filter; residue conjecture for k ≥ 48.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Progress this run (2026-10-15 ~1:55–2:30pm EDT / hourly routine: deg-R structural checks through m = 12)
 
 Dated 2026-10-15 (America/New_York).
