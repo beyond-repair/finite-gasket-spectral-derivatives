@@ -1,5 +1,17 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-22 ~12:55pm EDT / locked-kernel routine: m = 13 lifts k = 29, 77)
+
+Dated 2026-10-22 (America/New_York).
+
+- Record current before this run: head bdb70c9 (pushed); S_k ≠ 0 for k ≤ 49; exact h_n for 3 ≤ n ≤ 51.
+- **Assumptions**: locked K = ω²I − WL (ω = 1, λ_max = 6, K > 0 iff W < 1/6); the recorded elimination lemma and lifted-`direct` lemma; e = 16 for m = 13. No continuum, force, stress, momentum, or selected W.
+- **Exact finite computation (control)**: m = 13 `lift rep` p = 16 (k = 29) EXIT:0 12:03:43 EDT: 246 factors, 4,030,464 chains, 530 with S in GF(2^16), **0 with S = 0**. Agrees with the walk.
+- **Exact finite computation (new length)**: m = 13 `lift rep` p = 64 (k = 77) EXIT:0 12:31:10 EDT: 62 factors, 1,015,808 chains, 124 with S in GF(2^64), **0 with S = 0** (1646.8 s). Hence S_77 ≠ 0 (finite exact + recorded lemmas). Isolated length; range unchanged.
+- Running / not claimed: m = 13 p = 128 (k = 141) since 12:31 EDT; p ≥ 256 not started; m = 12 k = 2060 still running, k = 4108 not started.
+- Range unchanged: exact h_n for 3 ≤ n ≤ 51; smallest open length 50. Still open: residue conjecture for k ≥ 50 with excess ≥ 12 (apart from the isolated lengths recorded); excess ≤ 12 and ≤ 13; deg R for m ≥ 14.
+- README "Residue condition: excess m = 13" addendum; CLAIM_STATUS row updated. No literature opened; no novelty claimed.
+
 ## Progress this run (2026-10-22 ~11:57am EDT / locked-kernel routine: m = 13 control lift k = 45)
 
 Dated 2026-10-22 (America/New_York).

@@ -1577,6 +1577,17 @@ Exact `lift rep` zero counts at the nine surviving lengths k = 29, 45, 77, 141, 
 
 Addendum (2026-10-22 ~11:57am EDT, control k = 45). The p = 32 `lift rep` job (`check_residue_lifted.py lift /workspace/scratch-res/lifted_m13.json 32 rep`, started 10:54:22 EDT) finished EXIT:0 at 11:42:53 EDT: `lift[rep] k=45 (p=32, m=13, orbit reps): surviving factors=128, roots used=128, chains examined=2097152, with S in GF(2^p)=256, with S = 0: 0, time=2910.7s`. Every one of the 128 surviving factors reports (16384 chains, 2 with S in GF(2^32), 0 with S = 0). This is a finite exact cross-check, not a new theorem: S_45 ≠ 0 was already proved by the reduced walk (k ≤ 49), and the zero count 0 agrees with it. The p = 16 job (k = 29, also a control) restarted sequentially at 11:43:15 EDT; p = 64 (k = 77) and p = 128 (k = 141) are queued after it. No result for k = 77 or 141 yet.
 
+Addendum (2026-10-22 ~12:55pm EDT, k = 29 control and k = 77). Both sequential `lift rep` jobs finished EXIT:0 (logs `/workspace/scratch-res/lifted_rep_m13_p16.log`, `/workspace/scratch-res/lifted_rep_m13_p64.log`):
+
+| k | p | surviving factors | chains examined | S ∈ GF(2^p) | S = 0 | time | finished |
+|---|---|---|---|---|---|---|---|
+| 29 | 16 | 246 | 4030464 | 530 | 0 | 1227.4 s | 12:03:43 EDT |
+| 77 | 64 | 62 | 1015808 | 124 | 0 | 1646.8 s | 12:31:10 EDT |
+
+- k = 29 is a control: S_29 ≠ 0 was already proved by the reduced walk (k ≤ 49); zero count 0 agrees.
+- k = 77 = 64 + 13 is outside the walk range. Finite exact computation + elimination/lifted-`direct` lemmas (same reading as the recorded m = 12 lifts): **S_77 ≠ 0 for every chain.** This is an isolated length; it does not move the contiguous range (smallest open length stays 50, excess 18).
+- p = 128 (k = 141) started 12:31:10 EDT, running; p ≥ 256 (k = 269, 525, 1037, 2061, 8205) not started. Excess ≤ 13 still **not** claimed.
+
 #### Not a consequence
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
