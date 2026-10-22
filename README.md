@@ -1607,3 +1607,5 @@ This subsection does not select W, does not state a continuum limit, a force, a 
 Governing source: [ADL-Governance](https://github.com/beyond-repair/ADL-Governance) · [Claim levels 0–5](https://github.com/beyond-repair/ADL-Governance/blob/main/docs/CLAIM_VALIDATION.md)
 
 </div>
+
+Addendum (2026-10-22 ~2:57pm EDT, no new result). Both running lift jobs, m = 13 p = 256 (k = 269, started 13:58 EDT) and m = 12 p = 2048 (k = 2060, restarted 00:58 EDT), received SIGTERM at 14:20:50 EDT (EXIT:143) and produced no result. No statement about S_269 or S_2060 is made. Both were restarted at 14:56 EDT with the same command (`check_residue_lifted.py lift <json> <p> rep`, python-flint 0.9.0), logs appended to `/workspace/scratch-res/lifted_rep_m13_p256.log` and `/workspace/scratch-res/lifted_rep_m12_p2048.log`. k = 4108 remains unstarted. Range unchanged: S_k ≠ 0 for k ≤ 49 and for the isolated lengths already recorded (77, 141, and the residue/survivor exclusions), exact h_n for 3 ≤ n ≤ 51; smallest open length 50.
