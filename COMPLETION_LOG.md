@@ -1,5 +1,19 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Status this run (2026-10-22 ~12:55–1:05am EDT / locked-kernel routine: interrupted jobs restarted, no new theorem)
+
+Dated 2026-10-22 (America/New_York).
+
+- Record current before this run: head 236e2d1 (pushed); excess ≤ 11 theorem; deg R = 2^m − 2, d_0 / recurrence and R ∈ GF(2^e)[x²] exact for 2 ≤ m ≤ 13; S_k ≠ 0 for k ≤ 48; exact h_n for 3 ≤ n ≤ 50; smallest open length 49; excess m = 12 lift rep S = 0 count 0 at k = 28, 44, 76, 140, 268, 524; k = 2060, 4108 uncertified.
+- **Negative / operational result**: the compute box was restarted (~00:16 EDT 2026-10-22). Every pending job from the 2026-10-15 entries ended **without a result line**: `lift rep` k = 2060 (p = 2048; log `/workspace/scratch-res/lifted_rep_m12_p2048.log` held only its start timestamp), the queued k = 4108 (never started), and `prepare 13` (217 of 512 orbit prefixes cached in `/workspace/scratch-res/lifted_m13.json.d`). Nothing is inferred from the interrupted runs. The python-flint package was also missing after the restart and was reinstalled (0.9.0); cached prefix results are exact data and are reused unchanged.
+- **Restarted (pending, not claimed)**, all with unchanged code:
+  - reduced walk KMAX = 49 with the same binary as walk48 (sha256 1b35db9d…f451), OMP_NUM_THREADS = 4, log `/workspace/scratch-res/walk49.log`, started 00:56 EDT. If it reports zeros = 0 at k = 49 then S_k ≠ 0 for k ≤ 49 and the two-adic reduction extends exact h_n to n = 51; not claimed until EXIT:0.
+  - `prepare 13` resumed from the 217-prefix cache, 2 workers, log `/workspace/scratch-res/lifted_prepare_m13.log`.
+  - `lift rep` k = 2060 (p = 2048) from scratch (not resumable), log `/workspace/scratch-res/lifted_rep_m12_p2048.log`, started 00:58 EDT.
+- **Cost estimate (numerical observation, not a bound)**: recorded lift timings per surviving factor are ~506 s at p = 256 (13 factors, 6578 s) and ~3553 s at p = 512 (5 factors, 17765 s), a ratio of ~7 per doubling of p. Extrapolating that ratio gives order 2 days for k = 2060 (1 factor) and order weeks for k = 4108 (2 factors, p = 4096). k = 4108 is therefore **not restarted**; excess ≤ 12 cannot close by this route on this box without either a faster method for the p = 4096 survivors or a structural argument that removes them.
+- Range unchanged: S_k ≠ 0 for k ≤ 48; exact h_n for 3 ≤ n ≤ 50. Still open: residue conjecture for k ≥ 49 with excess ≥ 12; excess ≤ 12 (k = 2060, 4108); deg R recurrence / evenness for general m (exact only for m ≤ 13); excess-13 filter.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Proved this run (2026-10-15 ~4:28–5:00pm EDT / locked-kernel routine: k = 48 walk closed)
 
 Dated 2026-10-15 (America/New_York).
