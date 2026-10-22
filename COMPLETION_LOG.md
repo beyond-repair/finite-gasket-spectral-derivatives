@@ -1,5 +1,15 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-22 ~11:57am EDT / locked-kernel routine: m = 13 control lift k = 45)
+
+Dated 2026-10-22 (America/New_York).
+
+- Record current before this run: head c265878 (pushed); S_k ≠ 0 for k ≤ 49; exact h_n for 3 ≤ n ≤ 51; m = 13 survivors recorded; lifts pending.
+- **Exact finite computation (cross-check, not a new theorem)**: m = 13 `lift rep` at p = 32 (k = 45) finished EXIT:0 at 11:42:53 EDT: 128 surviving factors, 2,097,152 chains examined, 256 with S in GF(2^32), **0 with S = 0** (2910.7 s). Agrees with the reduced walk, which already proved S_45 ≠ 0. Log `/workspace/scratch-res/lifted_rep_m13_p32.log`. README "Residue condition: excess m = 13" addendum; CLAIM_STATUS row updated.
+- Running / queued, not claimed: m = 13 p = 16 (k = 29, control) restarted 11:43:15 EDT; p = 64 (k = 77) and p = 128 (k = 141) queued sequentially; p ≥ 256 not started. m = 12 `lift rep` k = 2060 still running; k = 4108 not started.
+- Range unchanged: S_k ≠ 0 for k ≤ 49; exact h_n for 3 ≤ n ≤ 51. Still open: residue conjecture for k ≥ 50 with excess ≥ 12; excess ≤ 12 and ≤ 13; deg R for m ≥ 14.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Progress this run (2026-10-22 ~10:53–11:25am EDT / locked-kernel routine: excess m = 13 survivors)
 
 Dated 2026-10-22 (America/New_York).
