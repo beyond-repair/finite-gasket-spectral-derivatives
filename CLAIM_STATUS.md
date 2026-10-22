@@ -49,3 +49,4 @@
 No LICENSE file in the tree. License choice is operator-only.
 
 Parent research index: `coherence-drive`. Geometry dependency: `sierpinski-geometry-045`.
+| Residue condition excess m=13: R≠0 and deg R=8190=2^13−2 on all 512 orbit prefixes (second run, agrees with `check_degR_structure.py 13`); survivors p∈{16,32,64,128,256,512,1024,2048,8192}; hence S_{p+13}≠0 for p=4096, p=16384 and every power of two p≥32768 | CLAIMED (finite exact computation + elimination lemma); excess ≤ 13 **PENDING** (excess ≤ 12 still open at k=2060, 4108; m=13 `lift rep` at k=29, 45 (controls), 77, 141 queued/running; k=269…8205 not started) | `scripts/check_residue_lifted.py prepare 13` EXIT:0 2026-10-22 10:03:05 EDT, log `/workspace/scratch-res/lifted_prepare_m13.log`; README "Residue condition: excess m = 13" |

@@ -1,5 +1,18 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-22 ~10:53–11:25am EDT / locked-kernel routine: excess m = 13 survivors)
+
+Dated 2026-10-22 (America/New_York).
+
+- Record current before this run: head 4758275 (pushed); S_k ≠ 0 for k ≤ 49; exact h_n for 3 ≤ n ≤ 51; smallest open length 50; `lift rep` k = 2060 running, k = 4108 not started, `prepare 13` 507/512.
+- **Assumptions**: locked K = ω²I − WL (ω = 1, λ_max = 6, K > 0 iff W < 1/6); the recorded elimination lemma and lifted-`direct` lemma; e = 16 for m = 13. No continuum, force, stress, momentum, or selected W.
+- **Exact finite computation**: `prepare 13` finished EXIT:0 at 10:03:05 EDT (512 orbit prefixes; 295 computed in the final call, 32756.2 s). R ≠ 0 and deg R = 8190 = 2^13 − 2 on every prefix (second, independent run of that degree statement). Surviving chain condition (p: count) = {16: 246, 32: 128, 64: 62, 128: 22, 256: 18, 512: 7, 1024: 12, 2048: 1, 8192: 1}; none at p = 4096 or 16384.
+- **Consequence (elimination lemma + computation)**: S_{p+13} ≠ 0 for every power of two p > 13 outside {16, …, 2048, 8192}; in particular k = 4109, 16397, and every 2^j + 13 with 2^j ≥ 32768. README "Residue condition: excess m = 13"; CLAIM_STATUS row added.
+- **Negative / operational result**: four parallel m = 13 `lift rep` jobs (p = 16, 32, 64, 128) exhausted memory; p = 16 was OOM-killed at 11:14 EDT (EXIT:137, no result). p = 64, 128 were stopped; p = 32 continues; p = 16, 64, 128 are queued to run one at a time after it, with raised OOM scores so the 8-hour k = 2060 lift is not the one killed. Nothing inferred from the killed runs.
+- Pending, not claimed: m = 13 lift S = 0 counts at k = 29, 45 (controls), 77, 141, 269, 525, 1037, 2061, 8205; m = 12 at k = 2060 (running since 03:15 EDT per process start), 4108 (not started).
+- Range unchanged: S_k ≠ 0 for k ≤ 49; exact h_n for 3 ≤ n ≤ 51. Still open: residue conjecture for k ≥ 50 with excess ≥ 12; excess ≤ 12 and ≤ 13; deg R for m ≥ 14.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Proved this run (2026-10-22 ~9:55am EDT / locked-kernel routine: k = 49 walk closed)
 
 Dated 2026-10-22 (America/New_York).

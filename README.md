@@ -1551,6 +1551,34 @@ This extends the previous range 3 ≤ n ≤ 50 by one level. For n = 52 the open
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
 
+### Residue condition: excess m = 13 (elimination + survivors; lifts pending)
+
+Dated 2026-10-22 (America/New_York), ~10:55am EDT / locked-kernel routine. Same method as the m = 11 and m = 12 subsections. This subsection does **not** prove excess ≤ 13 (excess 12 itself is still pending at k = 2060, 4108).
+
+#### Assumptions
+
+- The elimination lemma and the lifted-`direct` lemma already recorded (no new assumption). e = 16 for m = 13 (e = 2^⌈log2 14⌉).
+- Exact finite-field arithmetic (python-flint 0.9.0). The per-prefix cache was built in two sessions (217 prefixes before the 2026-10-22 box restart, 295 after); each cached entry is the exact output for its prefix and was reused unchanged.
+- No literature opened; no novelty claimed. No value of W is selected.
+
+#### Exact finite computation
+
+`scripts/check_residue_lifted.py prepare 13 /workspace/scratch-res/lifted_m13.json 2` finished EXIT:0 at 10:03:05 EDT 2026-10-22 (512 orbit prefixes; 295 computed in the final call, 32756.2 s for that call). Log `/workspace/scratch-res/lifted_prepare_m13.log` (not vendored).
+
+- R ≠ 0 on every prefix (asserted by the script), deg R = 8190 = 2^13 − 2 on every prefix. This agrees with the independent `check_degR_structure.py 13` run of 2026-10-15 (same 512 prefixes), so deg R = 2^13 − 2 now has two runs.
+- Power-of-two-degree factors (p: count) = {16: 962, 32: 238, 64: 110, 128: 60, 256: 27, 512: 19, 1024: 17, 2048: 3, 8192: 1, 16384: 1}.
+- Surviving chain condition (p: count) = {16: 246, 32: 128, 64: 62, 128: 22, 256: 18, 512: 7, 1024: 12, 2048: 1, 8192: 1}. No factor survives at p = 4096 or p = 16384.
+
+Consequence of the elimination lemma (proved): for m = 13, S_{p+13} ∉ GF(2^p), hence S_{p+13} ≠ 0, for every power of two p > 13 outside {16, 32, 64, 128, 256, 512, 1024, 2048, 8192}. In particular S_k ≠ 0 for k = 4109 (p = 4096), k = 16397 (p = 16384), and every k = 2^j + 13 with 2^j ≥ 32768.
+
+#### Pending (not claimed)
+
+Exact `lift rep` zero counts at the nine surviving lengths k = 29, 45, 77, 141, 269, 525, 1037, 2061, 8205. Started this run (~10:54 EDT, nice 10) as four parallel jobs p = 16, 32, 64, 128; the p = 16 job was killed by the kernel out-of-memory handler at 11:14 EDT (EXIT:137, no result line), so p = 64 and 128 were stopped and requeued to run one at a time (p = 16, 64, 128) after p = 32 finishes. Logs `/workspace/scratch-res/lifted_rep_m13_p{P}.log`. Nothing is inferred from the killed runs. k = 29 and k = 45 are already covered by the reduced walk (k ≤ 49) and act as controls. The p ≥ 256 lifts are not started; by the recorded cost ratio (~7 per doubling of p) p = 2048 and p = 8192 are out of reach on this box by this route. Excess ≤ 13 becomes a theorem only when excess ≤ 12 is closed and all nine report S = 0 count 0.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
+
 ---
 
 <div align="center">
