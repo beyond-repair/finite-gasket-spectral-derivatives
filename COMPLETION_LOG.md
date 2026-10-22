@@ -1,5 +1,16 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Proved this run (2026-10-22 ~9:55am EDT / locked-kernel routine: k = 49 walk closed)
+
+Dated 2026-10-22 (America/New_York).
+
+- Record current before this run: head aacc635 (pushed); S_k ≠ 0 for k ≤ 48; exact h_n for 3 ≤ n ≤ 50; smallest open length 49; walk KMAX = 49, `lift rep` k = 2060 and `prepare 13` running.
+- **Exact finite computation**: the reduced walk KMAX = 49 (unchanged source since 172f122, same binary as walk47/walk48, sha256 1b35db9d…f451) finished EXIT:0 at 08:51:41 EDT (started 00:56:27 EDT): `k=49 reduced_chains=8796093022208 orbit_size=64 chains_covered=2^49 zeros=0 ok`, zeros = 0 at every k ≤ 49; reduced-chain, orbit and coverage counts match 2^{k−⌈log₂(k+1)⌉} / 2^{⌈log₂(k+1)⌉} / 2^k at all 49 depths. Log `/workspace/scratch-res/walk49.log`.
+- **Corollary (theorem + computation)**: S_k ≠ 0 for k ≤ 49; smallest open length 50 = 32 + 18; exact h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3) for 3 ≤ n ≤ 51 (README "exact check to k = 49"; CLAIM_STATUS row added).
+- Pending, not claimed: `lift rep` k = 2060 (no result line); k = 4108 not started; `prepare 13` 507/512 prefixes cached.
+- Still open: residue conjecture for k ≥ 50 with excess ≥ 12; excess ≤ 12 (k = 2060, 4108); exact h_n for n ≥ 52; deg R for m ≥ 14.
+- No literature opened; no novelty claimed. Not a consequence: no W selected, no continuum limit, force, stress, or momentum.
+
 ## Status this run (2026-10-22 ~12:55–1:05am EDT / locked-kernel routine: interrupted jobs restarted, no new theorem)
 
 Dated 2026-10-22 (America/New_York).
