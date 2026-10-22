@@ -1588,6 +1588,11 @@ Addendum (2026-10-22 ~12:55pm EDT, k = 29 control and k = 77). Both sequential `
 - k = 77 = 64 + 13 is outside the walk range. Finite exact computation + elimination/lifted-`direct` lemmas (same reading as the recorded m = 12 lifts): **S_77 ≠ 0 for every chain.** This is an isolated length; it does not move the contiguous range (smallest open length stays 50, excess 18).
 - p = 128 (k = 141) started 12:31:10 EDT, running; p ≥ 256 (k = 269, 525, 1037, 2061, 8205) not started. Excess ≤ 13 still **not** claimed.
 
+Addendum (2026-10-22 ~1:58pm EDT, k = 141). The p = 128 `lift rep` job finished EXIT:0 at 13:16:17 EDT (log `/workspace/scratch-res/lifted_rep_m13_p128.log`): `lift[rep] k=141 (p=128, m=13, orbit reps): surviving factors=22, roots used=22, chains examined=360448, with S in GF(2^p)=44, with S = 0: 0, time=2706.6s`; every factor reports (16384, 2, 0).
+
+- k = 141 = 128 + 13 is outside the walk range. Finite exact computation + elimination/lifted-`direct` lemmas: **S_141 ≠ 0 for every chain.** Isolated length; the contiguous range does not move (smallest open length stays 50).
+- p = 256 (k = 269) started 13:58 EDT, running; p = 512, 1024, 2048, 8192 (k = 525, 1037, 2061, 8205) not started. Excess ≤ 13 still **not** claimed.
+
 #### Not a consequence
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.

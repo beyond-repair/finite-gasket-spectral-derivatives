@@ -1,5 +1,16 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-22 ~1:58pm EDT / locked-kernel routine: m = 13 lift k = 141)
+
+Dated 2026-10-22 (America/New_York).
+
+- Record current before this run: head 0c652e5 (pushed); S_k ≠ 0 for k ≤ 49; exact h_n for 3 ≤ n ≤ 51.
+- **Assumptions**: locked K = ω²I − WL (ω = 1, λ_max = 6, K > 0 iff W < 1/6); the recorded elimination lemma and lifted-`direct` lemma; e = 16 for m = 13. No continuum, force, stress, momentum, or selected W.
+- **Exact finite computation (new length)**: m = 13 `lift rep` p = 128 (k = 141) EXIT:0 13:16:17 EDT: 22 factors, 360,448 chains, 44 with S in GF(2^128), **0 with S = 0** (2706.6 s). Hence S_141 ≠ 0 (finite exact + recorded lemmas). Isolated length; range unchanged.
+- Running / not claimed: m = 13 p = 256 (k = 269) started 13:58 EDT (log `/workspace/scratch-res/lifted_rep_m13_p256.log`); p = 512, 1024, 2048, 8192 not started; m = 12 k = 2060 still running, k = 4108 not started.
+- Range unchanged: exact h_n for 3 ≤ n ≤ 51; smallest open length 50. Still open: residue conjecture for k ≥ 50 with excess ≥ 12 (apart from the isolated lengths recorded); excess ≤ 12 and ≤ 13; deg R for m ≥ 14.
+- README "Residue condition: excess m = 13" addendum; CLAIM_STATUS row updated. No literature opened; no novelty claimed.
+
 ## Progress this run (2026-10-22 ~12:55pm EDT / locked-kernel routine: m = 13 lifts k = 29, 77)
 
 Dated 2026-10-22 (America/New_York).
