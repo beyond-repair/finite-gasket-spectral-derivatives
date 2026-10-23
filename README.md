@@ -1602,6 +1602,41 @@ Addendum (2026-10-22 ~8:50pm EDT, k = 269). After the SIGTERM at 14:20:50 EDT an
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
 
+### Residue condition: exact check to k = 50 (2026-10-23)
+
+Dated 2026-10-23 (America/New_York), ~6:55am EDT / locked-kernel routine. This subsection adds one length to the exact finite check. It proves no new infinite family.
+
+#### Assumptions
+
+- Everything in "Residue condition: Frobenius orbit reduction and exact check to k = 45" and the exact checks to k = 46–49: chains z_0 = 1, z_i² + z_i = z_{i−1}, S_k = Σ_{i=1}^k 1/z_i, the orbit lemma, and the fact that every chain of length k ≤ 63 lies in GF(2^64).
+- The two-adic reduction theorem: a coincidental hit at level n ≥ 3 needs some k with 1 ≤ k ≤ n − 2, n − k even, and a chain with S_k = 0.
+- No literature was opened this run, and no novelty is claimed. S_W is not an input. No value of W is selected.
+
+#### Exact finite verification (1 ≤ k ≤ 50)
+
+The unchanged program scripts/residue_orbits_gf2_64.c (no diff against the committed source since 172f122) was run as `scripts/residue_orbits_gf2_64 50` with OMP_NUM_THREADS = 6; the committed binary `scripts/residue_orbits_gf2_64` has sha256 1b35db9d…f451, identical to walk47/walk48/walk49. It printed `ok` with zeros = 0 at every depth 1 ≤ k ≤ 50 (50 `ok` lines), with exactly 2^{k−⌈log₂(k+1)⌉} reduced chains, orbit size 2^{⌈log₂(k+1)⌉} and chains_covered = 2^k at each depth (checked line by line by a script against the log, zero mismatches); at k = 50 that is `reduced_chains=17592186044416` (= 2^44), orbit size 64, covering all 2^50 chains. Exit status 0; start 2026-10-22 15:53:13 EDT, last line 2026-10-23 06:08:30 EDT, wall about 14 h 15 min on a box shared with `lift rep` m = 12 p = 2048 and m = 13 p = 256/512. Scratch log `/workspace/scratch-res/walk50.log` (not vendored, prior practice).
+
+- `validate` was not re-run before this walk; the KMAX = 24 validation of this same binary (`/workspace/scratch-res/repo_orbits_k48_validate.log`) is relied on.
+- No independent sampled walk was run at k = 50.
+
+#### Corollary (theorem plus finite exact computation)
+
+S_k ≠ 0 for every chain when 1 ≤ k ≤ 50, and (by the recorded theorems) whenever k − 2^⌊log2 k⌋ ≤ 11, plus the isolated lengths already recorded (77, 141, 269 and the survivor exclusions). The smallest open length is now k = 51 = 32 + 19 (excess 19). A coincidental hit at level n needs an open k ≤ n − 2 with n − k even. For n = 52 that would be an even k ≤ 50, and none is open, so a hit needs n ≥ 53. Hence for 3 ≤ n ≤ 52 there are no coincidental hits, and
+    h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3)   exactly.
+This extends the previous range 3 ≤ n ≤ 51 by one level. For n = 53 the open odd length k = 51 is not excluded, so the range stops at 52.
+
+#### Still open
+
+- Residue conjecture for k ≥ 51 with k − 2^⌊log2 k⌋ ≥ 12 (apart from the isolated lengths recorded). Next open lengths: 51, …, 63 (excess 19–31). Excess-12 lengths k = 2060 (running) and k = 4108 (not started); excess-13 lengths k = 525 (running), 1037, 2061, 8205 (not started). Excess ≤ 12 and ≤ 13 are **not** claimed.
+- Exact h_n for n ≥ 53.
+- deg R = 2^m − 2: exact for 2 ≤ m ≤ 13, conjecture for m ≥ 14.
+- A KMAX = 51 walk would cost roughly twice this wall time (order 28 h at the same load); not started this run.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
+
+
 ---
 
 <div align="center">

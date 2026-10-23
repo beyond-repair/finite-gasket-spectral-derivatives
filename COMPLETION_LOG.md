@@ -1,5 +1,17 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-23 ~6:55am EDT / locked-kernel routine: reduced walk k = 50)
+
+Dated 2026-10-23 (America/New_York).
+
+- Record current before this run: head 865b888 (pushed); S_k ≠ 0 for k ≤ 49; exact h_n for 3 ≤ n ≤ 51.
+- **Assumptions**: locked K = ω²I − WL (ω = 1, λ_max = 6, K > 0 iff W < 1/6); orbit lemma; two-adic reduction theorem. No continuum, force, stress, momentum, or selected W.
+- **Exact finite computation**: unchanged reduced walk KMAX = 50 EXIT:0 at 06:08:30 EDT (started 2026-10-22 15:53:13 EDT): zeros = 0 at every k ≤ 50, 2^44 reduced chains at k = 50 covering all 2^50 chains; counts checked line by line. Hence S_k ≠ 0 for 1 ≤ k ≤ 50.
+- **Corollary**: smallest open length 51; exact h_n = 1 − μ_exc(n) − 5·2^n/(3^{n+1}+3) for 3 ≤ n ≤ 52 (was ≤ 51).
+- Running / not claimed: m = 13 p = 512 (k = 525), m = 12 p = 2048 (k = 2060); k = 4108, 1037, 2061, 8205 not started; KMAX = 51 walk not started.
+- Still open: residue conjecture for k ≥ 51 with excess ≥ 12 (apart from isolated lengths 77, 141, 269 and survivor exclusions); excess ≤ 12 and ≤ 13; exact h_n for n ≥ 53; deg R for m ≥ 14.
+- README "Residue condition: exact check to k = 50 (2026-10-23)"; CLAIM_STATUS row added. No literature opened; no novelty claimed.
+
 ## Progress this run (2026-10-22 ~8:50pm EDT / locked-kernel routine: m = 13 lift k = 269)
 
 Dated 2026-10-22 (America/New_York).
