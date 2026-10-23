@@ -1,5 +1,16 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-23 ~3:55pm EDT / locked-kernel routine: m = 13 lift k = 525)
+
+Dated 2026-10-23 (America/New_York).
+
+- Record current before this run: head 474f93f (pushed); S_k ≠ 0 for 1 ≤ k ≤ 50; exact h_n for 3 ≤ n ≤ 52.
+- **Assumptions**: locked K = ω²I − WL (ω = 1, λ_max = 6, K > 0 iff W < 1/6); the recorded elimination lemma and lifted-`direct` lemma; e = 16 for m = 13. No continuum, force, stress, momentum, or selected W.
+- **Exact finite computation (new length)**: m = 13 `lift rep` p = 512 (k = 525) EXIT:0 15:04:57 EDT: 7 factors, 114,688 chains, 14 with S in GF(2^512), **0 with S = 0** (65,695.6 s). Hence S_525 ≠ 0 (finite exact + recorded lemmas). Isolated length; range unchanged.
+- Started: m = 13 p = 1024 (k = 1037) at 15:54 EDT (log `/workspace/scratch-res/lifted_rep_m13_p1024.log`). Still running, no result: walk KMAX = 51 (started 07:52 EDT), m = 12 k = 2060. Not started: k = 2061, 4108, 8205.
+- Range unchanged: exact h_n for 3 ≤ n ≤ 52; smallest open length 51. Still open: residue conjecture for k ≥ 51 apart from the isolated lengths recorded (77, 141, 269, 525 and the survivor exclusions); excess ≤ 12 and ≤ 13; deg R for m ≥ 14.
+- README "Residue condition: excess m = 13" addendum; CLAIM_STATUS row updated. No literature opened; no novelty claimed.
+
 ## Progress this run (2026-10-23 ~6:55am EDT / locked-kernel routine: reduced walk k = 50)
 
 Dated 2026-10-23 (America/New_York).
