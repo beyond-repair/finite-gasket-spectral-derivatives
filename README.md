@@ -1642,6 +1642,41 @@ This extends the previous range 3 ≤ n ≤ 51 by one level. For n = 53 the open
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
 
 
+### Residue condition: exact check to k = 51 (2026-10-30)
+
+Dated 2026-10-30 (America/New_York), ~1:55pm EDT / locked-kernel routine. This subsection adds one length to the exact finite check. It proves no new infinite family.
+
+#### Assumptions
+
+- Everything in "Residue condition: Frobenius orbit reduction and exact check to k = 45" and the exact checks to k = 46–50: chains z_0 = 1, z_i² + z_i = z_{i−1}, S_k = Σ_{i=1}^k 1/z_i, the orbit lemma, and the fact that every chain of length k ≤ 63 lies in GF(2^64).
+- The two-adic reduction theorem: a coincidental hit at level n ≥ 3 needs some k with 1 ≤ k ≤ n − 2, n − k even, and a chain with S_k = 0.
+- Software assumption (not a theorem): the checkpointed program `scripts/residue_orbits_ckpt.c` (committed in e583638) walks the same Frobenius-reduced tree as `scripts/residue_orbits_gf2_64.c` and reports the same counts. Evidence for this: the recorded test `scripts/test_residue_ckpt.sh` (byte-identical stdout for KMAX = 1..12, 17, 20, 29, 33, 38, including SIGKILL + resume), the KMAX = 44 control (lines k = 1..44 byte-identical to walk50.log), and, in this run, lines k = 1..50 of the KMAX = 51 log byte-identical to the k = 1..50 lines of `/workspace/scratch-res/walk50.log` from the original binary.
+- No literature was opened this run, and no novelty is claimed. S_W is not an input. No value of W is selected.
+
+#### Exact finite verification (1 ≤ k ≤ 51)
+
+`scripts/residue_orbits_ckpt 51 --ckpt /workspace/scratch-res/walk51.ckpt --resume` with OMP_NUM_THREADS = 6 (65,536 units of 8 depth-24 nodes) started fresh at 2026-10-30 01:54:36 EDT and finished in one uninterrupted run (no resume was needed; 24,720 s wall) at 13:16:21 EDT with EXIT:0. The binary that ran has sha256 3cb716ae…ace9, and a fresh `gcc -O3 -march=native -fopenmp` build of the committed source is byte-identical. It printed `ok` with zeros = 0 at every depth 1 ≤ k ≤ 51 (51 `ok` lines), with exactly 2^{k−⌈log₂(k+1)⌉} reduced chains, orbit size 2^{⌈log₂(k+1)⌉} and chains_covered = 2^k at each depth (checked line by line by a script against the log, zero mismatches); at k = 51 that is `reduced_chains=35184372088832` (= 2^45), orbit size 64, covering all 2^51 chains. Scratch log `/workspace/scratch-res/walk51_ckpt.log` (not vendored, prior practice).
+
+- The earlier uncheckpointed KMAX = 51 runs (log `/workspace/scratch-res/walk51.log`) were lost to box restarts or stopped deliberately; none produced a result and none is used.
+- No independent second walk at k = 51 (original binary or sampled) was run.
+
+#### Corollary (theorem plus finite exact computation)
+
+S_k ≠ 0 for every chain when 1 ≤ k ≤ 51, and (by the recorded theorems) whenever k − 2^⌊log2 k⌋ ≤ 11, plus the isolated lengths already recorded (77, 141, 269, 525 and the survivor exclusions). The smallest open length is now k = 52 = 32 + 20 (excess 20). A coincidental hit at level n needs an open k ≤ n − 2 with n − k even. For n = 53 that would be an odd k ≤ 51, and none is open, so a hit needs n ≥ 54. Hence for 3 ≤ n ≤ 53 there are no coincidental hits, and
+    h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3)   exactly.
+This extends the previous range 3 ≤ n ≤ 52 by one level. For n = 54 the open even length k = 52 is not excluded, so the range stops at 53.
+
+#### Still open
+
+- Residue conjecture for k ≥ 52 with k − 2^⌊log2 k⌋ ≥ 12 (apart from the isolated lengths recorded). Next open lengths: 52, …, 63 (excess 20–31). Excess-12 lengths k = 2060 (running) and k = 4108 (not started); excess-13 lengths k = 1037, 2061 (running), 8205 (not started). Excess ≤ 12 and ≤ 13 are **not** claimed.
+- Exact h_n for n ≥ 54.
+- deg R = 2^m − 2: exact for 2 ≤ m ≤ 13, conjecture for m ≥ 14.
+- A KMAX = 52 walk would need about twice this run's work (order 14 h wall at the same load, an engineering estimate only); not started this run.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
+
 ---
 
 <div align="center">

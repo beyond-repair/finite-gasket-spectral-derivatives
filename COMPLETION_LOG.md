@@ -1,5 +1,17 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-30 ~1:55pm EDT / locked-kernel routine: reduced walk k = 51)
+
+Dated 2026-10-30 (America/New_York).
+
+- Record current before this run: head a5a13ec (pushed); S_k ≠ 0 for 1 ≤ k ≤ 50 and isolated lengths 77, 141, 269, 525; exact h_n for 3 ≤ n ≤ 52; smallest open length 51.
+- **Assumptions**: locked K = ω²I − WL (ω = 1, λ_max = 6, K > 0 iff W < 1/6); orbit lemma; two-adic reduction theorem; software assumption that `residue_orbits_ckpt` walks the same tree as `residue_orbits_gf2_64` (tested; lines k ≤ 50 of this run are byte-identical to walk50.log). No continuum, force, stress, momentum, or selected W.
+- **Exact finite computation**: checkpointed reduced walk KMAX = 51 EXIT:0 at 13:16:21 EDT (started 01:54:36 EDT, one uninterrupted run, 24,720 s): zeros = 0 at every k ≤ 51, 2^45 reduced chains at k = 51 covering all 2^51 chains; counts checked line by line (zero mismatches); binary = fresh rebuild of committed source (sha256 3cb716ae…ace9). Hence S_k ≠ 0 for 1 ≤ k ≤ 51.
+- **Corollary**: smallest open length 52 = 32 + 20; exact h_n = 1 − μ_exc(n) − 5·2^n/(3^{n+1}+3) for 3 ≤ n ≤ 53 (was ≤ 52).
+- Jobs: `ensure_jobs.sh` reports walk51_ckpt finished (EXIT:0); lifts k = 1037, k = 2060 (original script) and k = 2061 (checkpointed) alive, no result. MemAvailable ~2.2 GB, below the 3.5 GB gate, so k = 4108 not started; k = 8205 not started. KMAX = 52 walk not started this run.
+- Still open: residue conjecture for k ≥ 52 with excess ≥ 12 (apart from the isolated lengths); excess ≤ 12 and ≤ 13; exact h_n for n ≥ 54; deg R for m ≥ 14.
+- README "Residue condition: exact check to k = 51 (2026-10-30)"; CLAIM_STATUS row added (k ≤ 50 row marked superseded). No literature opened; no novelty claimed.
+
 ## Progress this run (2026-10-23 ~3:55pm EDT / locked-kernel routine: m = 13 lift k = 525)
 
 Dated 2026-10-23 (America/New_York).
