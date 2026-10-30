@@ -17,7 +17,9 @@
 set -u
 JOBS_DIR=${JOBS_DIR:-/workspace/scratch-res/jobs}
 DRY=0; [ "${1:-}" = "--dry-run" ] && DRY=1
-exec 9>"$JOBS_DIR/.ensure.lock" || exit 1
+exec 9>"$JOBS_DIR/.ensure_v2.lock" || exit 1
+# (v2 lock name: the pre-2026-10-30 version leaked fd 9 into launched jobs, so the old
+#  .ensure.lock stays held by the running walk51_ckpt wrapper; children now get 9>&-.)
 flock -n 9 || { echo "ensure_jobs: another instance is running"; exit 0; }
 avail() { awk '/MemAvailable/ {print int($2/1024)}' /proc/meminfo; }
 rc=0
@@ -42,7 +44,7 @@ for jf in "$JOBS_DIR"/*.job; do
   echo "restart $(date) by ensure_jobs (no live process, no EXIT line since line $last)" >> "$LOG"
   echo "$NAME started $(date) by ensure_jobs: $CMD" >> "$LOG"
   setsid nohup bash -c "cd '$DIR' && $CMD >> '$LOG' 2>&1; echo EXIT:\$? >> '$LOG'; date >> '$LOG'" \
-    > /dev/null 2>&1 < /dev/null &
+    > /dev/null 2>&1 < /dev/null 9>&- &
   echo "$NAME: relaunched (MemAvailable was ${a} MB)"
   sleep 20
 done
