@@ -1,0 +1,7 @@
+# Current run (original script, no checkpoint: a relaunch starts over).
+NAME=lift_k1037
+DIR=/workspace/finite-gasket-spectral-derivatives
+CMD='python3 scripts/check_residue_lifted.py lift /workspace/scratch-res/lifted_m13.json 1024 rep'
+LOG=/workspace/scratch-res/lifted_rep_m13_p1024.log
+MATCH='check_residue_lifted.py lift /workspace/scratch-res/lifted_m13.json 1024 rep'
+MIN_AVAIL_MB=2500

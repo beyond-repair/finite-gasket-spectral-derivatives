@@ -1,0 +1,7 @@
+# Proposed replacement (rename to .job and disable walk51.job only after deciding to switch).
+NAME=walk51_ckpt
+DIR=/workspace/finite-gasket-spectral-derivatives
+CMD='OMP_NUM_THREADS=6 scripts/residue_orbits_ckpt 51 --ckpt /workspace/scratch-res/walk51.ckpt --resume'
+LOG=/workspace/scratch-res/walk51_ckpt.log
+MATCH='residue_orbits_ckpt 51'
+MIN_AVAIL_MB=200

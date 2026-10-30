@@ -1,0 +1,6 @@
+NAME=lift_k1037_ckpt
+DIR=/workspace/finite-gasket-spectral-derivatives
+CMD='python3 scripts/check_residue_lifted_ckpt.py /workspace/scratch-res/lifted_m13.json 1024 rep --ckpt /workspace/scratch-res/lift_k1037.ckpt --resume'
+LOG=/workspace/scratch-res/lift_k1037_ckpt.log
+MATCH='check_residue_lifted_ckpt.py /workspace/scratch-res/lifted_m13.json 1024 rep'
+MIN_AVAIL_MB=2500
