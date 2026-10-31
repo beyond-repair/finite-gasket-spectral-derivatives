@@ -1677,6 +1677,40 @@ This extends the previous range 3 ≤ n ≤ 52 by one level. For n = 54 the open
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
 
+### Residue condition: exact check to k = 52 (2026-10-31)
+
+Dated 2026-10-31 (America/New_York), ~7:05am EDT / locked-kernel routine. This subsection adds one length to the exact finite check. It proves no new infinite family.
+
+#### Assumptions
+
+- Everything in "Residue condition: Frobenius orbit reduction and exact check to k = 45" and the exact checks to k = 46–51: chains z_0 = 1, z_i² + z_i = z_{i−1}, S_k = Σ_{i=1}^k 1/z_i, the orbit lemma, and the fact that every chain of length k ≤ 63 lies in GF(2^64).
+- The two-adic reduction theorem: a coincidental hit at level n ≥ 3 needs some k with 1 ≤ k ≤ n − 2, n − k even, and a chain with S_k = 0.
+- Software assumption (not a theorem): the checkpointed program `scripts/residue_orbits_ckpt.c` (committed in e583638) walks the same Frobenius-reduced tree as `scripts/residue_orbits_gf2_64.c` and reports the same counts. Evidence: the recorded test `scripts/test_residue_ckpt.sh`, the KMAX = 44 control, the KMAX = 51 run, and, in this run, lines k = 1..50 of the KMAX = 52 log byte-identical to `/workspace/scratch-res/walk50.log` from the original binary (and lines k = 1..51 byte-identical to `walk51_ckpt.log`).
+- No literature was opened this run, and no novelty is claimed. S_W is not an input. No value of W is selected.
+
+#### Exact finite verification (1 ≤ k ≤ 52)
+
+`scripts/residue_orbits_ckpt 52 --ckpt /workspace/scratch-res/walk52.ckpt --resume` with OMP_NUM_THREADS = 6 (65,536 units of 8 depth-24 nodes) started fresh at 2026-10-30 13:55:45 EDT and finished in one uninterrupted run (no resume was needed; 61,495 s wall, sharing the machine with three lift jobs) at 2026-10-31 07:00:40 EDT with EXIT:0. The binary that ran has sha256 3cb716ae…ace9, and a fresh `gcc -O3 -march=native -fopenmp` build of the committed source is byte-identical. It printed `ok` with zeros = 0 at every depth 1 ≤ k ≤ 52 (52 `ok` lines), with exactly 2^{k−⌈log₂(k+1)⌉} reduced chains, orbit size 2^{⌈log₂(k+1)⌉} and chains_covered = 2^k at each depth (checked line by line by a script against the log, zero mismatches); at k = 52 that is `reduced_chains=70368744177664` (= 2^46), orbit size 64, covering all 2^52 chains. Scratch log `/workspace/scratch-res/walk52_ckpt.log` (not vendored, prior practice).
+
+- No independent second walk at k = 52 (original binary or sampled) was run.
+
+#### Corollary (theorem plus finite exact computation)
+
+S_k ≠ 0 for every chain when 1 ≤ k ≤ 52, and (by the recorded theorems) whenever k − 2^⌊log2 k⌋ ≤ 11, plus the isolated lengths already recorded (77, 141, 269, 525 and the survivor exclusions). The smallest open length is now k = 53 = 32 + 21 (excess 21). A coincidental hit at level n needs an open k ≤ n − 2 with n − k even. For n = 54 that would be an even k ≤ 52, and none is open, so a hit needs n ≥ 55. Hence for 3 ≤ n ≤ 54 there are no coincidental hits, and
+    h_n = 1 − μ_exc(n) − 5 · 2^n/(3^{n+1} + 3)   exactly.
+This extends the previous range 3 ≤ n ≤ 53 by one level. For n = 55 the open odd length k = 53 is not excluded, so the range stops at 54.
+
+#### Still open
+
+- Residue conjecture for k ≥ 53 with k − 2^⌊log2 k⌋ ≥ 12 (apart from the isolated lengths recorded). Next open lengths: 53, …, 63 (excess 21–31). Excess-12 lengths k = 2060 (running) and k = 4108 (not started); excess-13 lengths k = 1037, 2061 (running), 8205 (not started). Excess ≤ 12 and ≤ 13 are **not** claimed.
+- Exact h_n for n ≥ 55.
+- deg R = 2^m − 2: exact for 2 ≤ m ≤ 13, conjecture for m ≥ 14.
+- A KMAX = 53 walk (about twice this run's work; an engineering estimate only) was started this run as a checkpointed job; nothing is claimed about S_53.
+
+#### Not a consequence
+
+This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
+
 ---
 
 <div align="center">

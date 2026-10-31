@@ -1,0 +1,6 @@
+NAME=walk53_ckpt
+DIR=/workspace/finite-gasket-spectral-derivatives
+CMD='OMP_NUM_THREADS=6 scripts/residue_orbits_ckpt 53 --ckpt /workspace/scratch-res/walk53.ckpt --resume'
+LOG=/workspace/scratch-res/walk53_ckpt.log
+MATCH='residue_orbits_ckpt 53'
+MIN_AVAIL_MB=200

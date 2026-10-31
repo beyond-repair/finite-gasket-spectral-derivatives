@@ -1,5 +1,17 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-31 ~7:05am EDT / locked-kernel routine: reduced walk k = 52)
+
+Dated 2026-10-31 (America/New_York).
+
+- Record current before this run: head bba60be (pushed); S_k ≠ 0 for 1 ≤ k ≤ 51 and isolated lengths 77, 141, 269, 525; exact h_n for 3 ≤ n ≤ 53; smallest open length 52.
+- **Assumptions**: locked K = ω²I − WL (ω = 1, λ_max = 6, K > 0 iff W < 1/6); orbit lemma; two-adic reduction theorem; software assumption that `residue_orbits_ckpt` walks the same tree as `residue_orbits_gf2_64` (tested; lines k ≤ 50 of this run are byte-identical to walk50.log from the original binary). No continuum, force, stress, momentum, or selected W.
+- **Exact finite computation**: checkpointed reduced walk KMAX = 52 EXIT:0 at 07:00:40 EDT (started 2026-10-30 13:55:45 EDT, one uninterrupted run, 61,495 s wall alongside three lifts): zeros = 0 at every k ≤ 52, 2^46 reduced chains at k = 52 covering all 2^52 chains; counts checked line by line (52 lines, zero mismatches); binary = fresh rebuild of committed source (sha256 3cb716ae…ace9). Hence S_k ≠ 0 for 1 ≤ k ≤ 52.
+- **Corollary**: smallest open length 53 = 32 + 21; exact h_n = 1 − μ_exc(n) − 5·2^n/(3^{n+1}+3) for 3 ≤ n ≤ 54 (was ≤ 53).
+- Jobs: `ensure_jobs.sh` reports walk52_ckpt finished (EXIT:0); lifts k = 1037, k = 2060 (original script) and k = 2061 (checkpointed) alive, no result. MemAvailable ~2.5 GB, below the 3.5 GB gate, so k = 4108 not started; k = 8205 not started. Checkpointed walk KMAX = 53 started (engineering only, job spec `scripts/jobs/walk53_ckpt.job`, log `/workspace/scratch-res/walk53_ckpt.log`); nothing is claimed about S_53 until it exits 0.
+- Still open: residue conjecture for k ≥ 53 with excess ≥ 12 (apart from the isolated lengths); excess ≤ 12 and ≤ 13; exact h_n for n ≥ 55; deg R for m ≥ 14.
+- README "Residue condition: exact check to k = 52 (2026-10-31)"; CLAIM_STATUS row added (k ≤ 51 row marked superseded). No literature opened; no novelty claimed.
+
 ## Progress this run (2026-10-30 ~1:55pm EDT / locked-kernel routine: reduced walk k = 51)
 
 Dated 2026-10-30 (America/New_York).
