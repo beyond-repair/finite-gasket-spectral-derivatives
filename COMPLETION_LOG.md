@@ -1,5 +1,17 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-10-31 ~10:55am EDT / locked-kernel routine: m = 12 lift k = 2060)
+
+Dated 2026-10-31 (America/New_York).
+
+- Record current before this run: head 2bc8a9f (pushed); S_k ≠ 0 for 1 ≤ k ≤ 52 and isolated lengths 77, 141, 269, 525; exact h_n for 3 ≤ n ≤ 54; smallest open length 53.
+- **Assumptions**: locked K; orbit lemma; elimination lemma; excess-12 survivor list from `prepare 12`; software assumption on `check_residue_lifted.py lift … rep` (same script as the k = 28, 44 controls). No continuum, force, stress, momentum, or selected W.
+- **Exact finite computation (new isolated length)**: m = 12 `lift rep` p = 2048 (k = 2060) EXIT:0 at 10:02:49 EDT: 1 surviving factor, 1 root, 8192 chains, 2 with S in GF(2^2048), **0 with S = 0** (144,188.4 s, one uninterrupted run since the 2026-10-29 17:59 EDT restart). Hence S_2060 ≠ 0.
+- **Consequence**: excess ≤ 12 now waits only on k = 4108 (p = 4096, 2 factors); **not** claimed.
+- Jobs: `ensure_jobs.sh` reports lift_k2060 finished (EXIT:0), lifts k = 1037 (original script) and k = 2061 (checkpointed) alive, walk53_ckpt alive at 7,254/65,536 units. MemAvailable ~2 GB, below the gate, so k = 4108 not started; k = 8205 not started.
+- Range unchanged (k = 2060 is isolated). Still open: k ≥ 53 with excess ≥ 12 apart from isolated lengths; excess ≤ 12 (k = 4108); excess ≤ 13 (k = 1037, 2061, 8205); exact h_n for n ≥ 55; deg R for m ≥ 14.
+- README "Residue condition: excess m = 12 lift at k = 2060 (2026-10-31)"; CLAIM_STATUS m = 12 row updated. No literature opened; no novelty claimed.
+
 ## Progress this run (2026-10-31 ~7:05am EDT / locked-kernel routine: reduced walk k = 52)
 
 Dated 2026-10-31 (America/New_York).

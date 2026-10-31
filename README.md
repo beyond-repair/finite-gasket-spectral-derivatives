@@ -1711,6 +1711,36 @@ This extends the previous range 3 ≤ n ≤ 53 by one level. For n = 55 the open
 
 This subsection does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
 
+### Residue condition: excess m = 12 lift at k = 2060 (2026-10-31)
+
+#### Assumptions
+
+Locked K = ω²I − WL (ω = 1, λ_max = 6, K > 0 iff W < 1/6); the orbit lemma, the elimination lemma and the excess m = 12 survivor list recorded above (`prepare 12`: survivors p ∈ {16, 32, 64, 128, 256, 512, 2048, 4096}, i.e. lengths k = p + 12); software assumption that `scripts/check_residue_lifted.py lift … rep` computes what it is documented to compute (it is the same script that produced the recorded k = 28, 44 controls, which agree with the reduced walk). No continuum, force, stress, momentum, or selected W.
+
+#### Exact finite computation
+
+`python3 scripts/check_residue_lifted.py lift /workspace/scratch-res/lifted_m12.json 2048 rep` (original, uncheckpointed script; last restart 2026-10-29 17:59 EDT, one uninterrupted run of 144,188.4 s) printed EXIT:0 at 10:02:49 EDT 2026-10-31:
+
+    lift[rep] k=2060 (p=2048, m=12, orbit reps): surviving factors=1, roots used=1, chains examined=8192, with S in GF(2^p)=2, with S = 0: 0
+
+So the S = 0 count is 0 at k = 2060. Hence S_2060 ≠ 0 for every chain (finite exact computation plus the recorded lemmas). Scratch log `/workspace/scratch-res/lifted_rep_m12_p2048.log` (not vendored, prior practice). No independent second run was made.
+
+#### Consequence for excess ≤ 12
+
+Of the eight surviving excess-12 lengths, k = 28, 44, 76, 140, 268, 524 and now 2060 have S = 0 count 0. Only **k = 4108** (p = 4096, 2 surviving factors) remains. Excess ≤ 12 becomes a theorem only when that lift also reports S = 0 count 0; it is **not** claimed now. The recorded cost estimate (numerical observation, not a bound: about 7× per doubling of p, and k = 2060 took about 40 h for one factor) puts k = 4108 at order 10+ days on this box, so it needs the checkpointed script (`scripts/check_residue_lifted_ckpt.py`) and the memory gate; it was not started this run (MemAvailable about 2 GB).
+
+#### Range
+
+Unchanged for the contiguous range: S_k ≠ 0 for 1 ≤ k ≤ 52; exact h_n for 3 ≤ n ≤ 54; smallest open length 53. k = 2060 is an isolated length (it does not extend the h_n range, which needs every shorter open length of the right parity closed).
+
+#### Still open
+
+Residue conjecture for k ≥ 53 with excess ≥ 12 (apart from isolated lengths 77, 141, 269, 525, 2060 and the survivor exclusions); excess ≤ 12 (k = 4108 only); excess ≤ 13 (k = 1037, 2061 running; 8205 not started); exact h_n for n ≥ 55; deg R for m ≥ 14.
+
+#### Not a consequence
+
+This does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
+
 ---
 
 <div align="center">
