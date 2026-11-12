@@ -1,5 +1,17 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-11-12 ~6:00pm EST / locked-kernel routine: reduced walk k = 53)
+
+Dated 2026-11-12 (America/New_York).
+
+- Record current before this run: head edb8564 (pushed); S_k ≠ 0 for 1 ≤ k ≤ 52 and isolated lengths 77, 141, 269, 525, 1037, 2060; exact h_n for 3 ≤ n ≤ 54; smallest open length 53.
+- **Assumptions**: locked K = ω²I − WL (ω = 1, λ_max = 6, K > 0 iff W < 1/6); orbit lemma; two-adic reduction theorem; software assumption that `residue_orbits_ckpt` walks the same tree as `residue_orbits_gf2_64` and that its checkpoint/resume loses no unit (lines k ≤ 50 of this run byte-identical to walk50.log from the original binary; lines k ≤ 52 byte-identical to walk52_ckpt.log). No continuum, force, stress, momentum, or selected W.
+- **Exact finite computation**: checkpointed reduced walk KMAX = 53 EXIT:0 at 17:51:58 EST (started 2026-10-31 07:01:43 EDT; resumed once from checkpoint at 35,771/65,536 units on 2026-11-11 23:52 EST after a box restore): zeros = 0 at every k ≤ 53, 2^47 reduced chains at k = 53 covering all 2^53 chains; counts checked line by line (53 lines, zero mismatches); binary sha256 3cb716ae…ace9. Hence S_k ≠ 0 for 1 ≤ k ≤ 53. No independent second walk.
+- **Corollary**: smallest open length 54 = 32 + 22; exact h_n = 1 − μ_exc(n) − 5·2^n/(3^{n+1}+3) for 3 ≤ n ≤ 55 (was ≤ 54).
+- Jobs: `ensure_jobs.sh` reports walk53_ckpt finished (EXIT:0); lift_k2061_ckpt alive (top 398/16384), no result. MemAvailable ~2 GB, below the 3.5 GB gate, so k = 4108 and 8205 stay held. Checkpointed walk KMAX = 54 started (engineering only, job spec `scripts/jobs/walk54_ckpt.job`, log `/workspace/scratch-res/walk54_ckpt.log`); nothing is claimed about S_54 until it exits 0.
+- Still open: residue conjecture for k ≥ 54 with excess ≥ 12 (apart from isolated lengths); excess ≤ 12 (k = 4108); excess ≤ 13 (k = 2061, 8205, and 4108 via excess 12); exact h_n for n ≥ 56; deg R for m ≥ 14.
+- README "Residue condition: exact check to k = 53 (2026-11-12)"; CLAIM_STATUS row added (k ≤ 52 row marked superseded). No literature opened; no novelty claimed.
+
 ## Progress this run (2026-11-11 ~11:55pm EST / locked-kernel routine: m = 13 lift k = 1037)
 
 Dated 2026-11-11 (America/New_York).
