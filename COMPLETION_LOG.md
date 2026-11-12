@@ -1,5 +1,17 @@
 # Completion log — finite-gasket-spectral-derivatives
 
+## Progress this run (2026-11-11 ~11:55pm EST / locked-kernel routine: m = 13 lift k = 1037)
+
+Dated 2026-11-11 (America/New_York).
+
+- Record current before this run: head b56fb88 (pushed; the 2026-11-09 sweep adds only LICENSE and CI, no mathematical change); S_k ≠ 0 for 1 ≤ k ≤ 52 and isolated lengths 77, 141, 269, 525, 2060; exact h_n for 3 ≤ n ≤ 54; smallest open length 53.
+- **Assumptions**: locked K; orbit lemma; elimination lemma; excess-13 survivor list from `prepare 13` (survivors p ∈ {16, 32, 64, 128, 256, 512, 1024, 2048, 8192}); software assumption on `check_residue_lifted.py lift … rep` (same script as the k = 29, 45 controls, which agree with the reduced walk). No continuum, force, stress, momentum, or selected W.
+- **Exact finite computation (new isolated length)**: m = 13 `lift rep` p = 1024 (k = 1037), original script, last restart 2026-10-29 17:59 EDT, log `/workspace/scratch-res/lifted_rep_m13_p1024.log` EXIT:0 with end stamp Sun Nov 1 10:16:52 EST 2026: 12 surviving factors, 12 roots, 196,608 chains, 24 with S in GF(2^1024), **0 with S = 0** (235,053.7 s; per factor 16,384 chains, 2 in GF, 0 zero). Hence S_1037 ≠ 0. This result had finished before a box restore and was not recorded until this run; it was read from the log, not recomputed. No independent second run.
+- **Consequence**: of the nine excess-13 survivors, k = 29, 45, 77, 141, 269, 525 and now 1037 have S = 0 count 0; k = 2061 (checkpointed, running) and k = 8205 (not started) remain, and excess ≤ 13 also needs excess ≤ 12 (k = 4108). Excess ≤ 13 is **not** claimed.
+- Jobs: box was restored (uptime 4 min at 23:52 EST). `ensure_jobs.sh` reported lift_k1037, lift_k2060, walk51_ckpt, walk52_ckpt finished (EXIT:0); relaunched walk53_ckpt (resumed at 35,771/65,536 units) and lift_k2061_ckpt (resumed from checkpoint). MemAvailable ~5 GB, but k = 2061 is the one lift allowed at a time, so k = 4108 and 8205 stay held.
+- Range unchanged (k = 1037 is isolated). Still open: k ≥ 53 with excess ≥ 12 apart from isolated lengths; excess ≤ 12 (k = 4108); excess ≤ 13 (k = 2061, 8205, and 4108 via excess 12); exact h_n for n ≥ 55; deg R for m ≥ 14.
+- README "Residue condition: excess m = 13 lift at k = 1037 (recorded 2026-11-11)"; CLAIM_STATUS m = 13 row updated. No literature opened; no novelty claimed.
+
 ## Progress this run (2026-10-31 ~10:55am EDT / locked-kernel routine: m = 12 lift k = 2060)
 
 Dated 2026-10-31 (America/New_York).

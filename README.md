@@ -1753,3 +1753,33 @@ Governing source: [ADL-Governance](https://github.com/beyond-repair/ADL-Governan
 </div>
 
 Addendum (2026-10-22 ~2:57pm EDT, no new result). Both running lift jobs, m = 13 p = 256 (k = 269, started 13:58 EDT) and m = 12 p = 2048 (k = 2060, restarted 00:58 EDT), received SIGTERM at 14:20:50 EDT (EXIT:143) and produced no result. No statement about S_269 or S_2060 is made. Both were restarted at 14:56 EDT with the same command (`check_residue_lifted.py lift <json> <p> rep`, python-flint 0.9.0), logs appended to `/workspace/scratch-res/lifted_rep_m13_p256.log` and `/workspace/scratch-res/lifted_rep_m12_p2048.log`. k = 4108 remains unstarted. Range unchanged: S_k ≠ 0 for k ≤ 49 and for the isolated lengths already recorded (77, 141, and the residue/survivor exclusions), exact h_n for 3 ≤ n ≤ 51; smallest open length 50.
+
+### Residue condition: excess m = 13 lift at k = 1037 (recorded 2026-11-11)
+
+#### Assumptions
+
+Locked K = ω²I − WL (ω = 1, λ_max = 6, K > 0 iff W < 1/6); the orbit lemma, the elimination lemma and the excess m = 13 survivor list recorded above (`prepare 13`: survivors p ∈ {16, 32, 64, 128, 256, 512, 1024, 2048, 8192}, i.e. lengths k = p + 13); software assumption that `scripts/check_residue_lifted.py lift … rep` computes what it is documented to compute (same script as the recorded k = 29, 45 controls, which agree with the reduced walk). No continuum, force, stress, momentum, or selected W.
+
+#### Exact finite computation
+
+`python3 scripts/check_residue_lifted.py lift /workspace/scratch-res/lifted_m13.json 1024 rep` (original, uncheckpointed script; last restart 2026-10-29 17:59 EDT) printed EXIT:0, end stamp Sun Nov 1 10:16:52 EST 2026:
+
+    lift[rep] k=1037 (p=1024, m=13, orbit reps): surviving factors=12, roots used=12, chains examined=196608, with S in GF(2^p)=24, with S = 0: 0, time=235053.7s
+
+Per factor: 16,384 chains, 2 with S in GF(2^1024), 0 with S = 0. So the S = 0 count is 0 at k = 1037. Hence S_1037 ≠ 0 for every chain (finite exact computation plus the recorded lemmas). Scratch log `/workspace/scratch-res/lifted_rep_m13_p1024.log` (not vendored, prior practice). The run finished before a box restore and is recorded from its log on 2026-11-11; no independent second run was made.
+
+#### Consequence for excess ≤ 13
+
+Of the nine surviving excess-13 lengths, k = 29, 45, 77, 141, 269, 525 and now 1037 have S = 0 count 0. Remaining: k = 2061 (checkpointed lift, running) and k = 8205 (not started). Excess ≤ 13 also requires excess ≤ 12, which still waits on k = 4108. Excess ≤ 13 is **not** claimed.
+
+#### Range
+
+Unchanged for the contiguous range: S_k ≠ 0 for 1 ≤ k ≤ 52; exact h_n for 3 ≤ n ≤ 54; smallest open length 53 (checkpointed walk KMAX = 53 running). k = 1037 is an isolated length.
+
+#### Still open
+
+Residue conjecture for k ≥ 53 with excess ≥ 12 (apart from isolated lengths 77, 141, 269, 525, 1037, 2060 and the survivor exclusions); excess ≤ 12 (k = 4108 only); excess ≤ 13 (k = 2061 running; 8205 not started); exact h_n for n ≥ 55; deg R for m ≥ 14.
+
+#### Not a consequence
+
+This does not select W, does not state a continuum limit, a force, a stress, or a momentum, and does not claim that the computation is new.
